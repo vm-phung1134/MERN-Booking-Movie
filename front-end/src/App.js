@@ -1,24 +1,30 @@
 import AOS from 'aos'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import { publicRoutes } from './routes';
+import { publicRoutes, privateRoutes } from './routes';
 import 'aos/dist/aos.css'
-import HeaderPublic from './pages/public/components/headerPublic'
-import FooterPublic from './pages/public/components/footerPublic';
+import FooterPublic from './pages/public/components/footerPublic'
 AOS.init();
 export default function App() {
   return (
     <BrowserRouter>
       <div className='App'>
-        <HeaderPublic/>
           <Routes>
-            {
-              publicRoutes.map((route, index) => {
-                const Page = route.component
-                return <Route key={index} path={route.path} element={<Page/>} />
-              })
-            }
+              {
+                publicRoutes.map((route, index) => {
+                  const Page = route.component
+                  return <Route key={index} path={route.path} element={<Page/>} />
+                })
+                
+              }
+              {/* Route the different layout */}
+              {
+                privateRoutes.map((route, index) => {
+                  const Page = route.component
+                  return <Route key={index} path={route.path} element={<Page/>} />
+                })
+              }
           </Routes>
-         <FooterPublic/> 
+        <FooterPublic/>      
       </div>
     </BrowserRouter>
   )

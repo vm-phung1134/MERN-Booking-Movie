@@ -5,13 +5,13 @@ const publicRoutes = [
     {
         path: '/home', component: HomePage
     },
-    {
-        path: '/', component: Login
-    },
+    
 ]
 
 const privateRoutes = [
-    
+   {
+        path: '/', component: Login
+    }, 
 ]
 
 export {publicRoutes, privateRoutes}

@@ -1,7 +1,8 @@
 function MovieNow() {
   return (
     <>
-      <div className="grid grid-cols-3 gap-5 justify-items-center mt-10">
+      <div data-aos="fade-up" data-aos-duration="2000"
+      className="grid grid-cols-3 gap-5 justify-items-center mt-10">
         <div className="">
           <div className="relative">
             <img
