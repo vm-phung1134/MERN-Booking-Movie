@@ -6,8 +6,7 @@ exports.register = async (req,res,next) => {
         const user = await User.create(req.body)
         const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
         res.status(200).json({
-            status: 'A User successfully created ',
-            data: {token, userName: user.name}
+            token, userName: user.name
         })
     }catch(error){
         res.json(error)
@@ -25,10 +24,7 @@ exports.login = async (req, res, next) => {
         if(bcrypt.compareSync(req.body.password, user.password)){ // so sánh pw user nhập vào và pw (hash) in db
             const token = jwt.sign({userId: user._id}, process.env.APP_SECRET)
             res.status(200).json({
-                status: 'success',
-                data: {
-                    token, userName: user.name
-                }
+                token, userName: user.name
             })
         } else {
             const err = new Error('Password is not correct');

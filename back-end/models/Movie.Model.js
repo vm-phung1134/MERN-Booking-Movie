@@ -4,8 +4,17 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Name must be required']
     },
+    namevn:{
+        type: String
+    },
     year: {
         type: Number,
+    },
+    country: {
+        type: String
+    },
+    type:{
+        type: String
     },
     released: {
         type: String,
@@ -19,6 +28,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Poster must be required']
     },
+    image: {
+        type: String,
+        required: [true, 'Image must be required']
+    },
     director: {
         type: String,
         required: [true, 'Director must be required']
@@ -27,7 +40,7 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Actors must be required']
     }],
-    disription: {
+    discription: {
         type: String,
         required: [true, 'Discription must be required']
     }

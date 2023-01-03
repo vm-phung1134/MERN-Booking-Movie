@@ -1,13 +1,20 @@
 const Movie = require('../models/Movie.Model.js')
 
 exports.getAllMovies = async (req, res, next) => {
+    const productsCount = await Movie.countDocuments()
     try {
-        const movies = await Movie.find({}).populate('author').populate('movie')
-        res.status(200).json({
-            status: 'success',
-            results: movies.length,
-            data: {movies}
-        })
+        const movies = await Movie.find({})
+        res.status(200).json({movies, productsCount})
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+exports.getOneMovie = async (req, res, next) => {
+    try {
+        const {movieId} = req.params;
+        const movie = await Movie.findById(movieId)
+        res.status(200).json(movie)
     } catch (error) {
         res.json(error)
     }
@@ -15,12 +22,8 @@ exports.getAllMovies = async (req, res, next) => {
 
 exports.createMovie = async (req, res, next) => {
     try {
-        const {userId} = req.user;
-        const movie = await Movie.create({...req.body, author: userId})
-        res.status(200).json({
-            status: 'success',
-            data: {movie}
-        })
+        const movie = await Movie.create({...req.body})
+        res.status(200).json(movie)
     } catch (error) {
         res.json(error)
     }
@@ -28,12 +31,8 @@ exports.createMovie = async (req, res, next) => {
 
 exports.updateMovie = async (req, res, next) => {
     try {
-        const {MovieId} = req.params;
-        const movie = await Movie.findByIdAndUpdate(MovieId,{...req.body},{new: true, runValidator: true})
-        res.status(200).json({
-            status: 'success',
-            data: {movie}
-        })
+        const movie = await Movie.findByIdAndUpdate(MovieId,{...req.body})
+        res.status(200).json(movie)
     } catch (error) {
         res.json(error)
     }

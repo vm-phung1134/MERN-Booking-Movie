@@ -19,7 +19,7 @@ const movieRoute = require('./routes/movieRoute')
 //mount the route
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/ticket', ticketRoute)
-app.use('/api/v1/movie', movieRoute)
+app.use('/api/v1/movies', movieRoute)
 
 //Route not exist
 app.all('*', (req, res, next) => {

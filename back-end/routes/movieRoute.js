@@ -1,10 +1,9 @@
 const express = require('express')
 const Router = express.Router()
-const {getAllMovies, createMovie, updateMovie, deleteMovie}
+const {getAllMovies, createMovie, updateMovie, deleteMovie, getOneMovie}
     = require('../controllers/movieController')
-const {verifyToken} = require('../middleware/verifyToken')
 
-Router.route('/').get(getAllMovies).post(verifyToken, createMovie)
-Router.route('/:movieId').put(verifyToken,updateMovie).delete(verifyToken,deleteMovie)
+Router.route('/').get(getAllMovies).post(createMovie)
+Router.route('/:movieId').put(updateMovie).delete(deleteMovie).get(getOneMovie)
 
 module.exports = Router

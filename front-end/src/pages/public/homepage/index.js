@@ -1,7 +1,9 @@
 import React, { useCallback, useState } from "react"
 import HeaderPublic from '../components/headerPublic'
-import MovieNow from "./movieNow"
-import MovieSoon from "./movieSoon"
+import MovieNow from "../movie/homeMovie/movieNowList"
+import MovieSoon from "../movie/homeMovie/movieSoonList"
+import News from "./news"
+import Events from "./events"
 function HomePage() {
   const [stateMovie, setStateMovie] = useState(true);
   const handleClickMovie = useCallback(() => {
@@ -70,161 +72,27 @@ function HomePage() {
               <p className="text-zinc-400">Avatar: The Way Of Water</p>
             </div>
           </div>
-          {/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}
+{/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}
           {stateMovie === true ? <MovieNow /> : <MovieSoon />}
-          <div data-aos="fade-down" data-aos-duration="2000" className="pt-20">
-            <button className="text-white text-[17px] border-b-2 border-[#E50914]">
+          <div className="pt-20">
+            <button className="text-white text-[20px] border-b-2 border-[#E50914]">
               BÌNH LUẬN PHIM
             </button>
             <div className="grid grid-cols-2 py-10 gap-4 px-6">
-              {/* bình luận phim */}
-              <div className="grid grid-cols-3 gap-x-2 text-white">
-                <img
-                  className="w-[220px] h-[150px]"
-                  src="https://cdn.galaxycine.vn/media/2022/11/11/black-panther-wakanda-forever-bao-den-tim-duoc-nguoi-ke-vi-xung-dang-2_1668181423298.jpg"
-                  alt=""
-                ></img>
-                <div className="col-span-2">
-                  <p>
-                    Review - Black Panther Wakanda Forever: Báo Đen Tìm Được
-                    Người Kế Vị Xứng Đáng
-                  </p>
-                  <button className="text-[#E50914] py-2">
-                    3.4K <i className="fas fa-heart"></i>
-                  </button>
-                  <p className="text-zinc-400">
-                    Mất đi ngôi sao quan trọng nhất, Marvel gặp nhiều khó khăn
-                    khi thực hiện Black Panther 2
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-x-2 text-white">
-                <img
-                  className="w-[220px] h-[150px]"
-                  src="https://cdn.galaxycine.vn/media/2022/11/11/black-panther-wakanda-forever-bao-den-tim-duoc-nguoi-ke-vi-xung-dang-2_1668181423298.jpg"
-                  alt=""
-                ></img>
-                <div className="col-span-2">
-                  <p>
-                    Review - Black Panther Wakanda Forever: Báo Đen Tìm Được
-                    Người Kế Vị Xứng Đáng
-                  </p>
-                  <button className="text-[#E50914] py-2">
-                    3.4K <i className="fas fa-heart"></i>
-                  </button>
-                  <p className="text-zinc-400">
-                    Mất đi ngôi sao quan trọng nhất, Marvel gặp nhiều khó khăn
-                    khi thực hiện Black Panther 2
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-x-2 text-white">
-                <img
-                  className="w-[220px] h-[150px]"
-                  src="https://cdn.galaxycine.vn/media/2022/11/11/black-panther-wakanda-forever-bao-den-tim-duoc-nguoi-ke-vi-xung-dang-2_1668181423298.jpg"
-                  alt=""
-                ></img>
-                <div className="col-span-2">
-                  <p>
-                    Review - Black Panther Wakanda Forever: Báo Đen Tìm Được
-                    Người Kế Vị Xứng Đáng
-                  </p>
-                  <button className="text-[#E50914] py-2">
-                    3.4K <i className="fas fa-heart"></i>
-                  </button>
-                  <p className="text-zinc-400">
-                    Mất đi ngôi sao quan trọng nhất, Marvel gặp nhiều khó khăn
-                    khi thực hiện Black Panther 2
-                  </p>
-                </div>
-              </div>
-              <div className="grid grid-cols-3 gap-x-2 text-white">
-                <img
-                  className="w-[220px] h-[150px]"
-                  src="https://cdn.galaxycine.vn/media/2022/11/11/black-panther-wakanda-forever-bao-den-tim-duoc-nguoi-ke-vi-xung-dang-2_1668181423298.jpg"
-                  alt=""
-                ></img>
-                <div className="col-span-2">
-                  <p>
-                    Review - Black Panther Wakanda Forever: Báo Đen Tìm Được
-                    Người Kế Vị Xứng Đáng
-                  </p>
-                  <button className="text-[#E50914] py-2">
-                    3.4K <i className="fas fa-heart"></i>
-                  </button>
-                  <p className="text-zinc-400">
-                    Mất đi ngôi sao quan trọng nhất, Marvel gặp nhiều khó khăn
-                    khi thực hiện Black Panther 2
-                  </p>
-                </div>
-              </div>
+{/* bình luận phim */}
+              <News/><News/><News/><News/>
             </div>
           </div>
-          {/* sự kiện */}
+{/* sự kiện */}
           <div className="pt-5">
-            <button className="text-white text-[17px] border-b-2 mb-10 border-[#E50914]">
+            <button className="text-white text-[20px] border-b-2 mb-10 border-[#E50914]">
               TIN KHUYẾN MÃI
             </button>
             <div className="grid grid-cols-4 gap-4 pb-10">
-              <div className="relative">
-                <img
-                  className="w-[290px] h-[438px]"
-                  src="https://cdn.galaxycine.vn/media/2022/12/16/300_1671174185632.jpg"
-                  alt=""
-                ></img>
-                <a href="/">
-                  <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/70">
-                    <div className="text-white text-center p-5 absolute top-[20%]">
-                      <p className="font-medium py-3 text-[17px]">
-                        QUÀ LUNG LINH - ĐÓN GIÁNG SINH
-                      </p>
-                      <p>
-                        Mỗi hóa đơn combo bắp nước bất kỳ sẽ được tặng ngẫu
-                        nhiên 01 bộ lì xì lung linh hoặc 01 lịch để bàn React
-                        Flix.
-                      </p>
-                    </div>
-                    <button
-                      className="absolute bottom-[5%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
-                                     border border-white py-[10px] px-[20px] hover:bg-[#E50914] hover:border-none
-                                    "
-                    >
-                      CHI TIẾT
-                    </button>
-                  </div>
-                </a>
-              </div>
-              <div>
-                <img
-                  className="w-[290px] h-[438px]"
-                  src="https://cdn.galaxycine.vn/media/2022/12/16/300_1671174185632.jpg"
-                  alt=""
-                ></img>
-              </div>
-              <div>
-                <img
-                  className="w-[290px] h-[438px]"
-                  src="https://cdn.galaxycine.vn/media/2022/12/16/300_1671174185632.jpg"
-                  alt=""
-                ></img>
-              </div>
-              <div>
-                <img
-                  className="w-[290px] h-[438px]"
-                  src="https://cdn.galaxycine.vn/media/2022/12/16/300_1671174185632.jpg"
-                  alt=""
-                ></img>
-              </div>
-              <div>
-                <img
-                  className="w-[290px] h-[438px]"
-                  src="https://cdn.galaxycine.vn/media/2022/12/16/300_1671174185632.jpg"
-                  alt=""
-                ></img>
-              </div>
+              <Events/><Events/><Events/><Events/>
             </div>
           </div>
-          {/* về chúng tôi */}
+{/* về chúng tôi */}
           <div className="py-5">
             <button className="text-white text-[17px] border-b-2 mb-10 border-[#E50914]">
               REACT FLIX
