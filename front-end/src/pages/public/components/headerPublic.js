@@ -1,9 +1,28 @@
-import React, { useState } from "react"
+import React, { useState, useEffect} from "react"
 import {Link} from 'react-router-dom'
 import { Transition } from "@headlessui/react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from 'react-router-dom';
+
 import Logo from "../login/mylogo.png"
+import { authLogout } from "../../../redux/actions/authActions"
 function HeaderPublic() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
+  const userName = localStorage.getItem("user")
+  console.log(userName)
+  
+  const handleLogout = () => {
+    dispatch(authLogout())
+  }
+  const {user, isAuthenticated } = useSelector((state) => state.user);
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      navigate('/')
+    }
+  
+  }, [dispatch, isAuthenticated, navigate, user]);
   return (
     <div>
       <nav className="bg-black">
@@ -59,7 +78,10 @@ function HeaderPublic() {
             </div>
             <div className="">
             <button className="text-white p-2 border border-white text-[14px]">Tiếng Việt <i className="fas fa-globe"></i></button>
-                <button className="text-white px-3 py-6 text-[14px]">Phúc Nguyễn <i className="fas fa-chevron-down text-[12px]"></i></button>
+                <button className="text-white px-3 py-6 text-[14px] capitalize" onClick={handleLogout}>
+                  {userName} &ensp;
+                <i className="fas fa-chevron-down text-[12px]"></i>
+              </button>
             </div>
             <div className="-mr-2 flex md:hidden">
               <button

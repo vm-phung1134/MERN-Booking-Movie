@@ -3,13 +3,15 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import { 
     movieDetailReducer, 
-    moviesReducer
+    moviesReducer,
 } 
 from './redux/reducer/movieReducer'
+import { userReducer } from './redux/reducer/authReducer'
 
 const reducer = combineReducers({
     movies: moviesReducer,
-    movie: movieDetailReducer
+    movie: movieDetailReducer,
+    user: userReducer
 })
 
 let initialState = {}

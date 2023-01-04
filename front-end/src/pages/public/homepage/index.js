@@ -9,7 +9,6 @@ function HomePage() {
   const handleClickMovie = useCallback(() => {
     setStateMovie(!stateMovie);
   }, [stateMovie]);
-
   return (
     <>
     <HeaderPublic/>

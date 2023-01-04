@@ -1,6 +1,7 @@
 const User = require('../models/User.Model')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.register = async (req,res,next) => {
     try{
         const user = await User.create(req.body)
@@ -17,7 +18,7 @@ exports.login = async (req, res, next) => {
     try {
         const user = await User.findOne({email: req.body.email}) //kiểm tra email
         if(!user){
-            const err = new Error('Email is not correct');
+            const err = new Error('Email không chính xác - Vui lòng nhập lại');
             err.statusCode = 400
             return next(err)
         }
@@ -27,7 +28,7 @@ exports.login = async (req, res, next) => {
                 token, userName: user.name
             })
         } else {
-            const err = new Error('Password is not correct');
+            const err = new Error('Mật khẩu không chính xác - Vui lòng nhập lại');
             err.statusCode = 400
             return next(err)
         }
@@ -52,3 +53,14 @@ exports.getCurrentUser = async (req, res, next) => {
         res.json(error)
     }
 }
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+      httpOnly: true,
+    });
+  
+    res.status(200).json({
+      success: true,
+      message: "Logged Out",
+    });
+  });
