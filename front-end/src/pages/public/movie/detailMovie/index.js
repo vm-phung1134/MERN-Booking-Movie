@@ -54,7 +54,7 @@ const DetailMovie = () => {
                         NỘI DUNG PHIM
                     </button>
                     <p className="text-white text-justify">
-                        &emsp;{movie.disription}
+                        &emsp;{movie.discription}
                     </p>
                 </div>
                 <div className="pt-10">

@@ -1,13 +1,95 @@
+import { Formik } from "formik";
+import {useDispatch, useSelector} from 'react-redux'
+import {useState, useEffect} from 'react'
+import { authRegister } from "../../../redux/actions/authActions";
 
 function RegisterForm() {
-    return (  
-        <>
-        <div id="register" className="relative flex flex-col justify-center min-h-screen overflow-hidden">
+  const initialValues = {
+    name: "",
+    email: "",
+    password: "",
+    passwordConfirm: ""
+  }
+  const dispatch = useDispatch()
+  const [stateErr, setStateErr] = useState("")
+  const [stateSuccess, setStateSuccess] = useState("")
+  const submitForm = (values, {resetForm}) => {
+    dispatch(authRegister(values.name, values.email, values.password))
+    resetForm({
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirm: ""
+    })
+  };
+  const { user, error, isRegister} = useSelector(
+    (state) => state.user
+  )
+  
+  useEffect(() => {
+    if (error) {
+      setStateErr(error)
+      setStateSuccess('')
+      console.log(error)
+    }
+    if(isRegister=== true)
+    {
+      setStateSuccess('Chúc mừng bạn đã đăng ký thành công !')
+      setStateErr('')
+    }
+  }, [dispatch, error, isRegister, stateErr, stateSuccess, user]);
+  const validate = (values) => {
+    let errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    // tên người dùng
+    if (!values.name) {
+      errors.name = "(*) Vui lòng nhập tên";
+    } else if (values.name.length < 6) {
+      errors.name = "(*) Tên người tối thiếu phải có 6 ký tự";
+    }
+    // email
+    if (!values.email) {
+      errors.email = "(*) Vui lòng nhập Email";
+    } else if (!regex.test(values.email)) {
+      errors.email = "(*) Email chưa chính xác";
+    }
+    // password
+    if (!values.password) {
+      errors.password = "(*) Vui lòng nhập mật khẩu";
+    } else if (values.password.length < 6) {
+      errors.password = "(*) Mật khẩu quá ngắn";
+    }
+    // confirm password
+    if (values.passwordConfirm !== values.password) {
+      errors.passwordConfirm = "(*) Mật khẩu không khớp với mật khẩu vừa nhập";
+    }
+    return errors;
+  }
+  return(
+    <Formik
+      initialValues={initialValues}
+      validate={validate}
+      onSubmit={submitForm}
+    >
+      {(formik) => {
+        const {
+          values,
+          handleChange,
+          handleSubmit,
+          errors,
+          touched,
+          handleBlur,
+        } = formik;
+        return (
+          <div id="register" className="relative flex flex-col justify-center min-h-screen overflow-hidden">
           <div className="w-[60%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
             <h1 className="text-3xl font-semibold text-center text-purple-600">
               Đăng Ký Thành Viên
             </h1>
-            <form className="mt-6">
+    
+            <p className="pt-1 text-center font-medium text-green-500">{stateSuccess}</p>
+            <p className="pt-1 text-center font-medium text-red-500">{stateErr}</p>
+            <form className="mt-6" onSubmit={handleSubmit}>
               <div className="mb-2">
                 <label
                   htmlFor="text"
@@ -16,9 +98,17 @@ function RegisterForm() {
                   Họ tên
                 </label>
                 <input
-                  type="text"
+                  type="name"
+                  name="name"
+                  id="name"
+                  value={values.name}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none focus:ring "
                 />
+                {errors.name && touched.name && (
+                    <span className="text-red-500">{errors.name}</span>
+                  )}
               </div>
               <div className="mb-2">
                 <label
@@ -28,9 +118,17 @@ function RegisterForm() {
                   Email
                 </label>
                 <input
-                  type="email"
                   className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none focus:ring "
+                  type="email"
+                    name="email"
+                    id="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                 />
+                {errors.email && touched.email && (
+                    <span className="text-red-500">{errors.email}</span>
+                  )}
               </div>
               <div className="mb-2">
                 <label
@@ -41,8 +139,16 @@ function RegisterForm() {
                 </label>
                 <input
                   type="password"
+                  name="password"
+                  id="password"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none focus:ring "
                 />
+                {errors.password && touched.password && (
+                    <span className="text-red-500">{errors.password}</span>
+                  )}
               </div>
               <div className="mb-2">
                 <label
@@ -53,11 +159,22 @@ function RegisterForm() {
                 </label>
                 <input
                   type="password"
+                  name="passwordConfirm"
+                  id="passwordConfirm"
+                  value={values.passwordConfirm}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none focus:ring "
                 />
+                {errors.passwordConfirm && touched.passwordConfirm && (
+                    <span className="text-red-500">{errors.passwordConfirm}</span>
+                  )}
               </div>
               <div className="mt-6">
-                <button className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600">
+                <button
+                  type="submit"
+                  className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                >
                   Đăng ký
                 </button>
               </div>
@@ -96,8 +213,11 @@ function RegisterForm() {
             </div>
           </div>
         </div>
-        </>
-    );
+        );
+      }}
+    </Formik>
+  )
 }
+
 
 export default RegisterForm;

@@ -4,11 +4,19 @@ const bcrypt = require('bcryptjs')
 const catchAsyncErrors = require("../middleware/catchAsyncErrors");
 exports.register = async (req,res,next) => {
     try{
-        const user = await User.create(req.body)
-        const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
-        res.status(200).json({
-            token, userName: user.name
-        })
+        const user = await User.findOne({email: req.body.email})
+        if(user){
+            const err = new Error('Email đã tồn tại ! Vui lòng thử lại');
+            err.statusCode = 400
+            return next(err)
+        }else{
+            const user = await User.create(req.body)
+            const token = jwt.sign({userId: user._id}, process.env.APP_SECRET);
+            res.status(200).json({
+            user,token
+            })  
+        }
+        
     }catch(error){
         res.json(error)
     }
