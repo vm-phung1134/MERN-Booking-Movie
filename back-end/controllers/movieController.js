@@ -22,7 +22,8 @@ exports.getOneMovie = async (req, res, next) => {
 
 exports.createMovie = async (req, res, next) => {
     try {
-        const movie = await Movie.create({...req.body})
+        const {cinemaId} = req.params;
+        const movie = await Movie.create({...req.body, cinemaId: cinemaId})
         res.status(200).json(movie)
     } catch (error) {
         res.json(error)
@@ -46,6 +47,24 @@ exports.deleteMovie = async (req, res, next) => {
             status: 'success',
             message: 'Movie has been deleted'
         })
+    } catch (error) {
+        res.json(error)
+    }
+}
+
+exports.getDetailMovie = async (req, res, next) => {
+    try {
+        Movie.aggregate([{
+            $lookup: {
+                from: 'showtimes',
+                localField: '_id',
+                foreignField: 'movieId',
+                as: 'showtimes'
+            }
+        },
+    ]).then(result => {
+        res.json(result)
+    })
     } catch (error) {
         res.json(error)
     }

@@ -8,7 +8,7 @@ import {
   AUTH_REGISTER_SUCCESS,
   AUTH_REGISTER_FAIL,
   CLEAR_ERRORS,
-} from "../constants/authContants";
+} from "../constants/authConstants";
 
 //REDUCER GET USER
 export const userReducer = (

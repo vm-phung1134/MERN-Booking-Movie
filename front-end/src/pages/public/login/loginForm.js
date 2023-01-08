@@ -38,13 +38,17 @@ function LoginForm() {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     // email
     if (!values.email) {
-      errors.email = "(*) Vui lòng nhập Email";
+      errors.email = "! Vui lòng nhập Email";
     } else if (!regex.test(values.email)) {
-      errors.email = "(*) Email chưa chính xác";
+      errors.email = "! Email chưa chính xác";
+    }else if (values.email.length > 30){
+      errors.email = "! Email không vượt quá 30 ký tự"
     }
     // password
     if (!values.password) {
-      errors.password = "(*) Vui lòng nhập mật khẩu";
+      errors.password = "! Vui lòng nhập mật khẩu";
+    }else if (values.password.length > 30){
+      errors.password = "! Mật khẩu không vượt quá 30 ký tự"
     }
     return errors;
   };

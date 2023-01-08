@@ -14,13 +14,14 @@ app.use(express.json())
 const authRoute = require('./routes/authRoute')
 const ticketRoute = require('./routes/ticketRoute')
 const movieRoute = require('./routes/movieRoute')
-
-
+const cinemaRoute = require('./routes/cinemaRoute')
+const showTimeRoute = require('./routes/showTimeRoute')
 //mount the route
 app.use('/api/v1/auth', authRoute)
 app.use('/api/v1/ticket', ticketRoute)
 app.use('/api/v1/movies', movieRoute)
-
+app.use('/api/v1/cinemas', cinemaRoute)
+app.use('/api/v1/showtimes', showTimeRoute)
 //Route not exist
 app.all('*', (req, res, next) => {
     const err = new Error('The route can not be found')

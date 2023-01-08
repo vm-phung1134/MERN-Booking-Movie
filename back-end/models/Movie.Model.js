@@ -43,6 +43,10 @@ const movieSchema = new mongoose.Schema({
     discription: {
         type: String,
         required: [true, 'Discription must be required']
+    },
+    cinemaId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
     }
 }, {timestamps: true})
 

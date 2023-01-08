@@ -4,7 +4,7 @@ import {
     ALL_MOVIE_FAIL,
     ONE_MOVIE_FAIL,
     ONE_MOVIE_REQUEST,
-    ONE_MOVIE_SUCCESS
+    ONE_MOVIE_SUCCESS,
 } from '../constants/movieConstants'
 
 //REDUCER GET ALL MOVIES
@@ -68,3 +68,6 @@ export const movieDetailReducer =
         }
         
     }
+
+
+

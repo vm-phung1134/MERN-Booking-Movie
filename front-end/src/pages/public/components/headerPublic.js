@@ -11,8 +11,7 @@ function HeaderPublic() {
   const navigate = useNavigate()
   const [isOpen, setIsOpen] = useState(false)
   const userName = localStorage.getItem("user")
-  console.log(userName)
-  
+
   const handleLogout = () => {
     dispatch(authLogout())
   }
@@ -53,7 +52,7 @@ function HeaderPublic() {
                     </Link>
 
                     <Link
-                        to="/#"
+                        to="/booking"
                         className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                     >
                         ĐẶT VÉ

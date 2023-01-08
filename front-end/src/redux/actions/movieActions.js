@@ -6,7 +6,7 @@ import {
     ALL_MOVIE_SUCCESS,
     ONE_MOVIE_FAIL,
     ONE_MOVIE_SUCCESS,
-    ONE_MOVIE_REQUEST
+    ONE_MOVIE_REQUEST,
 } from '../constants/movieConstants'
 
 export const getAllMovie = () => async (dispatch) => {

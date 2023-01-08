@@ -1,29 +1,29 @@
 function FooterPublic() {
     return ( 
-        <footer className="bg-black border-t border-zinc-400 text-center lg:text-center">
+        <footer className="bg-black text-blue-gray-300 border-t border-blue-gray-400 text-center lg:text-center">
         <div className="container px-6 pt-[100px]">
           <div className="grid lg:grid-cols-4 md:grid-cols-2">
             <div className="mb-6">
-              <h5 className="uppercase font-bold mb-2.5 text-zinc-400">Thông tin người dùng</h5>
+              <h5 className="uppercase font-bold mb-2.5">Thông tin người dùng</h5>
 
               <ul className="list-none mb-0">
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Câu hỏi thường gặp
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Quan hệ nhà đầu tư
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Quyền riêng tư
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Kiểm tra tốc độ
                   </a>
                 </li>
@@ -35,17 +35,17 @@ function FooterPublic() {
 
               <ul className="list-none mb-0">
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Trung tâm trợ giúp
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Tùy chọn cookie
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Thông báo pháp lý
                   </a>
                 </li>
@@ -57,22 +57,22 @@ function FooterPublic() {
 
               <ul className="list-none mb-0">
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Đặt vé
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Giá vé
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Lịch chiếu
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Sự kiện khuyến mãi
                   </a>
                 </li>
@@ -84,22 +84,22 @@ function FooterPublic() {
 
               <ul className="list-none mb-0">
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Tài khoản
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Thông tin doanh nghiệp
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Trung tâm đa phương tiện
                   </a>
                 </li>
                 <li>
-                  <a href="#!" className="text-zinc-400">
+                  <a href="#!" >
                     Liện hệ
                   </a>
                 </li>
@@ -110,7 +110,7 @@ function FooterPublic() {
 
         <div className="text-gray-700 text-center p-4">
           © 2022 Copyright -&ensp;
-          <a className="text-zinc-400" href="https://tailwind-elements.com/">
+          <a  href="https://tailwind-elements.com/">
              Pul React
           </a>
         </div>

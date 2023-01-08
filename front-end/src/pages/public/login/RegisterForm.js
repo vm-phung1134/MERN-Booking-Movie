@@ -43,25 +43,31 @@ function RegisterForm() {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     // tên người dùng
     if (!values.name) {
-      errors.name = "(*) Vui lòng nhập tên";
+      errors.name = "! Vui lòng nhập tên";
     } else if (values.name.length < 6) {
-      errors.name = "(*) Tên người tối thiếu phải có 6 ký tự";
+      errors.name = "! Tên người tối thiếu phải có 6 ký tự";
+    }else if (values.name.length > 30){
+      errors.name = "! Name không vượt quá 30 ký tự"
     }
     // email
     if (!values.email) {
-      errors.email = "(*) Vui lòng nhập Email";
+      errors.email = "! Vui lòng nhập Email";
     } else if (!regex.test(values.email)) {
-      errors.email = "(*) Email chưa chính xác";
+      errors.email = "! Email chưa chính xác";
+    }else if (values.email.length > 30){
+      errors.email = "! Email không vượt quá 30 ký tự"
     }
     // password
     if (!values.password) {
-      errors.password = "(*) Vui lòng nhập mật khẩu";
+      errors.password = "! Vui lòng nhập mật khẩu";
     } else if (values.password.length < 6) {
-      errors.password = "(*) Mật khẩu quá ngắn";
+      errors.password = "! Mật khẩu quá ngắn";
+    }else if (values.password.length > 30){
+      errors.password = "! Mật khẩu không vượt quá 30 ký tự"
     }
     // confirm password
     if (values.passwordConfirm !== values.password) {
-      errors.passwordConfirm = "(*) Mật khẩu không khớp với mật khẩu vừa nhập";
+      errors.passwordConfirm = "! Mật khẩu không khớp với mật khẩu vừa nhập";
     }
     return errors;
   }

@@ -96,7 +96,7 @@ function HomePage() {
             <button className="text-white text-[17px] border-b-2 mb-10 border-[#E50914]">
               REACT FLIX
             </button>
-            <p className="text-zinc-300 text-justify">
+            <p className="text-gray-400 text-justify">
               &ensp;React Flix là một trong những công ty một mình tao đầu tiên về điện
               ảnh được thành lập từ năm 2003, đã khẳng định thương hiệu là 1
               trong 10 địa điểm vui chơi giải trí được yêu thích nhất. Ngoài hệ

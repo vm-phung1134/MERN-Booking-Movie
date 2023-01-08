@@ -10,7 +10,7 @@ import {
     AUTH_REGISTER_SUCCESS,
     AUTH_REGISTER_REQUEST,
     CLEAR_ERRORS,
-} from '../constants/authContants'
+} from '../constants/authConstants'
 
 export const authLogin = (email, password) => async (dispatch) => {
     try{
