@@ -32,38 +32,80 @@ function Booking() {
   return (
     <>
       <HeaderPublic />
-      <div className="px-6 py-20 max-h-full">
-        <div className="grid grid-cols-2 gap-x-5 my-10">
+      <div className="px-16 py-20 max-h-full bg-black">
+        <button className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
+          CHỌN RẠP & PHIM
+        </button>
+        <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 sm:grid-cols-1">
           <div>
-            <Select label="Chọn rạp chiếu" onChange={handleChangeCinema}>
+            <Select
+              className="text-white"
+              label="CHỌN RẠP CHIẾU"
+              onChange={handleChangeCinema}
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 30 },
+              }}
+            >
               {cinemas.map((cinema) => (
-                <Option key={cinema._id} value={cinema._id}>
+                <Option
+                  className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
+                  key={cinema._id}
+                  value={cinema._id}
+                >
                   {cinema.name}
                 </Option>
               ))}
             </Select>
           </div>
           <div>
-            <Select label="Chọn phim" onChange={handleChangeMovie}>
+            <Select
+              className="text-white"
+              label="CHỌN PHIM"
+              animate={{
+                mount: { y: 0 },
+                unmount: { y: 30 },
+              }}
+              onChange={handleChangeMovie}
+            >
               {movies.map((movie) =>
-                valueCinema !== "" && valueCinema === movie.cinemaId ? (
-                  <Option key={movie._id} value={movie._id}>
+                valueCinema !== "" ? (
+                  <Option
+                    className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600 uppercase"
+                    key={movie._id}
+                    value={movie._id}
+                  >
                     {movie.name}
                   </Option>
                 ) : (
-                  <Option key={movie._id} hidden>
-                    {movie.name}
+                  <Option
+                    className="text-black focus:text-white focus:bg-blue-gray-600"
+                    key={movie._id}
+                    hidden
+                  >
+                    Vui lòng chọn rạp chiếu !
                   </Option>
                 )
               )}
             </Select>
           </div>
         </div>
-        <div className="grid grid-cols-2 gap-5">
+        <div>
+          {valueCinema !== "" && valueMovie !== "" ? (
+            <button className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
+              CHỌN SUẤT CHIẾU
+            </button>
+          ) : (
+            <button hidden></button>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 gap-5 mt-5">
           {showtimes.map((showtime) =>
             valueMovie !== "" &&
             valueCinema !== "" &&
-            valueMovie === showtime.movieId ? (
+            valueMovie === showtime.movieId &&
+            valueCinema === showtime.cinemaId ? (
               <Session key={showtime._id} showtime={showtime} />
             ) : (
               <div key={showtime._id} className="text-black" hidden>

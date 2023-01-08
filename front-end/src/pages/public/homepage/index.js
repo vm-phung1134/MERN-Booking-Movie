@@ -74,7 +74,7 @@ function HomePage() {
 {/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}
           {stateMovie === true ? <MovieNow /> : <MovieSoon />}
           <div className="pt-20">
-            <button className="text-white text-[20px] border-b-2 border-[#E50914]">
+            <button className="text-white py-[17px] text-[17px] border-b-2 border-[#E50914]">
               BÌNH LUẬN PHIM
             </button>
             <div className="grid grid-cols-2 py-10 gap-4 px-6">
@@ -84,7 +84,7 @@ function HomePage() {
           </div>
 {/* sự kiện */}
           <div className="pt-5">
-            <button className="text-white text-[20px] border-b-2 mb-10 border-[#E50914]">
+            <button className="text-white py-[17px] text-[17px] border-b-2 mb-10 border-[#E50914]">
               TIN KHUYẾN MÃI
             </button>
             <div className="grid grid-cols-4 gap-4 pb-10">
@@ -93,7 +93,7 @@ function HomePage() {
           </div>
 {/* về chúng tôi */}
           <div className="py-5">
-            <button className="text-white text-[17px] border-b-2 mb-10 border-[#E50914]">
+            <button className="text-white py-[17px]  text-[17px] border-b-2 mb-10 border-[#E50914]">
               REACT FLIX
             </button>
             <p className="text-gray-400 text-justify">

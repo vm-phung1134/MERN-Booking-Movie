@@ -5,5 +5,5 @@ const {getAllShowTimes, createShowTime, updateShowTime, deleteShowTime, getOneSh
 
 Router.route('/').get(getAllShowTimes).post(createShowTime)
 Router.route('/:showTimeId').put(updateShowTime).delete(deleteShowTime).get(getOneShowTime)
-Router.route('/:movieId').post(createShowTime)
+Router.route('/:movieId&:cinemaId').post(createShowTime)
 module.exports = Router

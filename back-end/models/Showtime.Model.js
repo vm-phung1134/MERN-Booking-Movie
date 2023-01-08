@@ -20,6 +20,10 @@ const showTimeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Movie'
     },
+    cinemaId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cinema'
+    }
 
 }, {timestamps: true})
 

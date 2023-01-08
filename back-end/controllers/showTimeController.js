@@ -23,7 +23,8 @@ exports.getOneShowTime = async (req, res, next) => {
 exports.createShowTime = async (req, res, next) => {
     try {
         const {movieId} = req.params;
-        const showTime = await ShowTime.create({...req.body, movieId: movieId})
+        const {cinemaId} = req.params;
+        const showTime = await ShowTime.create({...req.body, movieId: movieId,cinemaId:cinemaId})
         res.status(200).json(showTime)
     } catch (error) {
         res.json(error)
