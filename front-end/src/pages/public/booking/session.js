@@ -2,11 +2,11 @@ function Session({ showtime }) {
   return (
     <>
       <div className="text-white">
-        <h5 className="bg-[#E50914] px-4 py-2 w-[30%]">
-          Ngày {showtime.startDate}
+        <h5 className="bg-[#E50914] px-4 py-2 w-[40%]">
+          Ngày Chiếu - {showtime.startDate}
         </h5>
         <div className="border-2 h-[100px] items-center border-gray-600 px-5 grid grid-cols-4">
-          <p>2D - Phụ đề</p>
+          <p className="uppercase text-sm">PHỤ ĐỀ - {showtime.typeMovie}</p>
           <div className="col-span-3">
             {showtime.startTime.map((time) => (
               <button

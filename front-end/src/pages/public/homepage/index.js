@@ -11,17 +11,18 @@ function HomePage() {
   }, [stateMovie]);
   return (
     <>
-    <HeaderPublic/>
       <div className="relative w-full h-screen bg-[url('https://i0.wp.com/www.irishfilmcritic.com/wp-content/uploads/2022/08/Top-Gun-Maverick.jpg')]">
+        
         <div className="bg-gradient-to-r from-black/100 h-screen w-full">
+          <HeaderPublic/>
           <div
-            data-aos="fade-right"
-            className="absolute text-white translate-x-[-50%] top-[20%] left-20 w-[50%]"
+            data-aos="fade-right" data-aos-duration="2000"
+            className="absolute text-white translate-x-[-50%] top-[30%] left-20 w-[50%]"
           >
             <h2 className="text-[20px]">
               TOP PHIM ĐIỆN ẢNH DOANH THU CAO NHẤT PHÒNG VÉ
             </h2>
-            <h3 className="text-[30px] font-bold my-2">
+            <h3 className="text-[40px] font-bold my-2">
               TOPGUN - PHI CÔNG SIÊU ĐẲNG MAVERICK
             </h3>
             <button className="bg-[#E50914] rounded-full p-3 mb-2">

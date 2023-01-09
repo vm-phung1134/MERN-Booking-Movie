@@ -1,8 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import Logo from "./mylogo.png"
 import LoginForm from "./loginForm"
 import RegisterForm from "./RegisterForm";
+
+
 export default function Login() {
+
   return (
     <>
       <div className="bg-[url('https://assets.nflxext.com/ffe/siteui/vlv3/5e48e7b6-350d-48d9-96d6-de8ca173c89f/e39414f0-9714-4480-8e82-119dc943cfc1/VN-vi-20221219-popsignuptwoweeks-perspective_alpha_website_medium.jpg')] bg-cover w-full h-screen relative">

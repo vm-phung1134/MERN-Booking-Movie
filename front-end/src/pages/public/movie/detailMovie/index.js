@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import { useParams } from 'react-router-dom'
+import { getAllCinema } from '../../../../redux/actions/cinemaActions'
 import { getOneMovie } from '../../../../redux/actions/movieActions'
 //import components
 import HeaderPublic from '../../components/headerPublic'
@@ -13,8 +14,11 @@ const DetailMovie = () => {
     const dispatch = useDispatch()
     const movieId = useParams()
     const {movie} = useSelector((state) => state.movie)
+    const cinemas = useSelector((state) => state.cinema.cinemas)
+
     useEffect(() => {
         dispatch(getOneMovie(movieId.id))
+        dispatch(getAllCinema())
     }, [dispatch, movieId])
     return (  
     <>
@@ -62,7 +66,11 @@ const DetailMovie = () => {
                         LỊCH CHIẾU
                     </button>
                     <div className="grid grid-cols-2 gap-5">
-                        <Cinema/> <Cinema/>
+                        {
+                            cinemas.map((cinema) => (
+                                <Cinema key={cinema._id} cinema={cinema}/>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className="py-10">

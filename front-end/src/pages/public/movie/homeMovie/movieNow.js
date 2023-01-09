@@ -17,7 +17,7 @@ function Movie({movie}) {
                   className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
                   border border-white py-[15px] px-[30px] hover:bg-[#E50914] hover:border-none"
                 >
-                  <Link to="/booking">MUA VÉ</Link>
+                  MUA VÉ
                 </button>
               </div>
             </Link>
