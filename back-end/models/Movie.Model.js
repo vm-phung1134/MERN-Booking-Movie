@@ -36,6 +36,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Director must be required']
     },
+    limitAge: {
+        type: String,
+        required: true,
+    },
     actors: [{
         type: String,
         required: [true, 'Actors must be required']

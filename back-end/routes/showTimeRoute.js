@@ -3,7 +3,7 @@ const Router = express.Router()
 const {getAllShowTimes, createShowTime, updateShowTime, deleteShowTime, getOneShowTime}
     = require('../controllers/showTimeController')
 
-Router.route('/').get(getAllShowTimes).post(createShowTime)
+Router.route('/').get(getAllShowTimes)
 Router.route('/:showTimeId').put(updateShowTime).delete(deleteShowTime).get(getOneShowTime)
 Router.route('/:movieId&:cinemaId').post(createShowTime)
 module.exports = Router

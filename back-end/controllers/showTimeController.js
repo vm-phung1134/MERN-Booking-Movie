@@ -33,7 +33,8 @@ exports.createShowTime = async (req, res, next) => {
 
 exports.updateShowTime = async (req, res, next) => {
     try {
-        const showTime = await ShowTime.findByIdAndUpdate(ShowTimeId,{...req.body})
+        const {showTimeId} = req.params;
+        const showTime = await ShowTime.findByIdAndUpdate(showTimeId,{...req.body})
         res.status(200).json(showTime)
     } catch (error) {
         res.json(error)

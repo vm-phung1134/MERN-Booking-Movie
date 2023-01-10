@@ -22,9 +22,9 @@ const DetailMovie = () => {
     }, [dispatch, movieId])
     return (  
     <>
-    <HeaderPublic/>
-        <div className="bg-black max-h-full px-10 pt-10">
-           <div className="grid grid-cols-4">
+        <div className="bg-black max-h-full px-10">
+        <HeaderPublic/>
+           <div className="grid grid-cols-4 mt-10">
                 <div className="mt-5">
                     <img src={movie.poster} className="w-[300px]" alt=''></img>
                 </div>

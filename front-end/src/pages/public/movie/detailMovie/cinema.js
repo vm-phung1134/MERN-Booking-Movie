@@ -14,7 +14,7 @@ function Cinema({ cinema }) {
     <>
       <div className="text-white">
         <h5 className="bg-[#E50914] px-4 py-2 w-[30%]">{cinema.name}</h5>
-        <div className="border-2 h-[100px] items-center border-gray-600 px-5 grid grid-cols-4">
+        <div className="border-2 h-32 items-center border-gray-600 px-5 grid grid-cols-4">
           <p>2D - Phụ Đề</p>
           <div className="col-span-3">
             {showtimes.map((showtime) =>
@@ -27,10 +27,10 @@ function Cinema({ cinema }) {
                   <div>
                     {showtime.startTime.map((time) => (
                       <button
-                        key={time}
-                        className="px-2 py-1 m-1 border-2 border-gray-600"
+                        key={time.time}
+                        className="px-2 py-1 my-2 mx-2 border-2 border-gray-600"
                       >
-                        {time}
+                        {time.time}
                       </button>
                     ))}
                   </div>
