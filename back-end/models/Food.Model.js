@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const ticketSchema = new mongoose.Schema(
+const foodSchema = new mongoose.Schema(
   {
-    typeTicket: {
+    typeFood: {
         type: String,
         required: true,
     },
@@ -13,13 +13,13 @@ const ticketSchema = new mongoose.Schema(
         type: Number,
         required: true,
     },
-    quantity: {
-      type: Number,
-      required: true
+    image: {
+        type: String,
+        required: true
     }
   },
   { timestamps: true }
 );
 
-const Ticket = mongoose.model("Ticket", ticketSchema);
-module.exports = Ticket;
+const Food = mongoose.model("Food", foodSchema);
+module.exports = Food;

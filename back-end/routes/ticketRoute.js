@@ -4,7 +4,7 @@ const {getAllTickets, createTicket, updateTicket, deleteTicket}
     = require('../controllers/ticketController')
 const {verifyToken} = require('../middleware/verifyToken')
 
-Router.route('/').get(getAllTickets).post(verifyToken, createTicket)
-Router.route('/:ticketId').put(verifyToken,updateTicket).delete(verifyToken,deleteTicket)
+Router.route('/').get(getAllTickets).post(createTicket)
+Router.route('/:ticketId').put(updateTicket).delete(deleteTicket)
 
 module.exports = Router

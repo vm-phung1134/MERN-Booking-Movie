@@ -35,7 +35,7 @@ const DetailMovie = () => {
                     <h1 className="text-[25px] font-medium uppercase">
                         {movie.name}
                     </h1>
-                    <h2 className="text-[20px] text-zinc-400 font-medium uppercase">
+                    <h2 className="text-[20px] text-gray-500 font-medium uppercase">
                         {movie.namevn}
                     </h2>
                     <div className="text-[17px]">
