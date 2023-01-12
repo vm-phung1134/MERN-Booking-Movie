@@ -33,12 +33,17 @@ export const ticketReducer = (
       };
     case INCREMENT:
       let increaseSL = state.tickets.map((value) => {
+        
         if (value._id === action.payload) {
-          return { ...value, quantity: value.quantity <20 ? value.quantity + 1 : value.quantity };
+          return { ...value, quantity: value.quantity <20 ? 
+            (
+              value.quantity + 1
+            ): 
+            value.quantity };
         }
         return value;
       });
-      return { ...state, tickets: increaseSL };
+      return { ...state, tickets: increaseSL};
     case DECREMENT:
       let decreaseSL = state.tickets.map((value) => {
         if (value._id === action.payload) {

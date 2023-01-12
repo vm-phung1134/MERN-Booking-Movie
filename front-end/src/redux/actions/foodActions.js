@@ -4,6 +4,8 @@ import {
     ALL_FOOD_REQUEST, 
     ALL_FOOD_SUCCESS,
     ALL_FOOD_FAIL,
+    INCREMENT_FOOD,
+    DECREMENT_FOOD
 } from '../constants/foodConstants'
 
 export const getAllFood = () => async (dispatch) => {
@@ -12,7 +14,7 @@ export const getAllFood = () => async (dispatch) => {
         const {data} = await axios.get(`http://localhost:5000/api/v1/foods/`)
         dispatch({
             type: ALL_FOOD_SUCCESS,
-            payload: data
+            payload: data.foods
         })
     }catch(error){
         dispatch({
@@ -20,4 +22,17 @@ export const getAllFood = () => async (dispatch) => {
             payload: error
         })
     }
+}
+
+export const incrementFood = (id) => async (dispatch) => {
+    return dispatch({
+        type: INCREMENT_FOOD,
+        payload: id
+    })
+}
+export const decrementFood = (id) => async (dispatch) => {
+    return dispatch({
+        type: DECREMENT_FOOD,
+        payload: id
+    })
 }

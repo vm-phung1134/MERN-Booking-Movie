@@ -8,22 +8,28 @@ import {
 } 
 from './redux/reducer/movieReducer'
 import { userReducer } from './redux/reducer/authReducer'
-import {cinemaReducer} from './redux/reducer/cinemaReducer'
-import {showTimeReducer} from './redux/reducer/showTimeReducer'
 import {
-    ticketReducer,
-    getOneTicketReducer
+    cinemaReducer,
+    cinemaDetailReducer
+} from './redux/reducer/cinemaReducer'
+import {
+    showTimeReducer,
+    showtimeDetailReducer
+} from './redux/reducer/showTimeReducer'
+import {
+    ticketReducer
 } from './redux/reducer/ticketReducer'
 import { foodReducer } from './redux/reducer/foodReducer'
 const reducer = combineReducers({
     movies: moviesReducer,
     movie: movieDetailReducer,
     user: userReducer,
-    cinema: cinemaReducer,
+    cinemas: cinemaReducer,
     showtimes: showTimeReducer,
     tickets: ticketReducer,
     foods: foodReducer,
-    ticket: getOneTicketReducer
+    cinema: cinemaDetailReducer,
+    showtime: showtimeDetailReducer
 })
 
 let initialState = {}

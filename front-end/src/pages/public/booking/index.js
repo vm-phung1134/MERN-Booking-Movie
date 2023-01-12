@@ -1,31 +1,39 @@
 import HeaderPublic from "../components/headerPublic";
 import React, { useEffect, useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
-
-import { getAllCinema } from "../../../redux/actions/cinemaActions";
-import { getAllMovie } from "../../../redux/actions/movieActions";
+import { 
+  getAllCinema,
+  getOneCinema
+} from "../../../redux/actions/cinemaActions";
+import { getAllMovie, getOneMovie } from "../../../redux/actions/movieActions";
 import { useSelector, useDispatch } from "react-redux";
 import Session from "./session";
-import { getAllShowTime } from "../../../redux/actions/showTimeActions";
+import { 
+  getAllShowTime,
+  getOneShowTime
+} from "../../../redux/actions/showTimeActions";
 import {getAllTicket} from "../../../redux/actions/ticketActions"
 import TicketTable from "./ticketTable";
+import FoodTable from "./foodTable";
+import { getAllFood } from "../../../redux/actions/foodActions";
 
 function Booking() {
   const dispatch = useDispatch();
-  const cinemas = useSelector((state) => state.cinema.cinemas);
+  const cinemas = useSelector((state) => state.cinemas.cinemas);
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
   const tickets = useSelector((state) => state.tickets.tickets);
-  useEffect(() => {
-    dispatch(getAllMovie());
-    dispatch(getAllCinema());
-    dispatch(getAllShowTime());
-    dispatch(getAllTicket());
-  }, [dispatch]);
+  const foods = useSelector((state) => state.foods.foods);
+  const movie = useSelector((state) => state.movie.movie)
+  const cinema = useSelector((state) => state.cinema.cinema)
+  const showtime = useSelector((state) => state.showtime.showtime)
 
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
   const [valueShowTime, setValueShowTime] = useState("");
+  const [valueTime, setValueTime] = useState("");
+  let [vlPrice, setvlPrice] = useState(0)
+
   const handleChangeCinema = (value) => {
     setValueCinema(value);
     console.log(value);
@@ -34,9 +42,20 @@ function Booking() {
     setValueMovie(value);
     console.log(value);
   };
+  useEffect(() => {
+    dispatch(getAllMovie());
+    dispatch(getAllCinema());
+    dispatch(getAllShowTime());
+    dispatch(getAllTicket());
+    dispatch(getAllFood());
+    dispatch(getOneMovie(valueMovie));
+    dispatch(getOneCinema(valueCinema))
+    dispatch(getOneShowTime(valueShowTime))
+  }, [dispatch, valueCinema, valueMovie, valueShowTime]);
   return (
     <>
-      <div className=" bg-cover bg-center bg-[url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')]">
+    {/* [url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')] */}
+      <div className=" bg-cover bg-center bg-black">
         <div className="bg-black/80">
           <HeaderPublic />
           <div className="px-16 py-20 max-h-max bg-transparent">
@@ -122,6 +141,8 @@ function Booking() {
                     key={showtime._id}
                     showtime={showtime}
                     setValueShowTime={setValueShowTime}
+                    valueTime={valueTime}
+                    setValueTime = {setValueTime}
                     valueShowTime={valueShowTime}
                   />
                 ) : (
@@ -138,16 +159,47 @@ function Booking() {
               <button className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]">
                 CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
               </button>
-              <div className="grid grid-cols-3">
+              <div className="grid grid-cols-3 gap-x-5">
                 <div className="col-span-2">
-                  <TicketTable tickets={tickets}/>
+                  <TicketTable vlPrice={vlPrice} setvlPrice={setvlPrice} tickets={tickets}/>
+                  <FoodTable foods={foods}/>
                 </div>
-                <div>
-
+                <div className="bg-blue-gray-900 text-white h-[65%] text-sm mx-6 px-6 py-10">
+                    <div className=" flex justify-center">
+                        <img className="w-[300px] h-[200px] mb-2" src={movie.image} alt=""></img>
+                    </div>
+                  <div>
+                    <p className="font-medium uppercase py-1">{movie.name}</p>
+                    <p className="font-medium uppercase py-1 text-gray-500">{movie.namevn}</p>
+                    <p className="py-1">Rạp: {cinema.name}</p>
+                    <p className="py-1">Suất chiếu: {valueTime} | Ngày {showtime.startDate}</p>
+                    <p className="py-1">Loại vé: 
+                      {
+                        tickets.map((ticket) => 
+                          ticket.quantity > 0 ?
+                          (
+                            <>
+                              <span key={ticket._id}> {ticket.typeTicket} &#40;{ticket.quantity}&#41;</span>
+                              {
+                                localStorage.setItem('Tickets',JSON.stringify(tickets))
+                              }
+                            </>
+                          ):(
+                            <p key={ticket._id} hidden>Không có vé</p>
+                          )
+                        )
+                      }
+                    </p>
+                    <p className="py-1">Tổng: {vlPrice}</p>
+                  </div>
+                  <div className="justify-center flex">
+                    <button className="px-8 my-5 py-2 text-white bg-[#E51409]">
+                      TIẾP TỤC
+                    </button>
+                  </div>
+                  
                 </div>
               </div>
-
-              
             </div>
           </div>
         </div>
@@ -157,3 +209,6 @@ function Booking() {
 }
 
 export default Booking;
+
+// tính tổng tiển food rồi cộng với ticket = subtotal
+//  => tiếp theo submit để tạo create ticket

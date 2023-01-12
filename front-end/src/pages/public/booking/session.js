@@ -1,11 +1,12 @@
 import { Radio } from "@material-tailwind/react";
-// import { useState } from "react";
+import { useCallback } from "react";
 
-function Session({ showtime, valueShowTime, setValueShowTime }) {
-  const handleShowTime = e => {
-    setValueShowTime(e.target.value)
-    console.log(e.target.value)
-  }
+function Session({ showtime, valueShowTime, setValueShowTime, valueTime, setValueTime }) {
+  
+  const handleShowTime = useCallback((e, time) => {
+    setValueShowTime(e.target.value) // Get showtime
+    setValueTime(time) 
+  },[setValueShowTime, setValueTime])
   return (
     <>
       <div className="text-white">
@@ -16,7 +17,7 @@ function Session({ showtime, valueShowTime, setValueShowTime }) {
           <p className="uppercase text-sm">PHỤ ĐỀ - {showtime.typeMovie}</p>
           <div className="col-span-2 my-2 text-white" >
             {showtime.startTime.map((time) => (
-              <Radio onChange={handleShowTime} value={time._id.toString()} labelProps={{style: {color: 'white'}}} key={time._id} id={time.time} name="type" 
+              <Radio onChange={e => handleShowTime(e, time.time)} value={showtime._id} labelProps={{style: {color: 'white'}}} key={time._id} id={time.time} name="type" 
               label={
                 <div className="border mx-2 border-gray-500 text-center py-1 px-3">
                   <p className="text-[11px] uppercase">{time.nameScreen}</p>
