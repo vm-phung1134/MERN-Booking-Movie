@@ -3,15 +3,20 @@ import { memo, useEffect} from 'react';
 import { increment, decrement } from '../../../redux/actions/ticketActions';
 //import { getOneTicket } from '../../../redux/actions/ticketActions';
 
-function TicketTable({ tickets, vlPrice, setvlPrice }) {
+function TicketTable({ tickets, 
+  vlPriceTicket, 
+  setvlPriceTicket, 
+  valueMovie,
+  valueCinema,
+  valueShowTime}) {
   const dispatch = useDispatch()
   useEffect(() => {
     let total = 0;
     tickets.map(ticket => 
       total = total +  ticket.quantity * ticket.price
     )
-    setvlPrice(total)
-  },[setvlPrice, tickets])
+    setvlPriceTicket(total)
+  },[setvlPriceTicket, tickets])
   return (
     <>
       <div className="flex flex-col">
@@ -38,7 +43,7 @@ function TicketTable({ tickets, vlPrice, setvlPrice }) {
                       className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                     >
                       Giá
-                      <p className="text-[11px]">&#40;1000 VNĐ = 1 RF &#41;</p>
+                      <p className="text-[11px] font-thin">&#40; 1000 VNĐ = 1 RF &#41;</p>
                     </th>
                     <th
                       scope="col"

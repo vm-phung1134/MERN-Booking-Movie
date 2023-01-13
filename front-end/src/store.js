@@ -20,6 +20,8 @@ import {
     ticketReducer
 } from './redux/reducer/ticketReducer'
 import { foodReducer } from './redux/reducer/foodReducer'
+import { newReservationReducer } from './redux/reducer/reservationReducer'
+
 const reducer = combineReducers({
     movies: moviesReducer,
     movie: movieDetailReducer,
@@ -29,7 +31,8 @@ const reducer = combineReducers({
     tickets: ticketReducer,
     foods: foodReducer,
     cinema: cinemaDetailReducer,
-    showtime: showtimeDetailReducer
+    showtime: showtimeDetailReducer,
+    reservation: newReservationReducer
 })
 
 let initialState = {}

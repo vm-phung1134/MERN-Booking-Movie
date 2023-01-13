@@ -21,7 +21,7 @@ const foodRoute = require('./routes/foodRoute')
 
 //mount the route
 app.use('/api/v1/auth', authRoute)
-app.use('/api/v1/reservation', reservationRoute)
+app.use('/api/v1/reservations', reservationRoute)
 app.use('/api/v1/movies', movieRoute)
 app.use('/api/v1/cinemas', cinemaRoute)
 app.use('/api/v1/showtimes', showTimeRoute)

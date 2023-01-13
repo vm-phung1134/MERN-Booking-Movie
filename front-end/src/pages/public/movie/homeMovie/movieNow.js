@@ -7,7 +7,7 @@ function Movie({movie}) {
         <div className="">
           <div className="relative">
             <img
-              className="w-[350px] h-[250px] bg-cover"
+              className="w-[370px] h-[250px] bg-cover"
               src={movie.image}
               alt=""
             ></img>

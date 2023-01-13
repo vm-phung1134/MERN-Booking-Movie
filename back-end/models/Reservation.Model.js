@@ -1,46 +1,80 @@
-const mongoose = require('mongoose')
-const reservationSchema = new mongoose.Schema({
-    quantity: { // Số lượng người đặt
-        type: Number,
-        required: [true, 'Quantity must be required']
+const mongoose = require("mongoose");
+const reservationSchema = new mongoose.Schema(
+  {
+    nameMovie: {
+      type: String,
+      required: true,
     },
-    date: { // Ngày đặt vé
+    nameCinema: {
+      type: String,
+      required: true,
+    },
+    tickets: [
+      {
+        typeTicket: {
+          type: String,
+          required: true,
+        },
+        discription: {
+          type: String,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+    foods: [
+      {
+        typeFood: {
+          type: String,
+          required: true,
+        },
+        discription: {
+          type: String,
+          required: true,
+        },
+        price: {
+          type: Number,
+          required: true,
+        },
+        image: {
+          type: String,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+    startTime: {
         type: String,
-        required: [true, 'Date reservation must be required']
+        required: true
     },
-    seats: [{ // Array chỗ ngồi đã đặt
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Seat'
-    }],
-    movieId:{ // Thông tin phim
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Movie'
+    startDate: {
+        type: String,
+        required: true
     },
-    comboFoodId: { // Đồ ăn theo combo
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'ComboFood'
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-    cinemaId: { // Lấy giờ chiếu - ngày chiếu - rạp chiếu
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Cinema'
+    total: {
+      type: Number,
+      required: true,
     },
-    author: { // Thông tin người đặt
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
+    typeCheckout: {
+      type: String,
     },
-    total: { // Gía vé + comboFood + Số lượng người = Tổng thanh toán
-        type: Number,
-        required: [true, 'Total price must be required']
-    },
-    price: { // Giá vé
-        type: Number,
-        required: [true, 'Price reservation must be required']
-    },
-    checkout: { // Kiểm tra thanh toán
-        type: Boolean,
-        default: false
-    }
-}, {timestamps: true})
+  },
+  { timestamps: true }
+);
 
-const Reservation = mongoose.model('Reservation', reservationSchema)
-module.exports  = Reservation
+const Reservation = mongoose.model("Reservation", reservationSchema);
+module.exports = Reservation;

@@ -1,13 +1,19 @@
 import { useDispatch } from "react-redux";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import {
   incrementFood,
   decrementFood,
 } from "../../../redux/actions/foodActions";
 
-function FoodTable({ foods }) {
+function FoodTable({ foods, vlPriceFood, setvlPriceFood}) {
   const dispatch = useDispatch();
-
+  useEffect(() => {
+    let total = 0;
+    foods.map(food => 
+      total = total +  food.quantity * food.price
+    )
+    setvlPriceFood(total)
+  },[foods, setvlPriceFood])
   return (
     <>
       <div className="flex flex-col mt-3">
@@ -34,7 +40,7 @@ function FoodTable({ foods }) {
                       className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                     >
                       Giá
-                      <p className="text-[11px]">&#40;1000 VNĐ = 1 RF &#41;</p>
+                      <p className="text-[11px] font-thin">&#40; 1000 VNĐ = 1 RF &#41;</p>
                     </th>
                     <th
                       scope="col"
