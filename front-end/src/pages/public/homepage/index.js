@@ -35,6 +35,10 @@ function HomePage() {
               that would ground him.
             </p>
             <button className="py-2 px-3 bg-[#E50914] mt-5">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
               ĐẶT VÉ NGAY &ensp;
               <i className="fas fa-chevron-right text-[12px]"></i>
             </button>
