@@ -1,12 +1,11 @@
 import { Radio } from "@material-tailwind/react";
 import { useCallback } from "react";
 
-function Session({ showtime, valueShowTime, setValueShowTime, valueTime, setValueTime }) {
+function Session({ showtime, setValueShowTime}) {
   
   const handleShowTime = useCallback((e, time) => {
-    setValueShowTime(e.target.value) // Get showtime
-    setValueTime(time) 
-  },[setValueShowTime, setValueTime])
+    setValueShowTime({id: e.target.value, timeVl: time}) // Get showtime
+  },[setValueShowTime])
   return (
     <>
       <div className="text-white">

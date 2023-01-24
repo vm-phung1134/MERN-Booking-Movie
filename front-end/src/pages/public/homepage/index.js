@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import HeaderPublic from '../components/headerPublic'
 import MovieNow from "../movie/homeMovie/movieNowList"
 import MovieSoon from "../movie/homeMovie/movieSoonList"
@@ -9,6 +9,10 @@ function HomePage() {
   const handleClickMovie = useCallback(() => {
     setStateMovie(!stateMovie);
   }, [stateMovie]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  },[])
   return (
     <>
       <div className="relative w-full h-screen bg-[url('https://i0.wp.com/www.irishfilmcritic.com/wp-content/uploads/2022/08/Top-Gun-Maverick.jpg')]">

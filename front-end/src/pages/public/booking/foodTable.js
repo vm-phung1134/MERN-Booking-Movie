@@ -5,7 +5,7 @@ import {
   decrementFood,
 } from "../../../redux/actions/foodActions";
 
-function FoodTable({ foods, vlPriceFood, setvlPriceFood}) {
+function FoodTable({ foods, setvlPriceFood}) {
   const dispatch = useDispatch();
   useEffect(() => {
     let total = 0;

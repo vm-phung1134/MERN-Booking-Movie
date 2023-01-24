@@ -1,22 +1,15 @@
-import {useDispatch} from 'react-redux'
-import { memo, useEffect} from 'react';
-import { increment, decrement } from '../../../redux/actions/ticketActions';
+import { useDispatch } from "react-redux";
+import { memo, useEffect } from "react";
+import { increment, decrement } from "../../../redux/actions/ticketActions";
 //import { getOneTicket } from '../../../redux/actions/ticketActions';
 
-function TicketTable({ tickets, 
-  vlPriceTicket, 
-  setvlPriceTicket, 
-  valueMovie,
-  valueCinema,
-  valueShowTime}) {
-  const dispatch = useDispatch()
+function TicketTable({ tickets, setvlPriceTicket }) {
+  const dispatch = useDispatch();
   useEffect(() => {
     let total = 0;
-    tickets.map(ticket => 
-      total = total +  ticket.quantity * ticket.price
-    )
-    setvlPriceTicket(total)
-  },[setvlPriceTicket, tickets])
+    tickets.map((ticket) => (total = total + ticket.quantity * ticket.price));
+    setvlPriceTicket(total);
+  }, [setvlPriceTicket, tickets]);
   return (
     <>
       <div className="flex flex-col">
@@ -43,7 +36,9 @@ function TicketTable({ tickets,
                       className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                     >
                       Giá
-                      <p className="text-[11px] font-thin">&#40; 1000 VNĐ = 1 RF &#41;</p>
+                      <p className="text-[11px] font-thin">
+                        &#40; 1000 VNĐ = 1 RF &#41;
+                      </p>
                     </th>
                     <th
                       scope="col"
@@ -62,16 +57,16 @@ function TicketTable({ tickets,
                       </td>
                       <td className="px-6 py-4 text-sm text-white whitespace-nowrap">
                         <div className="flex justify-between">
-                          <button 
-                          className="border rounded-full px-1"
-                          onClick={() => dispatch(decrement(ticket._id))}
+                          <button
+                            className="border rounded-full px-1"
+                            onClick={() => dispatch(decrement(ticket._id))}
                           >
                             <i className="fa-solid fa-minus"></i>
                           </button>
-                           <p>{ticket.quantity}</p>
-                          <button 
-                          className="border rounded-full px-1"
-                          onClick={() => dispatch(increment(ticket._id))}
+                          <p>{ticket.quantity}</p>
+                          <button
+                            className="border rounded-full px-1"
+                            onClick={() => dispatch(increment(ticket._id))}
                           >
                             <i className="fa-solid fa-plus"></i>
                           </button>
@@ -81,9 +76,7 @@ function TicketTable({ tickets,
                         {ticket.price} <span className="text-[10px]">RF</span>
                       </td>
                       <td className="px-6 text-center py-4 text-sm text-white whitespace-nowrap">
-                        {
-                          ticket.price * ticket.quantity
-                        } 
+                        {ticket.price * ticket.quantity}
                         <span className="text-[10px]"> RF</span>
                       </td>
                     </tr>

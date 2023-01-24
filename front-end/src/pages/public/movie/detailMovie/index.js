@@ -18,6 +18,7 @@ const DetailMovie = () => {
 
   const [loadingPage, setLoadingPage] = useState(false);
   useEffect(() => {
+    window.scrollTo(0, 0)
     setLoadingPage(true);
     setTimeout(async () => {
       await setLoadingPage(false);

@@ -98,7 +98,7 @@ function RegisterForm() {
           >
             <div className="w-[60%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
               <h1 className="text-3xl font-semibold text-center text-purple-600">
-                Đăng Ký Thành Viên
+                Đăng Ký Tài Khoản
               </h1>
 
               <p className="pt-1 text-center font-medium text-green-500">
@@ -108,13 +108,7 @@ function RegisterForm() {
                 {stateErr}
               </p>
               <form className="mt-6" onSubmit={handleSubmit}>
-                <div className="mb-2">
-                  <label
-                    htmlFor="text"
-                    className="block text-sm font-semibold text-white text-[16px]"
-                  >
-                    Họ tên
-                  </label>
+                <div className="mb-4">
                   <input
                     type="name"
                     name="name"
@@ -122,70 +116,56 @@ function RegisterForm() {
                     value={values.name}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none focus:ring "
+                    placeholder="Tên người dùng"
+                    className="placeholder-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none"
                   />
                   {errors.name && touched.name && (
-                    <span className="text-red-500">{errors.name}</span>
+                    <span className="text-red-500 text-[13px]">{errors.name}</span>
                   )}
                 </div>
-                <div className="mb-2">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-semibold text-white text-[16px]"
-                  >
-                    Email
-                  </label>
+                <div className="mb-4">
                   <input
-                    className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none focus:ring "
+                    className="placeholder-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none"
                     type="email"
                     name="email"
                     id="email"
+                    placeholder="Email"
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
                   {errors.email && touched.email && (
-                    <span className="text-red-500">{errors.email}</span>
+                    <span className="text-red-500 text-[13px]">{errors.email}</span>
                   )}
                 </div>
-                <div className="mb-2">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-semibold text-white text-[16px]"
-                  >
-                    Mật khẩu
-                  </label>
+                <div className="mb-4">
                   <input
                     type="password"
                     name="password"
                     id="password"
+                    placeholder="Mật khẩu"
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none focus:ring "
+                    className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
                   />
                   {errors.password && touched.password && (
-                    <span className="text-red-500">{errors.password}</span>
+                    <span className="text-red-500 text-[13px]">{errors.password}</span>
                   )}
                 </div>
-                <div className="mb-2">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-semibold text-white text-[16px]"
-                  >
-                    Nhập lại mật khẩu
-                  </label>
+                <div className="mb-4">
                   <input
                     type="password"
                     name="passwordConfirm"
                     id="passwordConfirm"
+                    placeholder="Nhập lại mật khẩu"
                     value={values.passwordConfirm}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none focus:ring "
+                    className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
                   />
                   {errors.passwordConfirm && touched.passwordConfirm && (
-                    <span className="text-red-500">
+                    <span className="text-red-500 text-[13px]">
                       {errors.passwordConfirm}
                     </span>
                   )}
@@ -214,7 +194,7 @@ function RegisterForm() {
                           fill="currentColor"
                         />
                       </svg>
-                      Đang xử lý
+                      Vui lòng chờ
                     </button>
                   ) : (
                     <button

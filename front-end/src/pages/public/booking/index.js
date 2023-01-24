@@ -30,30 +30,32 @@ function Booking() {
   const showtime = useSelector((state) => state.showtime.showtime);
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
-  const [valueShowTime, setValueShowTime] = useState("");
-  const [valueTime, setValueTime] = useState("");
+  const [valueShowTime, setValueShowTime] = useState({ id: "", timeVl: "" });
   let [vlPriceTicket, setvlPriceTicket] = useState(0);
   let [vlPriceFood, setvlPriceFood] = useState(0);
-  const handleChangeCinema = useCallback((value) => {
-    setValueCinema("")
-    setValueMovie("")
-    setValueTime("")
-    setValueShowTime("")
-    setValueCinema(value);
-  },[setValueCinema]);
+  const handleChangeCinema = useCallback(
+    (value) => {
+      setValueMovie("");
+      setValueCinema(value);
+    },
+    [setValueCinema]
+  );
   const handleChangeMovie = (value) => {
+    setValueShowTime({ id: "", timeVl: "" });
     setValueMovie(value);
   };
+  useCallback(() => {
+    dispatch(getOneMovie(valueMovie));
+    dispatch(getOneCinema(valueCinema));
+    dispatch(getOneShowTime(valueShowTime.id));
+  },[dispatch, valueCinema, valueMovie, valueShowTime.id])
   useEffect(() => {
     dispatch(getAllMovie());
     dispatch(getAllCinema());
     dispatch(getAllShowTime());
     dispatch(getAllTicket());
     dispatch(getAllFood());
-    dispatch(getOneMovie(valueMovie));
-    dispatch(getOneCinema(valueCinema));
-    dispatch(getOneShowTime(valueShowTime));
-  }, [dispatch, valueCinema, valueMovie, valueShowTime]);
+  }, [dispatch]);
   return (
     <>
       {/* [url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')] */}
@@ -65,9 +67,8 @@ function Booking() {
               <button className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
                 CHỌN RẠP & PHIM
               </button>
-                
             </div>
-            
+
             <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 sm:grid-cols-1">
               <div>
                 <Select
@@ -101,8 +102,7 @@ function Booking() {
                   onChange={handleChangeMovie}
                 >
                   {movies.map((movie) =>
-                    valueCinema !== ""
-                    ? (
+                    valueCinema !== "" ? (
                       <Option
                         className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
                         key={movie._id}
@@ -141,31 +141,24 @@ function Booking() {
             </div>
 
             <div className="grid grid-cols-2 gap-5 mt-5 mb-10">
-              {showtimes.map((showtime) =>
-                valueMovie !== "" &&
-                valueCinema !== "" &&
-                valueMovie === showtime.movieId &&
-                valueCinema === showtime.cinemaId 
-                && 
-                  <Session
-                    key={showtime._id}
-                    showtime={showtime}
-                    setValueShowTime={setValueShowTime}
-                    valueTime={valueTime}
-                    setValueTime={setValueTime}
-                    valueShowTime={valueShowTime}
-                  />
-                
-                )
-              }
+              {showtimes.map(
+                (showtime) =>
+                  valueMovie !== "" &&
+                  valueCinema !== "" &&
+                  valueMovie === showtime.movieId &&
+                  valueCinema === showtime.cinemaId && (
+                    <Session
+                      key={showtime._id}
+                      showtime={showtime}
+                      setValueShowTime={setValueShowTime}
+                    />
+                  )
+              )}
             </div>
             <div>
-              {
-                valueMovie !== "" &&
+              {valueMovie !== "" &&
                 valueCinema !== "" &&
-                valueShowTime !== "" && 
-                valueTime !=="" &&
-                (
+                valueShowTime.id !== "" && (
                   <>
                     <button className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]">
                       CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
@@ -173,12 +166,10 @@ function Booking() {
                     <div className="grid grid-cols-3 gap-x-5">
                       <div className="col-span-2">
                         <TicketTable
-                          vlPriceTicket={vlPriceTicket}
                           setvlPriceTicket={setvlPriceTicket}
                           tickets={tickets}
                         />
                         <FoodTable
-                          vlPriceFood={vlPriceFood}
                           setvlPriceFood={setvlPriceFood}
                           foods={foods}
                         />
@@ -204,28 +195,30 @@ function Booking() {
                           </p>
                           <p className="py-1">
                             <span className="text-gray-500">Suất chiếu: </span>{" "}
-                            {valueTime} | Ngày {showtime.startDate}
+                            {valueShowTime.timeVl} | Ngày {showtime.startDate}
                           </p>
                           <p className="py-1">
                             <span className="text-gray-500">Loại vé: </span>{" "}
-                            {tickets.map((ticket) =>
-                              ticket.quantity > 0 && (
-                                <span key={ticket._id}>
-                                  {ticket.typeTicket} &#40;x{ticket.quantity}
-                                  &#41;&ensp;
-                                </span> 
-                                
-                              )
+                            {tickets.map(
+                              (ticket) =>
+                                ticket.quantity > 0 && (
+                                  <span key={ticket._id}>
+                                    {ticket.typeTicket} &#40;x{ticket.quantity}
+                                    &#41;&ensp;
+                                  </span>
+                                )
                             )}
                           </p>
                           <p className="py-1">
                             <span className="text-gray-500">Combo: </span>{" "}
-                            {foods.map((food) =>
-                              food.quantity > 0 && (
-                                <span key={food._id}>
-                                  {food.typeFood} &#40;x{food.quantity}&#41; &ensp;
-                                </span>
-                              )
+                            {foods.map(
+                              (food) =>
+                                food.quantity > 0 && (
+                                  <span key={food._id}>
+                                    {food.typeFood} &#40;x{food.quantity}&#41;
+                                    &ensp;
+                                  </span>
+                                )
                             )}
                           </p>
                           <p className="py-1 text-red-500 text-[17px]">
@@ -242,7 +235,7 @@ function Booking() {
                                   nameCinema: cinema.name,
                                   tickets: tickets,
                                   foods: foods,
-                                  startTime: valueTime,
+                                  startTime: valueShowTime.timeVl,
                                   startDate: showtime.startDate,
                                   total: vlPriceFood + vlPriceTicket,
                                 })

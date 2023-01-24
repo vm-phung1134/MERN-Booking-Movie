@@ -85,44 +85,34 @@ function LoginForm() {
                 {stateError}
               </p>
               <form className="mt-6" onSubmit={handleSubmit}>
-                <div className="mb-2">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-semibold text-white text-[16px]"
-                  >
-                    Email
-                  </label>
+                <div className="mb-4">
                   <input
                     type="email"
                     name="email"
                     id="emailLogin"
+                    placeholder="Email"
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none focus:ring "
+                    className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none "
                   />
                   {errors.email && touched.email && (
-                    <span className="text-red-500">{errors.email}</span>
+                    <span className="text-red-500 text-[14px]">{errors.email}</span>
                   )}
                 </div>
-                <div className="mb-2">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-semibold text-white text-[16px]"
-                  >
-                    Mật khẩu
-                  </label>
+                <div className="mb-4">
                   <input
                     type="password"
                     name="password"
                     id="passwordLogin"
+                    placeholder="Mật khẩu"
                     value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none focus:ring "
+                    className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
                   />
                   {errors.password && touched.password && (
-                    <span className="text-red-500">{errors.password}</span>
+                    <span className="text-red-500 text-[14px]">{errors.password}</span>
                   )}
                 </div>
                 <a
@@ -156,7 +146,7 @@ function LoginForm() {
                           fill="currentColor"
                         />
                       </svg>
-                      Đang xử lý
+                      Vui lòng chờ
                     </button>
                   ) : (
                     <button
