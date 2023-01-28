@@ -3,6 +3,7 @@ import Movie from './movieNow'
 
 import { getAllMovie } from '../../../../redux/actions/movieActions';
 import {useSelector, useDispatch} from 'react-redux'
+import {memo} from 'react'
 
 function MovieNow() {
   const dispatch = useDispatch()
@@ -23,4 +24,4 @@ function MovieNow() {
   );
 }
 
-export default MovieNow;
+export default memo(MovieNow);

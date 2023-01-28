@@ -1,5 +1,5 @@
 import { Radio } from "@material-tailwind/react";
-import { useCallback } from "react";
+import { useCallback, memo } from "react";
 
 function Session({ showtime, setValueShowTime}) {
   
@@ -33,4 +33,4 @@ function Session({ showtime, setValueShowTime}) {
   );
 }
 
-export default Session;
+export default memo(Session);

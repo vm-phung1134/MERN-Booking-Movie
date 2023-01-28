@@ -1,3 +1,5 @@
+import {memo} from 'react'
+
 function MovieSoon() {
   return (
     <>
@@ -87,4 +89,4 @@ function MovieSoon() {
   );
 }
 
-export default MovieSoon;
+export default memo(MovieSoon);

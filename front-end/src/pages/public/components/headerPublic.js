@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { Link } from "react-router-dom";
 import { Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -202,4 +202,4 @@ function HeaderPublic() {
   );
 }
 
-export default HeaderPublic;
+export default memo(HeaderPublic);

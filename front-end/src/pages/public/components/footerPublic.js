@@ -1,3 +1,5 @@
+import {memo} from 'react';
+
 function FooterPublic() {
     return ( 
         <footer className="bg-black text-blue-gray-300 border-t border-blue-gray-400 text-center lg:text-center">
@@ -118,4 +120,4 @@ function FooterPublic() {
     );
 }
 
-export default FooterPublic;
+export default memo(FooterPublic);

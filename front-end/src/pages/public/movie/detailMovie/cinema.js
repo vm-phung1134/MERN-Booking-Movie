@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect,memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllShowTime } from "../../../../redux/actions/showTimeActions";
 import { useParams } from "react-router-dom";
@@ -48,4 +48,4 @@ function Cinema({ cinema }) {
   );
 }
 
-export default Cinema;
+export default memo(Cinema);

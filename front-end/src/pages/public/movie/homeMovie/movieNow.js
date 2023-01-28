@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom'
-
+import {memo} from 'react'
 
 function Movie({movie}) {
     return (  
@@ -32,4 +32,4 @@ function Movie({movie}) {
     );
 }
 
-export default Movie;
+export default memo(Movie);

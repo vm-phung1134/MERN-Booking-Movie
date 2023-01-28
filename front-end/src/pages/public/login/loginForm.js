@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin, clearErrors } from "../../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
@@ -214,4 +214,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default memo(LoginForm);

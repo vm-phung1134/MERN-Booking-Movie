@@ -21,9 +21,9 @@ const DetailMovie = () => {
     window.scrollTo(0, 0)
     setLoadingPage(true);
     setTimeout(async () => {
-      await setLoadingPage(false);
-      dispatch(getOneMovie(movieId.id));
+      await dispatch(getOneMovie(movieId.id));
       dispatch(getAllCinema());
+      setLoadingPage(false); 
     }, 1300);
   }, [dispatch, movieId, setLoadingPage]);
   return (

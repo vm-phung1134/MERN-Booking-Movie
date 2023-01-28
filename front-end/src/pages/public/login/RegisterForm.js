@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, memo } from "react";
 import { authRegister } from "../../../redux/actions/authActions";
 
 function RegisterForm() {
@@ -246,4 +246,4 @@ function RegisterForm() {
   );
 }
 
-export default RegisterForm;
+export default memo(RegisterForm);
