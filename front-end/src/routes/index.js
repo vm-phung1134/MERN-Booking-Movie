@@ -3,6 +3,7 @@ import HomePage from '../pages/public/homepage'
 import HomeMovie from '../pages/public/movie/homeMovie'
 import DetailMovie from '../pages/public/movie/detailMovie'
 import Booking from '../pages/public/booking'
+import Account from '../pages/public/account'
 
 const publicRoutes = [
     {
@@ -20,8 +21,11 @@ const publicRoutes = [
     {
         path: '/booking', 
         component: Booking
+    },
+    {
+        path: '/account', 
+        component: Account
     }
-    
 ]
 
 const privateRoutes = [

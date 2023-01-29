@@ -1,5 +1,5 @@
 import HeaderPublic from "../components/headerPublic";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 import {
   getAllCinema,
@@ -28,27 +28,28 @@ function Booking() {
   const movie = useSelector((state) => state.movie.movie);
   const cinema = useSelector((state) => state.cinema.cinema);
   const showtime = useSelector((state) => state.showtime.showtime);
+  console.log(showtime)
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
   const [valueShowTime, setValueShowTime] = useState({ id: "", timeVl: "" });
   let [vlPriceTicket, setvlPriceTicket] = useState(0);
   let [vlPriceFood, setvlPriceFood] = useState(0);
-  const handleChangeCinema = useCallback(
-    (value) => {
-      setValueMovie("");
-      setValueCinema(value);
-    },
-    [setValueCinema]
-  );
-  const handleChangeMovie = (value) => {
+  const handleChangeCinema = useCallback((value) => {
+    setValueMovie("");
+    setValueCinema(value);
+  },[setValueCinema]);
+
+  const handleChangeMovie = useCallback((value) => {
     setValueShowTime({ id: "", timeVl: "" });
     setValueMovie(value);
-  };
-  useCallback(() => {
-    dispatch(getOneMovie(valueMovie));
+  },[setValueMovie]);
+
+  useMemo(() => {
     dispatch(getOneCinema(valueCinema));
+    dispatch(getOneMovie(valueMovie));
     dispatch(getOneShowTime(valueShowTime.id));
   },[dispatch, valueCinema, valueMovie, valueShowTime.id])
+  
   useEffect(() => {
     dispatch(getAllMovie());
     dispatch(getAllCinema());
@@ -58,7 +59,6 @@ function Booking() {
   }, [dispatch]);
   return (
     <>
-      {/* [url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')] */}
       <div className=" bg-cover bg-center bg-[url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')]">
         <div className="bg-black/90">
           <HeaderPublic />

@@ -20,7 +20,7 @@ function Events() {
             </div>
             <button
               className="absolute bottom-[5%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
-                                     border border-white py-[10px] px-[20px] hover:bg-[#E50914] hover:border-none
+                                     border border-white text-sm py-[13px] px-[25px] hover:bg-[#E50914] hover:border-none
                                     "
             >
               CHI TIẾT
