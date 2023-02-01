@@ -28,7 +28,6 @@ function Booking() {
   const movie = useSelector((state) => state.movie.movie);
   const cinema = useSelector((state) => state.cinema.cinema);
   const showtime = useSelector((state) => state.showtime.showtime);
-  console.log(showtime)
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
   const [valueShowTime, setValueShowTime] = useState({ id: "", timeVl: "" });
@@ -51,6 +50,7 @@ function Booking() {
   },[dispatch, valueCinema, valueMovie, valueShowTime.id])
   
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getAllMovie());
     dispatch(getAllCinema());
     dispatch(getAllShowTime());
@@ -64,7 +64,7 @@ function Booking() {
           <HeaderPublic />
           <div className="px-16 py-20 min-h-screen max-h-full bg-transparent">
             <div className="flex justify-between">
-              <button className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
+              <button disabled className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
                 CHỌN RẠP & PHIM
               </button>
             </div>
@@ -132,7 +132,7 @@ function Booking() {
             </div>
             <div>
               {valueCinema !== "" && valueMovie !== "" ? (
-                <button className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
+                <button disabled className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
                   CHỌN SUẤT CHIẾU
                 </button>
               ) : (
@@ -160,7 +160,7 @@ function Booking() {
                 valueCinema !== "" &&
                 valueShowTime.id !== "" && (
                   <>
-                    <button className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]">
+                    <button disabled className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]">
                       CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
                     </button>
                     <div className="grid grid-cols-3 gap-x-5">

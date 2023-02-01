@@ -163,7 +163,7 @@ function HomePage() {
           {/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}
           {stateMovie === true ? <MovieNow /> : <MovieSoon />}
           <div className="pt-20">
-            <button className="text-white py-[17px] text-[15px] border-b-2 border-[#E50914]">
+            <button disabled className="text-white py-[17px] text-[15px] border-b-2 border-[#E50914]">
               BÌNH LUẬN PHIM
             </button>
             <div className="grid grid-cols-2 py-10 gap-4 px-6">
@@ -176,7 +176,7 @@ function HomePage() {
           </div>
           {/* sự kiện */}
           <div className="pt-5">
-            <button className="text-white py-[17px] text-[15px] border-b-2 mb-10 border-[#E50914]">
+            <button disabled className="text-white py-[17px] text-[15px] border-b-2 mb-10 border-[#E50914]">
               TIN KHUYẾN MÃI
             </button>
             <div className="grid grid-cols-4 gap-4 pb-10">

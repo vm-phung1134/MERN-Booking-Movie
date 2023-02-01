@@ -26,7 +26,6 @@ function LoginForm() {
   const { user, errorLogin, isAuthenticated } = useSelector(
     (state) => state.user
   );
-
   useEffect(() => {
     if (errorLogin) {
       setStateError(errorLogin);
@@ -35,6 +34,7 @@ function LoginForm() {
     if (isAuthenticated === true) {
       localStorage.setItem("user", user.userName);
       localStorage.setItem("token", user.token);
+      localStorage.setItem('userId', user.userId);
       navigate("/home");
     }
   }, [dispatch, errorLogin, isAuthenticated, navigate, stateError, user]);
@@ -84,7 +84,7 @@ function LoginForm() {
               <p className="pt-1 text-center font-medium text-red-700">
                 {stateError}
               </p>
-              <form className="mt-6" onSubmit={handleSubmit}>
+              <form className="mt-6 " onSubmit={handleSubmit}>
                 <div className="mb-4">
                   <input
                     type="email"

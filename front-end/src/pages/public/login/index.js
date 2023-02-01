@@ -1,9 +1,27 @@
-import Logo from "./mylogo.png"
-import LoginForm from "./loginForm"
+import Logo from "./mylogo.png";
+import LoginForm from "./loginForm";
 import RegisterForm from "./RegisterForm";
-
+import { useSelector} from "react-redux";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useEffect,} from "react";
 
 export default function Login() {
+  const {isChanged } = useSelector((state) => state.newUser);
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (isChanged === true) {  
+      toast.success(
+        "Đã cập nhật mật khẩu thành công - Vui lòng đăng nhập lại !",
+        {
+          position: toast.POSITION.BOTTOM_LEFT,
+          className: "text-black",
+        }
+      );
+    }
+    
+  }, [isChanged]);
 
   return (
     <>
@@ -45,8 +63,7 @@ export default function Login() {
                   group
                 "
                 >
-                <i className="fa-brands fa-react"></i>&ensp;
-                  Bắt đầu
+                  <i className="fa-brands fa-react"></i>&ensp; Bắt đầu
                 </button>
               </a>
             </div>
@@ -57,7 +74,8 @@ export default function Login() {
       <div className="grid grid-cols-2 border-t border-zinc-400 gap-x-4 p-4 text-white bg-black h-full">
         <div className="relative">
           <div
-            data-aos="fade-down" data-aos-duration="1000"
+            data-aos="fade-down"
+            data-aos-duration="1000"
             className="absolute translate-x-[-40%] top-[30%] left-[20%]"
           >
             <h1 className="text-[35px] font-medium">
@@ -79,14 +97,15 @@ export default function Login() {
             </button>
           </div>
         </div>
-      <LoginForm/>
+        <LoginForm />
       </div>
       {/*-----------------FORM ĐĂNG KÝ---------------- */}
       <div className="grid grid-cols-2 gap-x-4 p-4  text-white bg-black h-full">
-        <RegisterForm/>
+        <RegisterForm />
         <div className="relative">
           <div
-            data-aos="fade-down" data-aos-duration="1000"
+            data-aos="fade-down"
+            data-aos-duration="1000"
             className="absolute translate-x-[40%] top-[15%] right-[20%]"
           >
             <h1 className="text-[35px] font-medium">

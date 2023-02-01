@@ -55,7 +55,7 @@ const DetailMovie = () => {
                   <p>Thời lượng: {movie.duration} phút</p>
                   <p>Đạo diễn: {movie.director}</p>
                   <p>Thể loại: {movie.type}</p>
-                  <p className="text-[#091dce]">
+                  <p className="text-[#e75353]">
                     Ngày khởi chiếu: {movie.released}
                   </p>
                 </div>

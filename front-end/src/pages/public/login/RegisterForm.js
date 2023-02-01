@@ -1,6 +1,8 @@
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, memo } from "react";
+import {ToastContainer ,toast} from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 import { authRegister } from "../../../redux/actions/authActions";
 
 function RegisterForm() {
@@ -12,6 +14,10 @@ function RegisterForm() {
     name: "",
     email: "",
     password: "",
+    phone: "",
+    gender:"",
+    cardId: "",
+    position:"",
     passwordConfirm: "",
   };
   const dispatch = useDispatch();
@@ -21,7 +27,7 @@ function RegisterForm() {
     setStateLoadingRegister({ loading: true });
     setTimeout(async () => {
       await setStateLoadingRegister({ loading: false });
-      dispatch(authRegister(values.name, values.email, values.password));
+      dispatch(authRegister(values.name, values.email, values.password, values.phone, values.cardId, values.gender, values.position));
       resetForm({
         name: "",
         email: "",
@@ -36,10 +42,12 @@ function RegisterForm() {
     if (error) {
       setStateErr(error);
       setStateSuccess("");
-      console.log(error);
     }
     if (isRegister === true) {
-      setStateSuccess("Chúc mừng bạn đã đăng ký thành công !");
+      toast.success('Đăng ký thành công !', {
+        position: toast.POSITION.BOTTOM_LEFT,
+        className: 'text-black'
+      });
       setStateErr("");
     }
   }, [dispatch, error, isRegister, stateErr, stateSuccess, user]);
@@ -180,7 +188,7 @@ function RegisterForm() {
                       <svg
                         aria-hidden="true"
                         role="status"
-                        class="inline w-4 h-4 mr-3 text-white animate-spin"
+                        className="inline w-4 h-4 mr-3 text-white animate-spin"
                         viewBox="0 0 100 101"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -197,12 +205,15 @@ function RegisterForm() {
                       Vui lòng chờ
                     </button>
                   ) : (
+                    <>
                     <button
                       type="submit"
                       className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
                     >
                       Đăng ký
                     </button>
+                    <ToastContainer  toastStyle={{color: 'black'}} />
+                    </>
                   )}
                 </div>
               </form>

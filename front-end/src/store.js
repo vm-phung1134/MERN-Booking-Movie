@@ -7,7 +7,7 @@ import {
    
 } 
 from './redux/reducer/movieReducer'
-import { userReducer } from './redux/reducer/authReducer'
+import { getAllReducer, userChangeReducer, userEditReducer, userInfoReducer, userReducer } from './redux/reducer/authReducer'
 import {
     cinemaReducer,
     cinemaDetailReducer
@@ -26,6 +26,10 @@ const reducer = combineReducers({
     movies: moviesReducer,
     movie: movieDetailReducer,
     user: userReducer,
+    users: getAllReducer,
+    userInfo: userInfoReducer,
+    editUser: userEditReducer,
+    newUser: userChangeReducer,
     cinemas: cinemaReducer,
     showtimes: showTimeReducer,
     tickets: ticketReducer,

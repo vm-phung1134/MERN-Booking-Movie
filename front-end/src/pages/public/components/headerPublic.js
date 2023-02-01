@@ -21,6 +21,9 @@ function HeaderPublic() {
 
   const handleLogout = () => {
     dispatch(authLogout());
+    localStorage.removeItem('user')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('token')
   };
   const { user, isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {

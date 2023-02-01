@@ -1,12 +1,79 @@
 import { Formik } from "formik";
-import {memo} from 'react'
-function ChangePassForm() {
+import { memo, useEffect, } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+// import {ToastContainer ,toast} from "react-toastify"
+// import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+
+import { changePasswordUser, authLogout} from "../../../redux/actions/authActions";
+
+function ChangePassForm({ userInfo }) {
   const initialValues = {
-    
+    passwordCurrent: "",
+    passwordNew: "",
+    passwordNewConfirm: "",
+  };
+  const dispatch = useDispatch()
+  const navigator = useNavigate()
+  const {error, isChanged} = useSelector(
+    (state) => state.newUser
+  );
+  const { user, isAuthenticated } = useSelector((state) => state.user);
+  const [stateErr, setStateErr] = useState("");
+  const submitForm = async (values, { resetForm }) => {
+    await dispatch(changePasswordUser(userInfo._id, values.passwordCurrent, values.passwordNew));
+    if(stateErr !== ""){
+      resetForm({
+        passwordCurrent: "",
+        passwordNew: "",
+        passwordNewConfirm: "",
+      })
+    }
+    dispatch(authLogout());
+    localStorage.removeItem('user')
+    localStorage.removeItem('userId')
+    localStorage.removeItem('token')
+
   };
   const validate = (values) => {
+    let errors = {};
+    if (!values.passwordCurrent) {
+      errors.passwordCurrent = "! Vui lòng nhập mật khẩu";
+    } else if (values.passwordCurrent.length < 6) {
+      errors.passwordCurrent = "! Mật khẩu quá ngắn";
+    } else if (values.passwordCurrent.length > 30) {
+      errors.passwordCurrent = "! Mật khẩu không vượt quá 30 ký tự";
+    }
+    // new password
+    if (!values.passwordNew) {
+      errors.passwordNew = "! Vui lòng nhập mật khẩu mới";
+    } else if (values.passwordNew.length < 6) {
+      errors.passwordNew = "! Mật khẩu quá ngắn";
+    } else if (values.passwordNew.length > 30) {
+      errors.passwordNew = "! Mật khẩu không vượt quá 30 ký tự";
+    }
+    // confirm new password
+    if (values.passwordNew !== values.passwordNewConfirm) {
+      errors.passwordNewConfirm = "! Mật khẩu không khớp với mật khẩu vừa nhập";
+    }
+    return errors;
   };
-  const submitForm = (values) => {};
+  useEffect(() => {
+    if(error){
+      setStateErr(error);
+    }
+    if(isChanged === true){
+      setStateErr("")
+    }
+  },[dispatch, error, isChanged])
+  
+  useEffect(() => {
+    if (isAuthenticated === false) {
+      navigator("/");
+    }
+  }, [dispatch, isAuthenticated, navigator, user]);
+  
   return (
     <Formik
       initialValues={initialValues}
@@ -23,8 +90,11 @@ function ChangePassForm() {
           handleBlur,
         } = formik;
         return (
-          <form className="mt-10" onSubmit={handleSubmit}>
+          <form className="mt-10 text-[15px]" onSubmit={handleSubmit}>
             <h1 className="text-white text-[15px] mb-5">THAY ĐỔI MẬT KHẨU</h1>
+            <p className="pb-1 font-medium text-red-500">
+                {stateErr}
+            </p>
             <div className="mb-4">
               <label
                 htmlFor="currentPass"
@@ -33,17 +103,17 @@ function ChangePassForm() {
                 Mật khẩu hiện tại
               </label>
               <input
-                type="currentPass"
-                name="currentPass"
-                id="currentPass"
-                value={values.currentPass}
+                type="password"
+                name="passwordCurrent"
+                id="passwordCurrent"
+                value={values.passwordCurrent}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className=" block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none "
               />
-              {errors.currentPass && touched.currentPass && (
+              {errors.passwordCurrent && touched.passwordCurrent && (
                 <span className="text-red-500 text-[14px]">
-                  {errors.currentPass}
+                  {errors.passwordCurrent}
                 </span>
               )}
             </div>
@@ -54,7 +124,20 @@ function ChangePassForm() {
               >
                 Mật khẩu mới
               </label>
-              <input className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none" />
+              <input
+                type="password"
+                name="passwordNew"
+                id="passwordNew"
+                value={values.passwordNew}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
+              />
+              {errors.passwordNew && touched.passwordNew && (
+                <span className="text-red-500 text-[14px]">
+                  {errors.passwordNew}
+                </span>
+              )}
             </div>
             <div className="mb-4">
               <label
@@ -63,11 +146,27 @@ function ChangePassForm() {
               >
                 Xác nhận mật khẩu
               </label>
-              <input className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none" />
+              <input
+                type="password"
+                name="passwordNewConfirm"
+                id="passwordNewConfirm"
+                value={values.passwordNewConfirm}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                className="block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
+              />
+              {errors.passwordNewConfirm && touched.passwordNewConfirm && (
+                <span className="text-red-500 text-[14px]">
+                  {errors.passwordNewConfirm}
+                </span>
+              )}
             </div>
-            <button className="px-4 my-5 py-2 text-sm text-gray-200 bg-[#E50914]">
-                XÁC NHẬN
+            <button 
+            type="submit"
+            className="px-4 my-5 py-2 text-sm text-gray-200 bg-[#E50914]">
+              XÁC NHẬN
             </button>
+            {/* <ToastContainer  toastStyle={{color: 'black'}} /> */}
           </form>
         );
       }}
