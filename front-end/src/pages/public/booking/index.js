@@ -16,10 +16,19 @@ import { getAllTicket } from "../../../redux/actions/ticketActions";
 import TicketTable from "./ticketTable";
 import FoodTable from "./foodTable";
 import { getAllFood } from "../../../redux/actions/foodActions";
-import { createReservation } from "../../../redux/actions/reservationActions";
+import { getAllSeat } from "../../../redux/actions/seatActions";
+//import { createReservation } from "../../../redux/actions/reservationActions";
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 function Booking() {
   const dispatch = useDispatch();
+  // CALL STORE FROM GET API
   const cinemas = useSelector((state) => state.cinemas.cinemas);
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
@@ -28,27 +37,55 @@ function Booking() {
   const movie = useSelector((state) => state.movie.movie);
   const cinema = useSelector((state) => state.cinema.cinema);
   const showtime = useSelector((state) => state.showtime.showtime);
+  const seats = useSelector((state) => state.seats.seats);
+  // COUNT SỐ VÉ KHÁCH HÀNG ĐÃ CHỌN
+  let countTicket = 0;
+  tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
+  const [size, setSize] = useState(null);
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
-  const [valueShowTime, setValueShowTime] = useState({ id: "", timeVl: "" });
+  const [valueShowTime, setValueShowTime] = useState({
+    id: "",
+    timeVl: "",
+    startTimeId: "",
+  });
   let [vlPriceTicket, setvlPriceTicket] = useState(0);
   let [vlPriceFood, setvlPriceFood] = useState(0);
-  const handleChangeCinema = useCallback((value) => {
-    setValueMovie("");
-    setValueCinema(value);
-  },[setValueCinema]);
-
-  const handleChangeMovie = useCallback((value) => {
-    setValueShowTime({ id: "", timeVl: "" });
-    setValueMovie(value);
-  },[setValueMovie]);
+  const [selectSeats, setSelectSeats] = useState([]);
+  // NẾU CHỌN GHẾ QUÁ SỐ LƯỢNG VÉ THÌ POP FIRST ITEM
+  if (selectSeats.length > countTicket) {
+    selectSeats.splice(0, 1);
+  }
+  // REMOVE DUPLICATE
+  const newSelectSeats = [...new Set(selectSeats)];
+  const handleOpen = (value) => setSize(value);
+  // GET VALUE CINEMA
+  const handleChangeCinema = useCallback(
+    (value) => {
+      setValueMovie("");
+      setValueCinema(value);
+    },
+    [setValueCinema]
+  );
+  // GET VALUE MOVIE
+  const handleChangeMovie = useCallback(
+    (value) => {
+      setValueShowTime({ id: "", timeVl: "", startTimeId: "" });
+      setValueMovie(value);
+    },
+    [setValueMovie]
+  );
+  // GET ARRAY VALUES SEAT
+  const handleSeat = (e, seat) => {
+    setSelectSeats((prev) => [...prev, seat.name]);
+  };
 
   useMemo(() => {
     dispatch(getOneCinema(valueCinema));
     dispatch(getOneMovie(valueMovie));
     dispatch(getOneShowTime(valueShowTime.id));
-  },[dispatch, valueCinema, valueMovie, valueShowTime.id])
-  
+  }, [dispatch, valueCinema, valueMovie, valueShowTime.id]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(getAllMovie());
@@ -56,6 +93,7 @@ function Booking() {
     dispatch(getAllShowTime());
     dispatch(getAllTicket());
     dispatch(getAllFood());
+    dispatch(getAllSeat());
   }, [dispatch]);
   return (
     <>
@@ -64,7 +102,10 @@ function Booking() {
           <HeaderPublic />
           <div className="px-16 py-20 min-h-screen max-h-full bg-transparent">
             <div className="flex justify-between">
-              <button disabled className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
+              <button
+                disabled
+                className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
+              >
                 CHỌN RẠP & PHIM
               </button>
             </div>
@@ -132,7 +173,10 @@ function Booking() {
             </div>
             <div>
               {valueCinema !== "" && valueMovie !== "" ? (
-                <button disabled className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]">
+                <button
+                  disabled
+                  className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
+                >
                   CHỌN SUẤT CHIẾU
                 </button>
               ) : (
@@ -160,7 +204,10 @@ function Booking() {
                 valueCinema !== "" &&
                 valueShowTime.id !== "" && (
                   <>
-                    <button disabled className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]">
+                    <button
+                      disabled
+                      className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]"
+                    >
                       CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
                     </button>
                     <div className="grid grid-cols-3 gap-x-5">
@@ -174,7 +221,7 @@ function Booking() {
                           foods={foods}
                         />
                       </div>
-                      <div className="bg-blue-gray-900 text-white h-[70%] text-sm mx-6 px-6 py-10">
+                      <div className="bg-blue-gray-900 text-white h-[80%] text-sm mx-6 px-6 py-10">
                         <div className=" flex justify-center">
                           <img
                             className="w-[300px] h-[200px] mb-2"
@@ -210,6 +257,12 @@ function Booking() {
                             )}
                           </p>
                           <p className="py-1">
+                            <span className="text-gray-500">Ghế: </span>{" "}
+                            {newSelectSeats.map((newSeat) => (
+                              <span key={newSeat}>{newSeat}, &ensp;</span>
+                            ))}
+                          </p>
+                          <p className="py-1">
                             <span className="text-gray-500">Combo: </span>{" "}
                             {foods.map(
                               (food) =>
@@ -223,29 +276,99 @@ function Booking() {
                           </p>
                           <p className="py-1 text-red-500 text-[17px]">
                             <span className="text-gray-500">Tổng: </span>
-                            {vlPriceFood + vlPriceTicket} RF
+                            {vlPriceFood + vlPriceTicket}.000 VNĐ
                           </p>
                         </div>
-                        <div className="justify-center flex">
+                        {}
+                        <div>
                           <button
-                            onClick={() =>
-                              dispatch(
-                                createReservation({
-                                  nameMovie: movie.name,
-                                  nameCinema: cinema.name,
-                                  tickets: tickets,
-                                  foods: foods,
-                                  startTime: valueShowTime.timeVl,
-                                  startDate: showtime.startDate,
-                                  total: vlPriceFood + vlPriceTicket,
-                                })
-                              )
-                            }
                             className="px-8 my-5 py-2 text-white bg-[#E51409]"
+                            onClick={() => handleOpen("md")}
                           >
-                            TIẾP TỤC
+                            CHỌN GHẾ
                           </button>
+                          <Dialog
+                            open={size === "md"}
+                            size={size || "md"}
+                            handler={handleOpen}
+                            // style={{background: 'transparent'}}
+                          >
+                            <DialogHeader>
+                              <h2 className="text-[15px] text-[#E50914]">
+                                CHỌN GHẾ
+                              </h2>
+                            </DialogHeader>
+                            <DialogBody divider>
+                              {seats.map((seats) => (
+                                <div key={seats._id}>
+                                  {valueShowTime.startTimeId ===
+                                    seats.startTimeId && (
+                                    <ul className="grid grid-cols-9 gap-x-2">
+                                      {seats.seats.map((seat) => (
+                                        <li
+                                          // style={{
+                                          //   backgroundColor:
+                                          //     isActive._id === seat._id
+                                          //       ? "red"
+                                          //       : "",
+                                          //   color:
+                                          //     isActive._id === seat._id
+                                          //       ? "white"
+                                          //       : "",
+                                          // }}
+                                          value={seat.name}
+                                          key={seat._id}
+                                          onClick={(e) => handleSeat(e, seat)}
+                                          className="bg-blue-gray-200 text-sm text-center text-gray-900"
+                                        >
+                                          {seat.name}
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  )}
+                                </div>
+                              ))}
+                            </DialogBody>
+                            <DialogFooter>
+                              <Button
+                                variant="text"
+                                color="red"
+                                onClick={() => handleOpen(null)}
+                                className="mr-1"
+                              ></Button>
+                              <Button
+                                variant="gradient"
+                                color="green"
+                                onClick={() => handleOpen(null)}
+                              >
+                                <span>Tiếp tục</span>
+                              </Button>
+                            </DialogFooter>
+                          </Dialog>
                         </div>
+                        {vlPriceTicket !== 0 && (
+                          <div className="justify-center flex">
+                            <button
+                              onClick={() =>
+                                // dispatch(
+                                //   createReservation({
+                                //     nameMovie: movie.name,
+                                //     nameCinema: cinema.name,
+                                //     tickets: tickets,
+                                //     foods: foods,
+                                //     startTime: valueShowTime.timeVl,
+                                //     startDate: showtime.startDate,
+                                //     total: vlPriceFood + vlPriceTicket,
+                                //   })
+                                // )
+                                console.log("da dat ve")
+                              }
+                              className="px-8 my-5 py-2 text-white bg-[#E51409]"
+                            >
+                              TIẾP TỤC
+                            </button>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </>

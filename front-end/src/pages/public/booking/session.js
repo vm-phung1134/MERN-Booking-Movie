@@ -1,11 +1,14 @@
 import { Radio } from "@material-tailwind/react";
-import { useCallback, memo } from "react";
+import { useCallback, memo} from "react";
 
 function Session({ showtime, setValueShowTime}) {
-  
-  const handleShowTime = useCallback((e, time) => {
-    setValueShowTime({id: e.target.value, timeVl: time}) // Get showtime
-  },[setValueShowTime])
+  const handleShowTime = useCallback(
+    (e, time, id) => {
+      setValueShowTime({ id: e.target.value, timeVl: time, startTimeId: id }); // Get showtime
+    },
+    [setValueShowTime]
+  );
+
   return (
     <>
       <div className="text-white">
@@ -14,19 +17,30 @@ function Session({ showtime, setValueShowTime}) {
         </h5>
         <div className="border-2 max-h-max items-center border-gray-600 px-5 grid grid-cols-3">
           <p className="uppercase text-sm">PHỤ ĐỀ - {showtime.typeMovie}</p>
-          <div className="col-span-2 my-2 text-white" >
+          <div className="col-span-2 my-2 text-white">
             {showtime.startTime.map((time) => (
-              <Radio onChange={e => handleShowTime(e, time.time)} value={showtime._id} labelProps={{style: {color: 'white'}}} key={time._id} id={time.time} name="type" 
-              label={
-                <div className="border mx-2 border-gray-500 text-center py-1 px-3">
-                  <p className="text-[11px] uppercase">{time.nameScreen}</p>
-                  <p className="py-1 font-medium">{time.time}</p>
-                  <p className="text-[12px] text-gray-500">Số ghế còn trống: {time.quantitySeat}</p>
-                </div>
-              } hidden>
-              </Radio>
+              <Radio
+                
+                onChange={(e) => handleShowTime(e, time.time, time._id)}
+                value={showtime._id}
+                labelProps={{ style: { color: "white" } }}
+                key={time._id}
+                id={time.time}
+                name="type"
+                label={
+                  <div className="border mx-2 border-gray-500 text-center py-1 px-3">
+                    <p className="text-[11px] uppercase">{time.nameScreen}</p>
+                    <p className="py-1 font-medium">{time.time}</p>
+                    <p className="text-[12px] text-gray-500">
+                      Số ghế còn trống: {time.quantitySeat}
+                    </p>
+                  </div>
+                }
+                hidden
+              ></Radio>
             ))}
           </div>
+          
         </div>
       </div>
     </>

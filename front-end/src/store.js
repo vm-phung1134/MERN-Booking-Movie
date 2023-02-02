@@ -21,6 +21,7 @@ import {
 } from './redux/reducer/ticketReducer'
 import { foodReducer } from './redux/reducer/foodReducer'
 import { newReservationReducer } from './redux/reducer/reservationReducer'
+import { seatsReducer } from './redux/reducer/seatReducer'
 
 const reducer = combineReducers({
     movies: moviesReducer,
@@ -33,6 +34,7 @@ const reducer = combineReducers({
     cinemas: cinemaReducer,
     showtimes: showTimeReducer,
     tickets: ticketReducer,
+    seats: seatsReducer,
     foods: foodReducer,
     cinema: cinemaDetailReducer,
     showtime: showtimeDetailReducer,

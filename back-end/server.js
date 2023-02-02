@@ -18,6 +18,7 @@ const cinemaRoute = require('./routes/cinemaRoute')
 const showTimeRoute = require('./routes/showTimeRoute')
 const ticketRoute = require('./routes/ticketRoute')
 const foodRoute = require('./routes/foodRoute')
+const seatRoute =  require('./routes/seatRoute')
 
 //mount the route
 app.use('/api/v1/auth', authRoute)
@@ -27,6 +28,7 @@ app.use('/api/v1/cinemas', cinemaRoute)
 app.use('/api/v1/showtimes', showTimeRoute)
 app.use('/api/v1/tickets', ticketRoute)
 app.use('/api/v1/foods', foodRoute)
+app.use('/api/v1/seats', seatRoute)
 //Route not exist
 app.all('*', (req, res, next) => {
     const err = new Error('The route can not be found')

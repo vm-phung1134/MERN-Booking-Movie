@@ -26,7 +26,6 @@ const publicRoutes = [
         path: '/account', 
         component: Account
     },
-    
 ]
 
 const privateRoutes = [
