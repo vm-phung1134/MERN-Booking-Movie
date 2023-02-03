@@ -41,3 +41,20 @@ export const getOneSeat = (id) => async (dispatch) => {
         })
     }
 }
+
+// export const updateStatusSeat = (idSeats, idSeat) => async (dispatch) => {
+//     try{
+        
+//         dispatch({type: ONE_SEAT_REQUEST})
+//         const {data} = await axios.get(`http://localhost:5000/api/v1/seats/${idSeats}&${idSeat}`)
+//         dispatch({
+//             type: SELECTING_ITEM ,
+//             payload: data._id
+//         })
+//     }catch(error){
+//         dispatch({
+//             type: ONE_SEAT_FAIL,
+//             payload: error
+//         })
+//     }
+// }

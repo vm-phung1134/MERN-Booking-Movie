@@ -19,7 +19,7 @@ function FoodTable({ foods, setvlPriceFood}) {
       <div className="flex flex-col mt-3">
         <div className="overflow-x-auto">
           <div className="w-full inline-block align-middle">
-            <div className="overflow-hidden border border-gray-500 rounded-lg">
+            <div className="overflow-hidden border border-gray-500">
               <table className="min-w-full divide-y divide-gray-500">
                 <thead className="bg-[#206cb391]">
                   <tr>
@@ -40,7 +40,7 @@ function FoodTable({ foods, setvlPriceFood}) {
                       className="px-6 py-3 text-xs font-bold text-center text-white uppercase "
                     >
                       Giá
-                      <p className="text-[11px] font-thin">&#40; 1000 VNĐ = 1 RF &#41;</p>
+                      <p className="text-[11px] font-thin">&#40; 1 RF = 1000 VNĐ &#41;</p>
                     </th>
                     <th
                       scope="col"

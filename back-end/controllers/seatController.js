@@ -13,8 +13,10 @@ exports.getAllSeats = async (req, res, next) => {
 exports.getOneSeat = async (req, res, next) => {
     try {
         const {seatId} = req.params;
+        const {nameId} = req.params;
         const seat = await Seat.findById(seatId)
-        res.status(200).json(seat)
+        const item = seat.seats.find(x => x.id === nameId)
+        res.status(200).json(item)
     } catch (error) {
         res.json(error)
     }

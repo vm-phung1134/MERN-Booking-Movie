@@ -19,12 +19,12 @@ import { getAllFood } from "../../../redux/actions/foodActions";
 import { getAllSeat } from "../../../redux/actions/seatActions";
 //import { createReservation } from "../../../redux/actions/reservationActions";
 import {
-  Button,
   Dialog,
   DialogHeader,
   DialogBody,
   DialogFooter,
 } from "@material-tailwind/react";
+import { isCheckQuanlitySeat } from "../middleware";
 
 function Booking() {
   const dispatch = useDispatch();
@@ -52,12 +52,10 @@ function Booking() {
   let [vlPriceTicket, setvlPriceTicket] = useState(0);
   let [vlPriceFood, setvlPriceFood] = useState(0);
   const [selectSeats, setSelectSeats] = useState([]);
-  // NẾU CHỌN GHẾ QUÁ SỐ LƯỢNG VÉ THÌ POP FIRST ITEM
-  if (selectSeats.length > countTicket) {
-    selectSeats.splice(0, 1);
-  }
-  // REMOVE DUPLICATE
+  // CHECK QUANLITY TICKET AND SEAT SELECTED
+  isCheckQuanlitySeat(selectSeats, countTicket);
   const newSelectSeats = [...new Set(selectSeats)];
+  //const newIsActive = [...new Set(isActive)]
   const handleOpen = (value) => setSize(value);
   // GET VALUE CINEMA
   const handleChangeCinema = useCallback(
@@ -281,17 +279,34 @@ function Booking() {
                         </div>
                         {}
                         <div>
-                          <button
-                            className="px-8 my-5 py-2 text-white bg-[#E51409]"
-                            onClick={() => handleOpen("md")}
-                          >
-                            CHỌN GHẾ
-                          </button>
+                          {countTicket > 0 && (
+                            <div className="grid grid-cols-2 gap-x-3">
+                              <button
+                                className="px-6 my-5 py-2 text-white bg-[#E51409]"
+                                onClick={() => handleOpen("md")}
+                              >
+                                CHỌN GHẾ
+                              </button>
+                              {selectSeats.length !== 0 ? (
+                                <button className="px-6 my-5 py-2 text-white bg-[#E51409]">
+                                  THANH TOÁN
+                                </button>
+                              ) : (
+                                <button
+                                  className="px-6 my-5 py-2 text-white bg-[#E51409]"
+                                  disabled
+                                >
+                                  THANH TOÁN
+                                </button>
+                              )}
+                            </div>
+                          )}
+
                           <Dialog
                             open={size === "md"}
                             size={size || "md"}
                             handler={handleOpen}
-                            // style={{background: 'transparent'}}
+                            style={{ borderRadius: "0px" }}
                           >
                             <DialogHeader>
                               <h2 className="text-[15px] text-[#E50914]">
@@ -308,18 +323,18 @@ function Booking() {
                                         <li
                                           // style={{
                                           //   backgroundColor:
-                                          //     isActive._id === seat._id
+                                          //     isActive.includes(seat._id)
                                           //       ? "red"
                                           //       : "",
                                           //   color:
-                                          //     isActive._id === seat._id
+                                          //   isActive.includes(seat._id)
                                           //       ? "white"
                                           //       : "",
                                           // }}
                                           value={seat.name}
                                           key={seat._id}
                                           onClick={(e) => handleSeat(e, seat)}
-                                          className="bg-blue-gray-200 text-sm text-center text-gray-900"
+                                          className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
                                         >
                                           {seat.name}
                                         </li>
@@ -330,45 +345,36 @@ function Booking() {
                               ))}
                             </DialogBody>
                             <DialogFooter>
-                              <Button
-                                variant="text"
-                                color="red"
-                                onClick={() => handleOpen(null)}
-                                className="mr-1"
-                              ></Button>
-                              <Button
-                                variant="gradient"
-                                color="green"
+                              <button
+                                className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
                                 onClick={() => handleOpen(null)}
                               >
-                                <span>Tiếp tục</span>
-                              </Button>
+                                TIẾP TỤC
+                              </button>
                             </DialogFooter>
                           </Dialog>
                         </div>
-                        {vlPriceTicket !== 0 && (
-                          <div className="justify-center flex">
-                            <button
-                              onClick={() =>
-                                // dispatch(
-                                //   createReservation({
-                                //     nameMovie: movie.name,
-                                //     nameCinema: cinema.name,
-                                //     tickets: tickets,
-                                //     foods: foods,
-                                //     startTime: valueShowTime.timeVl,
-                                //     startDate: showtime.startDate,
-                                //     total: vlPriceFood + vlPriceTicket,
-                                //   })
-                                // )
-                                console.log("da dat ve")
-                              }
-                              className="px-8 my-5 py-2 text-white bg-[#E51409]"
-                            >
-                              TIẾP TỤC
-                            </button>
-                          </div>
-                        )}
+                        <div className="justify-center flex">
+                          <button
+                            // onClick={() =>
+                            //   dispatch(
+                            //     createReservation({
+                            //       nameMovie: movie.name,
+                            //       nameCinema: cinema.name,
+                            //       tickets: tickets,
+                            //       foods: foods,
+                            //       startTime: valueShowTime.timeVl,
+                            //       startDate: showtime.startDate,
+                            //       total: vlPriceFood + vlPriceTicket,
+                            //     })
+                            //   )
+                            //   console.log("da dat ve")
+                            // }
+                            className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
+                          >
+                            TIẾP TỤC
+                          </button>
+                        </div>
                       </div>
                     </div>
                   </>

@@ -15,7 +15,7 @@ function TicketTable({ tickets, setvlPriceTicket }) {
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="w-full inline-block align-middle">
-            <div className="overflow-hidden border border-gray-500 rounded-lg">
+            <div className="overflow-hidden border border-gray-500 ">
               <table className="min-w-full divide-y divide-gray-500">
                 <thead className="bg-[#206cb391]">
                   <tr>
@@ -37,7 +37,7 @@ function TicketTable({ tickets, setvlPriceTicket }) {
                     >
                       Giá
                       <p className="text-[11px] font-thin">
-                        &#40; 1000 VNĐ = 1 RF &#41;
+                        &#40; 1 RF = 1000 VNĐ   &#41;
                       </p>
                     </th>
                     <th
