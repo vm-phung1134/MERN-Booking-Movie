@@ -5,7 +5,6 @@ const app = express()
 const cors = require('cors')
 const port = process.env.APP_PORT;
 const {errorHandler} = require('./error/errorHandler')
-
 connectDB()
 app.use(cors()) // use send req from back to front end
 app.use(express.json())
@@ -19,6 +18,7 @@ const showTimeRoute = require('./routes/showTimeRoute')
 const ticketRoute = require('./routes/ticketRoute')
 const foodRoute = require('./routes/foodRoute')
 const seatRoute =  require('./routes/seatRoute')
+const paymentRoute = require('./routes/paymentRoute')
 
 //mount the route
 app.use('/api/v1/auth', authRoute)
@@ -29,6 +29,8 @@ app.use('/api/v1/showtimes', showTimeRoute)
 app.use('/api/v1/tickets', ticketRoute)
 app.use('/api/v1/foods', foodRoute)
 app.use('/api/v1/seats', seatRoute)
+app.use('/api/v1/payment', paymentRoute)
+
 //Route not exist
 app.all('*', (req, res, next) => {
     const err = new Error('The route can not be found')

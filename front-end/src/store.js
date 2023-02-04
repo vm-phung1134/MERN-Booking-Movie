@@ -23,6 +23,7 @@ import { foodReducer } from './redux/reducer/foodReducer'
 import { newReservationReducer } from './redux/reducer/reservationReducer'
 import { seatsReducer } from './redux/reducer/seatReducer'
 
+
 const reducer = combineReducers({
     movies: moviesReducer,
     movie: movieDetailReducer,

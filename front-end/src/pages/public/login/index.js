@@ -63,7 +63,7 @@ export default function Login() {
                   group
                 "
                 >
-                  <i className="fa-brands fa-react"></i>&ensp; Bắt đầu
+                  Bắt đầu&ensp;<i className="fa-brands fa-react"></i>
                 </button>
               </a>
             </div>

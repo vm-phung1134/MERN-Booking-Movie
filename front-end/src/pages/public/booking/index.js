@@ -1,4 +1,5 @@
 import HeaderPublic from "../components/headerPublic";
+import axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Select, Option } from "@material-tailwind/react";
 import {
@@ -17,7 +18,7 @@ import TicketTable from "./ticketTable";
 import FoodTable from "./foodTable";
 import { getAllFood } from "../../../redux/actions/foodActions";
 import { getAllSeat } from "../../../redux/actions/seatActions";
-//import { createReservation } from "../../../redux/actions/reservationActions";
+import { createReservation } from "../../../redux/actions/reservationActions";
 import {
   Dialog,
   DialogHeader,
@@ -38,6 +39,7 @@ function Booking() {
   const cinema = useSelector((state) => state.cinema.cinema);
   const showtime = useSelector((state) => state.showtime.showtime);
   const seats = useSelector((state) => state.seats.seats);
+
   // COUNT SỐ VÉ KHÁCH HÀNG ĐÃ CHỌN
   let countTicket = 0;
   tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
@@ -77,7 +79,29 @@ function Booking() {
   const handleSeat = (e, seat) => {
     setSelectSeats((prev) => [...prev, seat.name]);
   };
-
+  const tokenId = localStorage.getItem('userId')
+  const ticketPayment = {
+    nameMovie: movie.name,
+    nameCinema: cinema.name,
+    tickets: tickets,
+    seats: newSelectSeats.join(),
+    foods: foods,
+    startTime: valueShowTime.timeVl,
+    startDate: showtime.startDate,
+    total: vlPriceFood + vlPriceTicket,
+  };
+  
+  const handlePayment = () => {
+    axios.post(
+      `http://localhost:5000/api/v1/payment/create-checkout-session`,
+        {ticketPayment, userId: tokenId},
+    ).then((res) => {
+      if(res.data.url){
+        window.location.href = res.data.url
+        dispatch(createReservation(ticketPayment))
+      }
+    }).catch((err) => console.log(err.message))
+  };
   useMemo(() => {
     dispatch(getOneCinema(valueCinema));
     dispatch(getOneMovie(valueMovie));
@@ -219,161 +243,159 @@ function Booking() {
                           foods={foods}
                         />
                       </div>
-                      <div className="bg-blue-gray-900 text-white h-[80%] text-sm mx-6 px-6 py-10">
-                        <div className=" flex justify-center">
-                          <img
-                            className="w-[300px] h-[200px] mb-2"
-                            src={movie.image}
-                            alt=""
-                          ></img>
-                        </div>
-                        <div>
-                          <p className="font-medium uppercase py-1">
-                            {movie.name}
-                          </p>
-                          <p className="font-medium uppercase py-1 text-green-700">
-                            {movie.namevn}
-                          </p>
-                          <p className="py-1">
-                            <span className="text-gray-500">Rạp chiếu: </span>{" "}
-                            {cinema.name}
-                          </p>
-                          <p className="py-1">
-                            <span className="text-gray-500">Suất chiếu: </span>{" "}
-                            {valueShowTime.timeVl} | Ngày {showtime.startDate}
-                          </p>
-                          <p className="py-1">
-                            <span className="text-gray-500">Loại vé: </span>{" "}
-                            {tickets.map(
-                              (ticket) =>
-                                ticket.quantity > 0 && (
-                                  <span key={ticket._id}>
-                                    {ticket.typeTicket} &#40;x{ticket.quantity}
-                                    &#41;&ensp;
-                                  </span>
-                                )
-                            )}
-                          </p>
-                          <p className="py-1">
-                            <span className="text-gray-500">Ghế: </span>{" "}
-                            {newSelectSeats.map((newSeat) => (
-                              <span key={newSeat}>{newSeat}, &ensp;</span>
-                            ))}
-                          </p>
-                          <p className="py-1">
-                            <span className="text-gray-500">Combo: </span>{" "}
-                            {foods.map(
-                              (food) =>
-                                food.quantity > 0 && (
-                                  <span key={food._id}>
-                                    {food.typeFood} &#40;x{food.quantity}&#41;
-                                    &ensp;
-                                  </span>
-                                )
-                            )}
-                          </p>
-                          <p className="py-1 text-red-500 text-[17px]">
-                            <span className="text-gray-500">Tổng: </span>
-                            {vlPriceFood + vlPriceTicket}.000 VNĐ
-                          </p>
-                        </div>
-                        {}
-                        <div>
-                          {countTicket > 0 && (
-                            <div className="grid grid-cols-2 gap-x-3">
-                              <button
-                                className="px-6 my-5 py-2 text-white bg-[#E51409]"
-                                onClick={() => handleOpen("md")}
-                              >
-                                CHỌN GHẾ
-                              </button>
-                              {selectSeats.length !== 0 ? (
-                                <button className="px-6 my-5 py-2 text-white bg-[#E51409]">
-                                  THANH TOÁN
-                                </button>
-                              ) : (
+                      <div
+                        className="mx-6 h-[70%] bg-cover bg-center"
+                        style={{ backgroundImage: `url("${movie.poster}")` }}
+                      >
+                        <div className="bg-gradient-to-r from-black/100 to-black/40  text-white text-sm w-full h-full">
+                          <div className="px-5 py-10">
+                            <div>
+                              <p className="font-medium text-[20px] uppercase py-1">
+                                {movie.name}
+                              </p>
+                              <p className="font-medium text-[17px] uppercase py-1 text-green-700">
+                                {movie.namevn}
+                              </p>
+                              <p className="py-1 mt-2">
+                                <span className="text-gray-500">
+                                  Rạp chiếu:{" "}
+                                </span>{" "}
+                                {cinema.name}
+                              </p>
+                              <p className="py-1 mt-2">
+                                <span className="text-gray-500">
+                                  Suất chiếu:{" "}
+                                </span>{" "}
+                                {valueShowTime.timeVl} | Ngày{" "}
+                                {showtime.startDate}
+                              </p>
+                              <p className="py-1 mt-2">
+                                <span className="text-gray-500">Loại vé: </span>{" "}
+                                {tickets.map(
+                                  (ticket) =>
+                                    ticket.quantity > 0 && (
+                                      <span key={ticket._id}>
+                                        {ticket.typeTicket} &#40;x
+                                        {ticket.quantity}
+                                        &#41;&ensp;
+                                      </span>
+                                    )
+                                )}
+                              </p>
+                              <div className="grid grid-cols-3 gap-x-1 mt-2">
+                                <p className="py-1 col-span-2">
+                                  <span className="text-gray-500">Ghế: </span>{" "}
+                                  {newSelectSeats.map((newSeat) => (
+                                    <span key={newSeat}>{newSeat}, &ensp;</span>
+                                  ))}
+                                </p>
                                 <button
-                                  className="px-6 my-5 py-2 text-white bg-[#E51409]"
-                                  disabled
+                                  className="text-[13px] p-2 text-white bg-[#E51409]"
+                                  onClick={() => handleOpen("md")}
                                 >
-                                  THANH TOÁN
+                                  CHỌN GHẾ
                                 </button>
-                              )}
-                            </div>
-                          )}
+                              </div>
+                              <p className="py-1">
+                                <span className="text-gray-500">Combo: </span>{" "}
+                                {foods.map(
+                                  (food) =>
+                                    food.quantity > 0 && (
+                                      <span key={food._id}>
+                                        {food.typeFood} &#40;x{food.quantity}
+                                        &#41; &ensp;
+                                      </span>
+                                    )
+                                )}
+                              </p>
 
-                          <Dialog
-                            open={size === "md"}
-                            size={size || "md"}
-                            handler={handleOpen}
-                            style={{ borderRadius: "0px" }}
-                          >
-                            <DialogHeader>
-                              <h2 className="text-[15px] text-[#E50914]">
-                                CHỌN GHẾ
-                              </h2>
-                            </DialogHeader>
-                            <DialogBody divider>
-                              {seats.map((seats) => (
-                                <div key={seats._id}>
-                                  {valueShowTime.startTimeId ===
-                                    seats.startTimeId && (
-                                    <ul className="grid grid-cols-9 gap-x-2">
-                                      {seats.seats.map((seat) => (
-                                        <li
-                                          // style={{
-                                          //   backgroundColor:
-                                          //     isActive.includes(seat._id)
-                                          //       ? "red"
-                                          //       : "",
-                                          //   color:
-                                          //   isActive.includes(seat._id)
-                                          //       ? "white"
-                                          //       : "",
-                                          // }}
-                                          value={seat.name}
-                                          key={seat._id}
-                                          onClick={(e) => handleSeat(e, seat)}
-                                          className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
-                                        >
-                                          {seat.name}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  )}
-                                </div>
-                              ))}
-                            </DialogBody>
-                            <DialogFooter>
+                              <p className="py-1 mt-2 text-red-500 text-[17px]">
+                                <span className="text-gray-500">Tổng: </span>
+                                {vlPriceFood + vlPriceTicket}.000 VNĐ
+                              </p>
+                            </div>
+                            <div>
+                              {countTicket > 0 && (
+                                <div className="grid grid-cols-2 gap-x-3"></div>
+                              )}
+
+                              <Dialog
+                                open={size === "md"}
+                                size={size || "md"}
+                                handler={handleOpen}
+                                style={{ borderRadius: "0px" }}
+                              >
+                                <DialogHeader>
+                                  <h2 className="text-[15px] text-[#E50914]">
+                                    CHỌN GHẾ
+                                  </h2>
+                                </DialogHeader>
+                                <DialogBody divider>
+                                  {seats.map((seats) => (
+                                    <div key={seats._id}>
+                                      {valueShowTime.startTimeId ===
+                                        seats.startTimeId && (
+                                        <ul className="grid grid-cols-9 gap-x-2">
+                                          {seats.seats.map((seat) => (
+                                            <li
+                                              // style={{
+                                              //   backgroundColor:
+                                              //     isActive.includes(seat._id)
+                                              //       ? "red"
+                                              //       : "",
+                                              //   color:
+                                              //   isActive.includes(seat._id)
+                                              //       ? "white"
+                                              //       : "",
+                                              // }}
+                                              value={seat.name}
+                                              key={seat._id}
+                                              onClick={(e) =>
+                                                handleSeat(e, seat)
+                                              }
+                                              className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
+                                            >
+                                              {seat.name}
+                                            </li>
+                                          ))}
+                                        </ul>
+                                      )}
+                                    </div>
+                                  ))}
+                                </DialogBody>
+                                <DialogFooter>
+                                  <button
+                                    className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
+                                    onClick={() => handleOpen(null)}
+                                  >
+                                    TIẾP TỤC
+                                  </button>
+                                </DialogFooter>
+                              </Dialog>
+                            </div>
+                            <div className="justify-center flex mt-10">
                               <button
-                                className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
-                                onClick={() => handleOpen(null)}
+                                // onClick={() =>
+                                //   dispatch(
+                                //     createReservation({
+                                //       nameMovie: movie.name,
+                                //       nameCinema: cinema.name,
+                                //       tickets: tickets,
+                                //       foods: foods,
+                                //       startTime: valueShowTime.timeVl,
+                                //       startDate: showtime.startDate,
+                                //       total: vlPriceFood + vlPriceTicket,
+                                //     })
+                                //   )
+                                //   console.log("da dat ve")
+                                // }
+                                onClick={handlePayment}
+                                className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
                               >
                                 TIẾP TỤC
                               </button>
-                            </DialogFooter>
-                          </Dialog>
-                        </div>
-                        <div className="justify-center flex">
-                          <button
-                            // onClick={() =>
-                            //   dispatch(
-                            //     createReservation({
-                            //       nameMovie: movie.name,
-                            //       nameCinema: cinema.name,
-                            //       tickets: tickets,
-                            //       foods: foods,
-                            //       startTime: valueShowTime.timeVl,
-                            //       startDate: showtime.startDate,
-                            //       total: vlPriceFood + vlPriceTicket,
-                            //     })
-                            //   )
-                            //   console.log("da dat ve")
-                            // }
-                            className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
-                          >
-                            TIẾP TỤC
-                          </button>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>

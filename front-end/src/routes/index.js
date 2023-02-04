@@ -4,6 +4,7 @@ import HomeMovie from '../pages/public/movie/homeMovie'
 import DetailMovie from '../pages/public/movie/detailMovie'
 import Booking from '../pages/public/booking'
 import Account from '../pages/public/account'
+import CheckoutSuccess from '../pages/public/booking/checkoutSuccess'
 
 const publicRoutes = [
     {
@@ -26,6 +27,10 @@ const publicRoutes = [
         path: '/account', 
         component: Account
     },
+    {
+        path: '/checkout-success',
+        component: CheckoutSuccess
+    }
 ]
 
 const privateRoutes = [
