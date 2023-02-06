@@ -1,6 +1,7 @@
-import HeaderPublic from "../components/headerPublic";
 import axios from "axios";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import HeaderPublic from "../components/headerPublic";
+import SpinnerLoading from "../components/spinnerLoading";
 import { Select, Option } from "@material-tailwind/react";
 import {
   getAllCinema,
@@ -44,6 +45,10 @@ function Booking() {
   let countTicket = 0;
   tickets.map((ticket) => (countTicket = countTicket + ticket.quantity));
   const [size, setSize] = useState(null);
+  const [loadingPage, setLoadingPage] = useState(false);
+  const [stateLoadingLogin, setStateLoadingLogin] = useState({
+    loading: false,
+  });
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
   const [valueShowTime, setValueShowTime] = useState({
@@ -79,9 +84,10 @@ function Booking() {
   const handleSeat = (e, seat) => {
     setSelectSeats((prev) => [...prev, seat.name]);
   };
-  const tokenId = localStorage.getItem('userId')
+  const tokenId = localStorage.getItem("userId");
   const ticketPayment = {
     nameMovie: movie.name,
+    imgMovie: movie.bg,
     nameCinema: cinema.name,
     tickets: tickets,
     seats: newSelectSeats.join(),
@@ -90,17 +96,24 @@ function Booking() {
     startDate: showtime.startDate,
     total: vlPriceFood + vlPriceTicket,
   };
-  
+
   const handlePayment = () => {
-    axios.post(
-      `http://localhost:5000/api/v1/payment/create-checkout-session`,
-        {ticketPayment, userId: tokenId},
-    ).then((res) => {
-      if(res.data.url){
-        window.location.href = res.data.url
-        dispatch(createReservation(ticketPayment))
-      }
-    }).catch((err) => console.log(err.message))
+    setStateLoadingLogin({ loading: true });
+    setTimeout(async () => {
+      setStateLoadingLogin({ loading: false });
+      await axios
+        .post(`http://localhost:5000/api/v1/payment/create-checkout-session`, {
+          ticketPayment,
+          userId: tokenId,
+        })
+        .then((res) => {
+          if (res.data.url) {
+            window.location.href = res.data.url;
+            dispatch(createReservation(ticketPayment));
+          }
+        })
+        .catch((err) => console.log(err.message));
+    }, 3000);
   };
   useMemo(() => {
     dispatch(getOneCinema(valueCinema));
@@ -110,299 +123,339 @@ function Booking() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    dispatch(getAllMovie());
-    dispatch(getAllCinema());
-    dispatch(getAllShowTime());
-    dispatch(getAllTicket());
-    dispatch(getAllFood());
-    dispatch(getAllSeat());
+    setLoadingPage(true);
+    let timeOut = setTimeout(async () => {
+      await dispatch(getAllMovie());
+      await dispatch(getAllCinema());
+      await dispatch(getAllShowTime());
+      await dispatch(getAllTicket());
+      await dispatch(getAllFood());
+      await dispatch(getAllSeat());
+      setLoadingPage(false);
+    }, 1500);
+    return () => {
+      clearTimeout(timeOut);
+    };
   }, [dispatch]);
   return (
     <>
       <div className=" bg-cover bg-center bg-[url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/020e1179-46f8-43ff-9c44-4280cde630ec/ddbudat-bb20107b-044e-432d-92a1-fbc5951f40ec.jpg/v1/fill/w_1280,h_776,q_75,strp/avatar_2__2022__wallpaper_hd_4k_by_sahibdm_ddbudat-fullview.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Nzc2IiwicGF0aCI6IlwvZlwvMDIwZTExNzktNDZmOC00M2ZmLTljNDQtNDI4MGNkZTYzMGVjXC9kZGJ1ZGF0LWJiMjAxMDdiLTA0NGUtNDMyZC05MmExLWZiYzU5NTFmNDBlYy5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.3ObOA_bTMLdoT1zr019ZY0bQrLSsTQy6YYZKdyGLGg0')]">
         <div className="bg-black/90">
           <HeaderPublic />
-          <div className="px-16 py-20 min-h-screen max-h-full bg-transparent">
-            <div className="flex justify-between">
-              <button
-                disabled
-                className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
-              >
-                CHỌN RẠP & PHIM
-              </button>
-            </div>
-
-            <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 sm:grid-cols-1">
-              <div>
-                <Select
-                  className="text-white"
-                  label="CHỌN RẠP CHIẾU"
-                  onChange={handleChangeCinema}
-                  animate={{
-                    mount: { y: 0 },
-                    unmount: { y: 30 },
-                  }}
-                >
-                  {cinemas.map((cinema) => (
-                    <Option
-                      className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
-                      key={cinema._id}
-                      value={cinema._id}
-                    >
-                      {cinema.name}
-                    </Option>
-                  ))}
-                </Select>
-              </div>
-              <div>
-                <Select
-                  className="text-white"
-                  label="CHỌN PHIM"
-                  animate={{
-                    mount: { y: 0 },
-                    unmount: { y: 30 },
-                  }}
-                  onChange={handleChangeMovie}
-                >
-                  {movies.map((movie) =>
-                    valueCinema !== "" ? (
-                      <Option
-                        className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
-                        key={movie._id}
-                        value={movie._id}
-                      >
-                        <div className="flex justify-between">
-                          <div>
-                            {movie.name} - {movie.namevn}
-                          </div>
-                          <p className="px-2 ml-5 text-white rounded bg-red-600/70">
-                            {movie.limitAge} +
-                          </p>
-                        </div>
-                      </Option>
-                    ) : (
-                      <Option
-                        className="text-black focus:text-white focus:bg-blue-gray-600"
-                        key={movie._id}
-                        hidden
-                      >
-                        Vui lòng chọn rạp chiếu !
-                      </Option>
-                    )
-                  )}
-                </Select>
-              </div>
-            </div>
-            <div>
-              {valueCinema !== "" && valueMovie !== "" ? (
+          {loadingPage === true ? (
+            <SpinnerLoading />
+          ) : (
+            <div className="px-16 py-20 min-h-screen max-h-full bg-transparent">
+              <div className="flex justify-between">
                 <button
                   disabled
-                  className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
+                  className="text-white text-[15px] pr-6 py-[17px] border-b-[3px] border-[#E50914]"
                 >
-                  CHỌN SUẤT CHIẾU
+                  CHỌN RẠP & PHIM
                 </button>
-              ) : (
-                <button hidden></button>
-              )}
-            </div>
+              </div>
 
-            <div className="grid grid-cols-2 gap-5 mt-5 mb-10">
-              {showtimes.map(
-                (showtime) =>
-                  valueMovie !== "" &&
-                  valueCinema !== "" &&
-                  valueMovie === showtime.movieId &&
-                  valueCinema === showtime.cinemaId && (
-                    <Session
-                      key={showtime._id}
-                      showtime={showtime}
-                      setValueShowTime={setValueShowTime}
-                    />
-                  )
-              )}
-            </div>
-            <div>
-              {valueMovie !== "" &&
-                valueCinema !== "" &&
-                valueShowTime.id !== "" && (
-                  <>
-                    <button
-                      disabled
-                      className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-2 border-[#E50914]"
-                    >
-                      CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
-                    </button>
-                    <div className="grid grid-cols-3 gap-x-5">
-                      <div className="col-span-2">
-                        <TicketTable
-                          setvlPriceTicket={setvlPriceTicket}
-                          tickets={tickets}
-                        />
-                        <FoodTable
-                          setvlPriceFood={setvlPriceFood}
-                          foods={foods}
-                        />
-                      </div>
-                      <div
-                        className="mx-6 h-[70%] bg-cover bg-center"
-                        style={{ backgroundImage: `url("${movie.poster}")` }}
+              <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 sm:grid-cols-1">
+                <div>
+                  <Select
+                    className="text-white"
+                    label="CHỌN RẠP CHIẾU"
+                    onChange={handleChangeCinema}
+                    animate={{
+                      mount: { y: 0 },
+                      unmount: { y: 30 },
+                    }}
+                  >
+                    {cinemas.map((cinema) => (
+                      <Option
+                        className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
+                        key={cinema._id}
+                        value={cinema._id}
                       >
-                        <div className="bg-gradient-to-r from-black/100 to-black/40  text-white text-sm w-full h-full">
-                          <div className="px-5 py-10">
+                        {cinema.name}
+                      </Option>
+                    ))}
+                  </Select>
+                </div>
+                <div>
+                  <Select
+                    className="text-white"
+                    label="CHỌN PHIM"
+                    animate={{
+                      mount: { y: 0 },
+                      unmount: { y: 30 },
+                    }}
+                    onChange={handleChangeMovie}
+                  >
+                    {movies.map((movie) =>
+                      valueCinema !== "" ? (
+                        <Option
+                          className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
+                          key={movie._id}
+                          value={movie._id}
+                        >
+                          <div className="flex justify-between">
                             <div>
-                              <p className="font-medium text-[20px] uppercase py-1">
-                                {movie.name}
-                              </p>
-                              <p className="font-medium text-[17px] uppercase py-1 text-green-700">
-                                {movie.namevn}
-                              </p>
-                              <p className="py-1 mt-2">
-                                <span className="text-gray-500">
-                                  Rạp chiếu:{" "}
-                                </span>{" "}
-                                {cinema.name}
-                              </p>
-                              <p className="py-1 mt-2">
-                                <span className="text-gray-500">
-                                  Suất chiếu:{" "}
-                                </span>{" "}
-                                {valueShowTime.timeVl} | Ngày{" "}
-                                {showtime.startDate}
-                              </p>
-                              <p className="py-1 mt-2">
-                                <span className="text-gray-500">Loại vé: </span>{" "}
-                                {tickets.map(
-                                  (ticket) =>
-                                    ticket.quantity > 0 && (
-                                      <span key={ticket._id}>
-                                        {ticket.typeTicket} &#40;x
-                                        {ticket.quantity}
-                                        &#41;&ensp;
-                                      </span>
-                                    )
-                                )}
-                              </p>
-                              <div className="grid grid-cols-3 gap-x-1 mt-2">
-                                <p className="py-1 col-span-2">
-                                  <span className="text-gray-500">Ghế: </span>{" "}
-                                  {newSelectSeats.map((newSeat) => (
-                                    <span key={newSeat}>{newSeat}, &ensp;</span>
-                                  ))}
+                              {movie.name} - {movie.namevn}
+                            </div>
+                            <p className="px-2 ml-5 text-white rounded bg-red-600/70">
+                              {movie.limitAge} +
+                            </p>
+                          </div>
+                        </Option>
+                      ) : (
+                        <Option
+                          className="text-black focus:text-white focus:bg-blue-gray-600"
+                          key={movie._id}
+                          hidden
+                        >
+                          Vui lòng chọn rạp chiếu !
+                        </Option>
+                      )
+                    )}
+                  </Select>
+                </div>
+              </div>
+              <div>
+                {valueCinema !== "" && valueMovie !== "" ? (
+                  <button
+                    disabled
+                    className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
+                  >
+                    CHỌN SUẤT CHIẾU
+                  </button>
+                ) : (
+                  <button hidden></button>
+                )}
+              </div>
+
+              <div className="grid grid-cols-2 gap-5 mt-5 mb-10">
+                {showtimes.map(
+                  (showtime) =>
+                    valueMovie !== "" &&
+                    valueCinema !== "" &&
+                    valueMovie === showtime.movieId &&
+                    valueCinema === showtime.cinemaId && (
+                      <Session
+                        key={showtime._id}
+                        showtime={showtime}
+                        setValueShowTime={setValueShowTime}
+                      />
+                    )
+                )}
+              </div>
+              <div>
+                {valueMovie !== "" &&
+                  valueCinema !== "" &&
+                  valueShowTime.id !== "" && (
+                    <>
+                      <button
+                        disabled
+                        className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-[3px] border-[#E50914]"
+                      >
+                        CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
+                      </button>
+                      <div className="grid grid-cols-3 gap-x-5">
+                        <div className="col-span-2">
+                          <TicketTable
+                            setvlPriceTicket={setvlPriceTicket}
+                            tickets={tickets}
+                          />
+                          <FoodTable
+                            setvlPriceFood={setvlPriceFood}
+                            foods={foods}
+                          />
+                        </div>
+                        <div
+                          className="mx-6 h-[70%] bg-cover bg-center"
+                          style={{ backgroundImage: `url("${movie.poster}")` }}
+                        >
+                          <div className="bg-gradient-to-r from-black/100 to-black/40  text-white text-sm w-full h-full">
+                            <div className="px-5 py-10">
+                              <div>
+                                <p className="font-medium text-[20px] uppercase py-1">
+                                  {movie.name}
                                 </p>
-                                <button
-                                  className="text-[13px] p-2 text-white bg-[#E51409]"
-                                  onClick={() => handleOpen("md")}
-                                >
-                                  CHỌN GHẾ
-                                </button>
-                              </div>
-                              <p className="py-1">
-                                <span className="text-gray-500">Combo: </span>{" "}
-                                {foods.map(
-                                  (food) =>
-                                    food.quantity > 0 && (
-                                      <span key={food._id}>
-                                        {food.typeFood} &#40;x{food.quantity}
-                                        &#41; &ensp;
+                                <p className="font-medium text-[17px] uppercase py-1 text-green-700">
+                                  {movie.namevn}
+                                </p>
+                                <p className="py-1 mt-2">
+                                  <span className="text-gray-500">
+                                    Rạp chiếu:{" "}
+                                  </span>{" "}
+                                  {cinema.name}
+                                </p>
+                                <p className="py-1 mt-2">
+                                  <span className="text-gray-500">
+                                    Suất chiếu:{" "}
+                                  </span>{" "}
+                                  {valueShowTime.timeVl} | Ngày{" "}
+                                  {showtime.startDate}
+                                </p>
+                                <p className="py-1 mt-2">
+                                  <span className="text-gray-500">
+                                    Loại vé:{" "}
+                                  </span>{" "}
+                                  {tickets.map(
+                                    (ticket) =>
+                                      ticket.quantity > 0 && (
+                                        <span key={ticket._id}>
+                                          {ticket.typeTicket} &#40;x
+                                          {ticket.quantity}
+                                          &#41;&ensp;
+                                        </span>
+                                      )
+                                  )}
+                                </p>
+                                <div className="grid grid-cols-3 gap-x-1 mt-2">
+                                  <p className="py-1 col-span-2">
+                                    <span className="text-gray-500">Ghế: </span>{" "}
+                                    {newSelectSeats.map((newSeat) => (
+                                      <span key={newSeat}>
+                                        {newSeat}, &ensp;
                                       </span>
-                                    )
-                                )}
-                              </p>
-
-                              <p className="py-1 mt-2 text-red-500 text-[17px]">
-                                <span className="text-gray-500">Tổng: </span>
-                                {vlPriceFood + vlPriceTicket}.000 VNĐ
-                              </p>
-                            </div>
-                            <div>
-                              {countTicket > 0 && (
-                                <div className="grid grid-cols-2 gap-x-3"></div>
-                              )}
-
-                              <Dialog
-                                open={size === "md"}
-                                size={size || "md"}
-                                handler={handleOpen}
-                                style={{ borderRadius: "0px" }}
-                              >
-                                <DialogHeader>
-                                  <h2 className="text-[15px] text-[#E50914]">
-                                    CHỌN GHẾ
-                                  </h2>
-                                </DialogHeader>
-                                <DialogBody divider>
-                                  {seats.map((seats) => (
-                                    <div key={seats._id}>
-                                      {valueShowTime.startTimeId ===
-                                        seats.startTimeId && (
-                                        <ul className="grid grid-cols-9 gap-x-2">
-                                          {seats.seats.map((seat) => (
-                                            <li
-                                              // style={{
-                                              //   backgroundColor:
-                                              //     isActive.includes(seat._id)
-                                              //       ? "red"
-                                              //       : "",
-                                              //   color:
-                                              //   isActive.includes(seat._id)
-                                              //       ? "white"
-                                              //       : "",
-                                              // }}
-                                              value={seat.name}
-                                              key={seat._id}
-                                              onClick={(e) =>
-                                                handleSeat(e, seat)
-                                              }
-                                              className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
-                                            >
-                                              {seat.name}
-                                            </li>
-                                          ))}
-                                        </ul>
-                                      )}
-                                    </div>
-                                  ))}
-                                </DialogBody>
-                                <DialogFooter>
+                                    ))}
+                                  </p>
                                   <button
-                                    className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
-                                    onClick={() => handleOpen(null)}
+                                    className="text-[13px] p-2 text-white bg-[#E51409]"
+                                    onClick={() => handleOpen("md")}
                                   >
-                                    TIẾP TỤC
+                                    CHỌN GHẾ
                                   </button>
-                                </DialogFooter>
-                              </Dialog>
-                            </div>
-                            <div className="justify-center flex mt-10">
-                              <button
-                                // onClick={() =>
-                                //   dispatch(
-                                //     createReservation({
-                                //       nameMovie: movie.name,
-                                //       nameCinema: cinema.name,
-                                //       tickets: tickets,
-                                //       foods: foods,
-                                //       startTime: valueShowTime.timeVl,
-                                //       startDate: showtime.startDate,
-                                //       total: vlPriceFood + vlPriceTicket,
-                                //     })
-                                //   )
-                                //   console.log("da dat ve")
-                                // }
-                                onClick={handlePayment}
-                                className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
-                              >
-                                TIẾP TỤC
-                              </button>
+                                </div>
+                                <p className="py-1">
+                                  <span className="text-gray-500">Combo: </span>{" "}
+                                  {foods.map(
+                                    (food) =>
+                                      food.quantity > 0 && (
+                                        <span key={food._id}>
+                                          {food.typeFood} &#40;x{food.quantity}
+                                          &#41; &ensp;
+                                        </span>
+                                      )
+                                  )}
+                                </p>
+
+                                <p className="py-1 mt-2 text-red-500 text-[17px]">
+                                  <span className="text-gray-500">Tổng: </span>
+                                  {vlPriceFood + vlPriceTicket}.000 VNĐ
+                                </p>
+                              </div>
+                              <div>
+                                {countTicket > 0 && (
+                                  <div className="grid grid-cols-2 gap-x-3"></div>
+                                )}
+
+                                <Dialog
+                                  open={size === "md"}
+                                  size={size || "md"}
+                                  handler={handleOpen}
+                                  style={{ borderRadius: "0px" }}
+                                >
+                                  <DialogHeader>
+                                    <h2 className="text-[15px] text-[#E50914]">
+                                      CHỌN GHẾ
+                                    </h2>
+                                  </DialogHeader>
+                                  <DialogBody divider>
+                                    {seats.map((seats) => (
+                                      <div key={seats._id}>
+                                        {valueShowTime.startTimeId ===
+                                          seats.startTimeId && (
+                                          <ul className="grid grid-cols-9 gap-x-2">
+                                            {seats.seats.map((seat) => (
+                                              <li
+                                                // style={{
+                                                //   backgroundColor:
+                                                //     isActive.includes(seat._id)
+                                                //       ? "red"
+                                                //       : "",
+                                                //   color:
+                                                //   isActive.includes(seat._id)
+                                                //       ? "white"
+                                                //       : "",
+                                                // }}
+                                                value={seat.name}
+                                                key={seat._id}
+                                                onClick={(e) =>
+                                                  handleSeat(e, seat)
+                                                }
+                                                className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
+                                              >
+                                                {seat.name}
+                                              </li>
+                                            ))}
+                                          </ul>
+                                        )}
+                                      </div>
+                                    ))}
+                                  </DialogBody>
+                                  <DialogFooter>
+                                    <button
+                                      className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
+                                      onClick={() => handleOpen(null)}
+                                    >
+                                      TIẾP TỤC
+                                    </button>
+                                  </DialogFooter>
+                                </Dialog>
+                              </div>
+                              <div className="justify-center flex mt-10">
+                                {stateLoadingLogin.loading === true ? (
+                                  <button
+                                    disabled
+                                    className="px-8 my-3 py-3 text-[15px] text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
+                                  >
+                                    <svg
+                                      aria-hidden="true"
+                                      role="status"
+                                      className="inline w-4 h-4 mr-3 text-white animate-spin"
+                                      viewBox="0 0 100 101"
+                                      fill="none"
+                                      xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                      <path
+                                        d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                        fill="#E5E7EB"
+                                      />
+                                      <path
+                                        d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                        fill="currentColor"
+                                      />
+                                    </svg>
+                                    Vui lòng chờ
+                                  </button>
+                                ) : (
+                                  <div>
+                                    {newSelectSeats.length > 0 ? (
+                                      <button
+                                        onClick={handlePayment}
+                                        className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
+                                      >
+                                        TIẾP TỤC
+                                      </button>
+                                    ) : (
+                                      <button
+                                      disabled
+                                        onClick={handlePayment}
+                                        className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
+                                      >
+                                        TIẾP TỤC
+                                      </button>
+                                    )
+                                  }
+                                  </div>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </>
-                )}
+                    </>
+                  )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </>

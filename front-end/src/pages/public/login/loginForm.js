@@ -14,13 +14,16 @@ function LoginForm() {
   const [stateLoadingLogin, setStateLoadingLogin] = useState({ loading: false });
   const submitForm = (values, { resetForm }) => {
     setStateLoadingLogin({ loading: true });
-    setTimeout(async () => {
+    let timeOutLogin = setTimeout(async () => {
       await setStateLoadingLogin({ loading: false });
       dispatch(authLogin(values.email, values.password));
       resetForm({
         email: "",
         password: "",
       });
+      return () => {
+        clearTimeout(timeOutLogin)
+      }
     }, 2000);
   };
   const { user, errorLogin, isAuthenticated } = useSelector(

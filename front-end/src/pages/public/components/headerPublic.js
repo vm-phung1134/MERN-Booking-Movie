@@ -95,7 +95,7 @@ function HeaderPublic() {
                 </MenuHandler>
                 <MenuList className="text-black">
                   <MenuItem><Link to='/account'>Thông tin cá nhân</Link></MenuItem>
-                  <MenuItem>Vé đã đặt</MenuItem>
+                  <MenuItem><Link to='/user-tickets'>Vé đã đặt</Link></MenuItem>
                   <MenuItem>Đổi mật khẩu</MenuItem>
                   <MenuItem className="border-t border-bg-gray-700" onClick={handleLogout}>
                     Đăng xuất

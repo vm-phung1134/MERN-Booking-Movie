@@ -25,7 +25,7 @@ function RegisterForm() {
   const [stateSuccess, setStateSuccess] = useState("");
   const submitForm = (values, { resetForm }) => {
     setStateLoadingRegister({ loading: true });
-    setTimeout(async () => {
+    let timeOutRegister = setTimeout(async () => {
       await setStateLoadingRegister({ loading: false });
       dispatch(authRegister(values.name, values.email, values.password, values.phone, values.cardId, values.gender, values.position));
       resetForm({
@@ -34,6 +34,9 @@ function RegisterForm() {
         password: "",
         passwordConfirm: "",
       });
+      return () => {
+        clearTimeout(timeOutRegister)
+      }
     }, 2000);
   };
   const { user, error, isRegister } = useSelector((state) => state.user);

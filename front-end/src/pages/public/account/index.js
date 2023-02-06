@@ -18,12 +18,14 @@ function Account() {
   useEffect(() => {
     window.scrollTo(0, 0)
     setLoadingPage(true);
-    setTimeout(async () => {
+    let timeOut = setTimeout(async () => {
       await dispatch(getOneUser(id));
       dispatch(getAllMovie());
       setLoadingPage(false); 
     }, 1300);
-    
+    return () => {
+      clearTimeout(timeOut)
+    }
   }, [dispatch, id]);
   
   return (

@@ -9,6 +9,10 @@ const reservationSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    imgMovie: {
+      type: String,
+      required: true
+    },
     tickets: [
       {
         typeTicket: {

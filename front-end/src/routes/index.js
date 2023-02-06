@@ -5,6 +5,7 @@ import DetailMovie from '../pages/public/movie/detailMovie'
 import Booking from '../pages/public/booking'
 import Account from '../pages/public/account'
 import CheckoutSuccess from '../pages/public/booking/checkoutSuccess'
+import UserTickets from '../pages/public/account/userTickets'
 
 const publicRoutes = [
     {
@@ -30,6 +31,10 @@ const publicRoutes = [
     {
         path: '/checkout-success',
         component: CheckoutSuccess
+    },
+    {
+        path: '/user-tickets',
+        component: UserTickets
     }
 ]
 

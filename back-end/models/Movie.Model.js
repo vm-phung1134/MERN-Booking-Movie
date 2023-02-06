@@ -32,6 +32,9 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Image must be required']
     },
+    bg: {
+        type: String
+    },
     director: {
         type: String,
         required: [true, 'Director must be required']
