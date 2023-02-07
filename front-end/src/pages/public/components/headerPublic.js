@@ -76,6 +76,12 @@ function HeaderPublic() {
                   >
                     THÀNH VIÊN
                   </Link>
+                  <Link
+                    to="/search"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    TÌM KIẾM
+                  </Link>
                 </div>
               </div>
             </div>
@@ -87,7 +93,7 @@ function HeaderPublic() {
               <Menu>
                 <MenuHandler>
                   <Button
-                    className="text-white ml-3 py-2 bg-transparent hover:bg-none shadow-none font-thin text-[14px] capitalize"
+                    className="text-white ml-3 py-2 bg-transparent hover:bg-none font-medium shadow-none text-[14px] capitalize"
                   >
                     {userName} &ensp;
                     <i className="fas fa-chevron-down text-[12px]"></i>
@@ -162,40 +168,46 @@ function HeaderPublic() {
           {(ref) => (
             <div className="md:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a
-                  href="/home"
+                <Link
+                  to="/home"
                   className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   TRANG CHỦ
-                </a>
+                </Link>
 
-                <a
-                  href="/cinema"
+                <Link
+                  to="/cinema"
                   className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   RẠP CHIẾU
-                </a>
+                </Link>
 
-                <a
-                  href="/booking"
+                <Link
+                  to="/booking"
                   className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   ĐẶT VÉ
-                </a>
+                </Link>
 
-                <a
-                  href="/news"
+                <Link
+                  to="/news"
                   className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   KHUYẾN MÃI
-                </a>
+                </Link>
 
-                <a
-                  href="/member"
+                <Link
+                  to="/member"
                   className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
                 >
                   THÀNH VIÊN
-                </a>
+                </Link>
+                <Link
+                  to="/member"
+                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                >
+                  TÌM KIẾM
+                </Link>
               </div>
             </div>
           )}

@@ -6,6 +6,7 @@ import Booking from '../pages/public/booking'
 import Account from '../pages/public/account'
 import CheckoutSuccess from '../pages/public/booking/checkoutSuccess'
 import UserTickets from '../pages/public/account/userTickets'
+import SearchPage from '../pages/public/search'
 
 const publicRoutes = [
     {
@@ -35,6 +36,10 @@ const publicRoutes = [
     {
         path: '/user-tickets',
         component: UserTickets
+    },
+    {
+        path: '/search',
+        component: SearchPage
     }
 ]
 

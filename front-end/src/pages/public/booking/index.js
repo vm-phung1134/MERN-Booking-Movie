@@ -18,7 +18,7 @@ import { getAllTicket } from "../../../redux/actions/ticketActions";
 import TicketTable from "./ticketTable";
 import FoodTable from "./foodTable";
 import { getAllFood } from "../../../redux/actions/foodActions";
-import { getAllSeat } from "../../../redux/actions/seatActions";
+import { getAllSeat, updateStatusSeat } from "../../../redux/actions/seatActions";
 import { createReservation } from "../../../redux/actions/reservationActions";
 import {
   Dialog,
@@ -51,6 +51,7 @@ function Booking() {
   });
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
+  const [valueSeats, setValueSeats] = useState("")
   const [valueShowTime, setValueShowTime] = useState({
     id: "",
     timeVl: "",
@@ -81,7 +82,8 @@ function Booking() {
     [setValueMovie]
   );
   // GET ARRAY VALUES SEAT
-  const handleSeat = (e, seat) => {
+  const handleSeat = (e, seat, seats_id) => {
+    setValueSeats(seats_id)
     setSelectSeats((prev) => [...prev, seat.name]);
   };
   const tokenId = localStorage.getItem("userId");
@@ -110,6 +112,7 @@ function Booking() {
           if (res.data.url) {
             window.location.href = res.data.url;
             dispatch(createReservation(ticketPayment));
+            newSelectSeats.map(item => dispatch(updateStatusSeat(valueSeats, item))) 
           }
         })
         .catch((err) => console.log(err.message));
@@ -280,20 +283,20 @@ function Booking() {
                                   {movie.namevn}
                                 </p>
                                 <p className="py-1 mt-2">
-                                  <span className="text-gray-500">
+                                  <span className="text-gray-400">
                                     Rạp chiếu:{" "}
                                   </span>{" "}
                                   {cinema.name}
                                 </p>
                                 <p className="py-1 mt-2">
-                                  <span className="text-gray-500">
+                                  <span className="text-gray-400">
                                     Suất chiếu:{" "}
                                   </span>{" "}
                                   {valueShowTime.timeVl} | Ngày{" "}
                                   {showtime.startDate}
                                 </p>
                                 <p className="py-1 mt-2">
-                                  <span className="text-gray-500">
+                                  <span className="text-gray-400">
                                     Loại vé:{" "}
                                   </span>{" "}
                                   {tickets.map(
@@ -309,7 +312,7 @@ function Booking() {
                                 </p>
                                 <div className="grid grid-cols-3 gap-x-1 mt-2">
                                   <p className="py-1 col-span-2">
-                                    <span className="text-gray-500">Ghế: </span>{" "}
+                                    <span className="text-gray-400">Ghế: </span>{" "}
                                     {newSelectSeats.map((newSeat) => (
                                       <span key={newSeat}>
                                         {newSeat}, &ensp;
@@ -324,7 +327,7 @@ function Booking() {
                                   </button>
                                 </div>
                                 <p className="py-1">
-                                  <span className="text-gray-500">Combo: </span>{" "}
+                                  <span className="text-gray-400">Combo: </span>{" "}
                                   {foods.map(
                                     (food) =>
                                       food.quantity > 0 && (
@@ -340,6 +343,7 @@ function Booking() {
                                   <span className="text-gray-500">Tổng: </span>
                                   {vlPriceFood + vlPriceTicket}.000 VNĐ
                                 </p>
+                                <p className="text-[10px] text-gray-200">&#40; Chú ý: Nếu bạn không muốn lên nóc nhà ngồi. Thì hãy chọn ghế ! &#41;</p>
                               </div>
                               <div>
                                 {countTicket > 0 && (
@@ -364,26 +368,25 @@ function Booking() {
                                           seats.startTimeId && (
                                           <ul className="grid grid-cols-9 gap-x-2">
                                             {seats.seats.map((seat) => (
-                                              <li
-                                                // style={{
-                                                //   backgroundColor:
-                                                //     isActive.includes(seat._id)
-                                                //       ? "red"
-                                                //       : "",
-                                                //   color:
-                                                //   isActive.includes(seat._id)
-                                                //       ? "white"
-                                                //       : "",
-                                                // }}
-                                                value={seat.name}
-                                                key={seat._id}
-                                                onClick={(e) =>
-                                                  handleSeat(e, seat)
-                                                }
-                                                className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
-                                              >
-                                                {seat.name}
-                                              </li>
+                                              <div key={seat._id}>
+                                                {seat.status === true ? (
+                                                  <li
+                                                    value={seat.name}
+                                                    onClick={(e) =>
+                                                      handleSeat(e, seat, seats._id)
+                                                    }
+                                                    className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
+                                                  >
+                                                    {seat.name}
+                                                  </li>
+                                                ) : (
+                                                  <li 
+                                                  disabled
+                                                  className="bg-red-600 text-sm text-center text-white">
+                                                    {seat.name}
+                                                  </li>
+                                                )}
+                                              </div>
                                             ))}
                                           </ul>
                                         )}
@@ -436,14 +439,13 @@ function Booking() {
                                       </button>
                                     ) : (
                                       <button
-                                      disabled
+                                        disabled
                                         onClick={handlePayment}
                                         className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
                                       >
                                         TIẾP TỤC
                                       </button>
-                                    )
-                                  }
+                                    )}
                                   </div>
                                 )}
                               </div>
