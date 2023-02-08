@@ -7,6 +7,7 @@ import Account from '../pages/public/account'
 import CheckoutSuccess from '../pages/public/booking/checkoutSuccess'
 import UserTickets from '../pages/public/account/userTickets'
 import SearchPage from '../pages/public/search'
+import Cinema from '../pages/public/cinema'
 
 const publicRoutes = [
     {
@@ -40,6 +41,10 @@ const publicRoutes = [
     {
         path: '/search',
         component: SearchPage
+    },
+    {
+        path: '/cinema',
+        component: Cinema
     }
 ]
 

@@ -9,7 +9,7 @@ import { getOneMovie } from "../../../../redux/actions/movieActions";
 import HeaderPublic from "../../components/headerPublic";
 import SpinnerLoading from "../../components/spinnerLoading";
 import MovieNowList from "../homeMovie/movieNowList";
-import Cinema from "./cinema";
+import Cinema from "../../cinema/cinema";
 
 const DetailMovie = () => {
   const dispatch = useDispatch();
@@ -76,16 +76,18 @@ const DetailMovie = () => {
                         </p>
                       </div>
                     </div>
-                    <div 
-                    data-aos="zoom-in-left"
-                    data-aos-duration="1000"
-                    className="flex justify-start items-center ">
+                    <div
+                      data-aos="zoom-in-left"
+                      data-aos-duration="1000"
+                      className="flex justify-start items-center "
+                    >
                       <div className="relative px-[70px] py-[70px] border-l-[3px] border-r-[3px] border-[#ffffff] shadow-white rounded-full">
-                        <button className="absolute top-[2px] left-[2px] right-[2px] bottom-[2px] text-lg rounded-full text-white hover: bg-gradient-to-t hover:to-[#f01404] hover:from-black/80 font-medium bg-transparent">
-                          <Link to="/booking">MUA VÉ</Link>
-                        </button>
+                        <Link to="/booking">
+                          <button className="absolute top-[2px] left-[2px] right-[2px] bottom-[2px] text-lg rounded-full text-white hover: bg-gradient-to-t hover:to-[#f01404] hover:from-black/80 font-medium bg-transparent">
+                            MUA VÉ
+                          </button>
+                        </Link>
                       </div>
-                      
                     </div>
                   </div>
                 </div>

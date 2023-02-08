@@ -1,4 +1,7 @@
-import { useEffect, useState, memo } from "react";
+import { useEffect, useState, memo, useCallback } from "react";
+import { Link } from "react-router-dom";
+import QRCode from "react-qr-code"
+import { Breadcrumbs } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllReservation,
@@ -7,7 +10,6 @@ import {
 import HeaderPublic from "../components/headerPublic";
 import { getAllMovie } from "../../../redux/actions/movieActions";
 import SpinnerLoading from "../components/spinnerLoading";
-import { Link } from "react-router-dom";
 import {
   Dialog,
   DialogHeader,
@@ -23,14 +25,20 @@ function UserTickets() {
   const movies = useSelector((state) => state.movies.movies);
   const reservations = useSelector((state) => state.reservations.reservations);
   const [size, setSize] = useState(null);
+  const [sizeQR, setSizeQR] = useState(null);
   const userId = localStorage.getItem("userId")
   const [loadingPage, setLoadingPage] = useState(false);
   const [id, setId] = useState("");
+  const [idQR, setIdQR] = useState("");
   const [newReservations, setNewReservation] = useState([]); //CREATE ONE EMPTY ARRAY TO SAVE CURRENT RESERVATION
-  const handleOpen = (value, id) => {
+  const handleOpen = useCallback((value, id) => {
     setSize(value);
     setId(id);
-  };
+  },[]);
+  const handleOpenQR = useCallback((value, id) => {
+    setSizeQR(value);
+    setIdQR(id)
+  },[]);
   const handleDeleteTicket = async (id) => {
     await dispatch(deleteTicket(id));
     setSize(null); //DISMISS MODAL
@@ -67,6 +75,14 @@ function UserTickets() {
           <div
             className="px-16 py-20 text-white min-h-screen max-h-full w-full"
           >
+            <Breadcrumbs className="bg-transparen p-0">
+                <Link to="/home" className="text-gray-400">
+                  Trang chủ
+                </Link>
+                <Link to="/account" className="text-gray-200">
+                  Vé đã đặt
+                </Link>
+              </Breadcrumbs>
             <button
               disabled
               className="text-white text-[15px] pr-6 py-[10px] border-b-[3px] border-[#E50914]"
@@ -106,7 +122,9 @@ function UserTickets() {
                               </div>
                               <div className="flex items-center justify-end">
                                 <h1 className="mx-2">Mã vé QR</h1>
-                                <button className="border font-bold p-2 text-[12px] rounded-full">
+                                <button onClick={() =>
+                                    handleOpenQR("xs", reservation._id)
+                                  } className="border font-bold p-2 text-[12px] rounded-full">
                                   Xem
                                 </button>
                                 &ensp;
@@ -224,6 +242,44 @@ function UserTickets() {
                 <button
                   className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
                   onClick={() => handleDeleteTicket(id)}
+                >
+                  Tiếp tục
+                </button>
+              </DialogFooter>
+            </Dialog>
+            <Dialog
+              open={sizeQR === "xs"}
+              size={sizeQR || "xs"}
+              handler={handleOpenQR}
+              style={{ borderRadius: "0px" }}
+            >
+              <DialogHeader>
+                <h2 className="text-[17px] text-[#E50914] font-bold">
+                  Mã QR Code
+                </h2>
+                
+              </DialogHeader>
+              <DialogBody divider>
+                <div className="mb-5">
+                  <p className="mt-2">Mã vé: <span className="text-[#000000]">{idQR}</span></p>
+                  <p className="my-2 text-[#e97a3a] text-sm">
+                    Bạn có thể dùng điện thoại lưu lại để đưa nhân viên tại quầy nhé!
+                  </p>
+                  
+                  <QRCode
+                  id='qrcode'
+                  value={idQR}
+                  style={{height:"100px", width:"100%"}}
+                  level={'H'}
+                  includeMargin={true}
+                  >                
+                  </QRCode>
+                </div>
+              </DialogBody>
+              <DialogFooter>
+                <button
+                  className="px-6 my-5 py-2 text-sm text-white bg-[#E51409]"
+                  onClick={() => handleOpenQR(null,null)}
                 >
                   Tiếp tục
                 </button>

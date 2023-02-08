@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Link } from "react-router-dom";
+import { Breadcrumbs } from "@material-tailwind/react";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import HeaderPublic from "../components/headerPublic";
 import SpinnerLoading from "../components/spinnerLoading";
@@ -149,6 +151,14 @@ function Booking() {
             <SpinnerLoading />
           ) : (
             <div className="px-16 py-20 min-h-screen max-h-full bg-transparent">
+              <Breadcrumbs className="bg-transparen p-0">
+                <Link to="/home" className="text-gray-400">
+                  Trang chủ
+                </Link>
+                <Link to="/booking" className="text-gray-200">
+                  Đặt vé xem phim
+                </Link>
+              </Breadcrumbs>
               <div className="flex justify-between">
                 <button
                   disabled

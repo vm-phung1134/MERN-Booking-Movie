@@ -21,9 +21,9 @@ function HeaderPublic() {
 
   const handleLogout = () => {
     dispatch(authLogout());
-    localStorage.removeItem('user')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('token')
+    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
   };
   const { user, isAuthenticated } = useSelector((state) => state.user);
   useEffect(() => {
@@ -48,33 +48,30 @@ function HeaderPublic() {
                   >
                     TRANG CHỦ
                   </Link>
-
                   <Link
-                    to="/#"
+                    to="/booking"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    MUA VÉ
+                  </Link>
+                  <Link
+                    to="/movie"
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    PHIM
+                  </Link>
+                  <Link
+                    to="/cinema"
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     RẠP CHIẾU
                   </Link>
 
                   <Link
-                    to="/booking"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    ĐẶT VÉ
-                  </Link>
-
-                  <Link
                     to="/#"
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    KHUYẾN MÃI
-                  </Link>
-
-                  <Link
-                    to="/#"
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    THÀNH VIÊN
+                    HỖ TRỢ
                   </Link>
                   <Link
                     to="/search"
@@ -92,18 +89,23 @@ function HeaderPublic() {
               </button>
               <Menu>
                 <MenuHandler>
-                  <Button
-                    className="text-white ml-3 py-2 bg-transparent hover:bg-none font-medium shadow-none text-[14px] capitalize"
-                  >
+                  <Button className="text-white  ml-3 py-2 bg-transparent hover:bg-none font-medium shadow-none text-[14px] capitalize">
                     {userName} &ensp;
                     <i className="fas fa-chevron-down text-[12px]"></i>
                   </Button>
                 </MenuHandler>
                 <MenuList className="text-black">
-                  <MenuItem><Link to='/account'>Thông tin cá nhân</Link></MenuItem>
-                  <MenuItem><Link to='/user-tickets'>Vé đã đặt</Link></MenuItem>
+                  <MenuItem>
+                    <Link to="/account">Thông tin cá nhân</Link>
+                  </MenuItem>
+                  <MenuItem>
+                    <Link to="/user-tickets">Vé đã đặt</Link>
+                  </MenuItem>
                   <MenuItem>Đổi mật khẩu</MenuItem>
-                  <MenuItem className="border-t border-bg-gray-700" onClick={handleLogout}>
+                  <MenuItem
+                    className="border-t border-bg-gray-700"
+                    onClick={handleLogout}
+                  >
                     Đăng xuất
                   </MenuItem>
                 </MenuList>
