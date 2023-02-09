@@ -8,6 +8,7 @@ import CheckoutSuccess from '../pages/public/booking/checkoutSuccess'
 import UserTickets from '../pages/public/account/userTickets'
 import SearchPage from '../pages/public/search'
 import Cinema from '../pages/public/cinema'
+import support from '../pages/public/support'
 
 const publicRoutes = [
     {
@@ -15,7 +16,7 @@ const publicRoutes = [
         component: HomePage
     },
     {
-        path: '/movies', 
+        path: '/movie', 
         component: HomeMovie
     },
     {
@@ -45,6 +46,10 @@ const publicRoutes = [
     {
         path: '/cinema',
         component: Cinema
+    },
+    {
+        path: '/support',
+        component: support
     }
 ]
 

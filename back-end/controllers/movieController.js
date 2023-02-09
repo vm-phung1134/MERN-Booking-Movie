@@ -22,8 +22,7 @@ exports.getOneMovie = async (req, res, next) => {
 
 exports.createMovie = async (req, res, next) => {
     try {
-        const {cinemaId} = req.params;
-        const movie = await Movie.create({...req.body, cinemaId: cinemaId})
+        const movie = await Movie.create({...req.body})
         res.status(200).json(movie)
     } catch (error) {
         res.json(error)

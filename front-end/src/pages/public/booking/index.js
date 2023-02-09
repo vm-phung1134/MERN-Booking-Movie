@@ -20,13 +20,17 @@ import { getAllTicket } from "../../../redux/actions/ticketActions";
 import TicketTable from "./ticketTable";
 import FoodTable from "./foodTable";
 import { getAllFood } from "../../../redux/actions/foodActions";
-import { getAllSeat, updateStatusSeat } from "../../../redux/actions/seatActions";
+import {
+  getAllSeat,
+  updateStatusSeat,
+} from "../../../redux/actions/seatActions";
 import { createReservation } from "../../../redux/actions/reservationActions";
 import {
   Dialog,
   DialogHeader,
   DialogBody,
   DialogFooter,
+  Tooltip,
 } from "@material-tailwind/react";
 import { isCheckQuanlitySeat } from "../middleware";
 
@@ -53,7 +57,7 @@ function Booking() {
   });
   const [valueCinema, setValueCinema] = useState("");
   const [valueMovie, setValueMovie] = useState("");
-  const [valueSeats, setValueSeats] = useState("")
+  const [valueSeats, setValueSeats] = useState("");
   const [valueShowTime, setValueShowTime] = useState({
     id: "",
     timeVl: "",
@@ -85,7 +89,7 @@ function Booking() {
   );
   // GET ARRAY VALUES SEAT
   const handleSeat = (e, seat, seats_id) => {
-    setValueSeats(seats_id)
+    setValueSeats(seats_id);
     setSelectSeats((prev) => [...prev, seat.name]);
   };
   const tokenId = localStorage.getItem("userId");
@@ -114,7 +118,9 @@ function Booking() {
           if (res.data.url) {
             window.location.href = res.data.url;
             dispatch(createReservation(ticketPayment));
-            newSelectSeats.map(item => dispatch(updateStatusSeat(valueSeats, item))) 
+            newSelectSeats.map((item) =>
+              dispatch(updateStatusSeat(valueSeats, item))
+            );
           }
         })
         .catch((err) => console.log(err.message));
@@ -329,12 +335,14 @@ function Booking() {
                                       </span>
                                     ))}
                                   </p>
-                                  <button
-                                    className="text-[13px] p-2 text-white bg-[#E51409]"
-                                    onClick={() => handleOpen("md")}
-                                  >
-                                    CHỌN GHẾ
-                                  </button>
+                                  {countTicket > 0 && (
+                                    <button
+                                      className="text-[13px] p-2 text-white bg-[#E51409]"
+                                      onClick={() => handleOpen("md")}
+                                    >
+                                      CHỌN GHẾ
+                                    </button>
+                                  )}
                                 </div>
                                 <p className="py-1">
                                   <span className="text-gray-400">Combo: </span>{" "}
@@ -353,13 +361,12 @@ function Booking() {
                                   <span className="text-gray-500">Tổng: </span>
                                   {vlPriceFood + vlPriceTicket}.000 VNĐ
                                 </p>
-                                <p className="text-[10px] text-gray-200">&#40; Chú ý: Nếu bạn không muốn lên nóc nhà ngồi. Thì hãy chọn ghế ! &#41;</p>
+                                <p className="text-[10px] text-gray-200">
+                                  &#40; Nếu bạn không muốn lên nóc nhà ngồi. Thì
+                                  hãy chọn ghế ! &#41;
+                                </p>
                               </div>
                               <div>
-                                {countTicket > 0 && (
-                                  <div className="grid grid-cols-2 gap-x-3"></div>
-                                )}
-
                                 <Dialog
                                   open={size === "md"}
                                   size={size || "md"}
@@ -372,33 +379,47 @@ function Booking() {
                                     </h2>
                                   </DialogHeader>
                                   <DialogBody divider>
+                                    <p className="text-black">Lối vào</p>
                                     {seats.map((seats) => (
                                       <div key={seats._id}>
                                         {valueShowTime.startTimeId ===
                                           seats.startTimeId && (
-                                          <ul className="grid grid-cols-9 gap-x-2">
-                                            {seats.seats.map((seat) => (
-                                              <div key={seat._id}>
-                                                {seat.status === true ? (
-                                                  <li
-                                                    value={seat.name}
-                                                    onClick={(e) =>
-                                                      handleSeat(e, seat, seats._id)
-                                                    }
-                                                    className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
-                                                  >
-                                                    {seat.name}
-                                                  </li>
-                                                ) : (
-                                                  <li 
-                                                  disabled
-                                                  className="bg-red-600 text-sm text-center text-white">
-                                                    {seat.name}
-                                                  </li>
-                                                )}
-                                              </div>
-                                            ))}
-                                          </ul>
+                                          <div>
+                                            <ul className="grid grid-cols-9 gap-1 py-5 px-14">
+                                              {seats.seats.map((seat) => (
+                                                <div key={seat._id}>
+                                                  {seat.status === true ? (
+                                                    <li
+                                                      value={seat.name}
+                                                      onClick={(e) =>
+                                                        handleSeat(
+                                                          e,
+                                                          seat,
+                                                          seats._id
+                                                        )
+                                                      }
+                                                      className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
+                                                    >
+                                                      {seat.name}
+                                                    </li>
+                                                  ) : (
+                                                    <li
+                                                      disabled
+                                                      className="bg-red-600 text-sm text-center text-white"
+                                                    >
+                                                      {seat.name}
+                                                    </li>
+                                                  )}
+                                                </div>
+                                              ))}
+                                            </ul>
+                                            <div className="">
+                                              <p className="text-center text-black px-10">
+                                                Màn hình
+                                              </p>
+                                              <p className="border-2 border-black"></p>
+                                            </div>
+                                          </div>
                                         )}
                                       </div>
                                     ))}
@@ -448,13 +469,11 @@ function Booking() {
                                         TIẾP TỤC
                                       </button>
                                     ) : (
-                                      <button
-                                        disabled
-                                        onClick={handlePayment}
-                                        className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
-                                      >
-                                        TIẾP TỤC
-                                      </button>
+                                      <Tooltip content="Chọn Vé và Ghế để tiếp tục">
+                                        <button className="px-8 my-3 py-3 cursor-pointer text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]">
+                                          TIẾP TỤC
+                                        </button>
+                                      </Tooltip>
                                     )}
                                   </div>
                                 )}

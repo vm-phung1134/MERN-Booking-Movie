@@ -38,16 +38,14 @@ function HeaderPublic() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
-                <img className="h-8 w-[150px]" src={Logo} alt="Workflow" />
+                <Link
+                  to="/home"
+                >
+                  <img className="h-8 w-[150px]" src={Logo} alt="Workflow" />
+                </Link>
               </div>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-3">
-                  <Link
-                    to="/home#"
-                    className=" hover:bg-[#E50914] text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    TRANG CHỦ
-                  </Link>
                   <Link
                     to="/booking"
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
@@ -66,9 +64,20 @@ function HeaderPublic() {
                   >
                     RẠP CHIẾU
                   </Link>
-
                   <Link
-                    to="/#"
+                    
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    SỰ KIỆN
+                  </Link>
+                  <Link
+                    
+                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    GÓC ĐIỆN ẢNH
+                  </Link>
+                  <Link
+                    to="/support"
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     HỖ TRỢ

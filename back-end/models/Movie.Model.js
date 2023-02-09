@@ -51,10 +51,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Discription must be required']
     },
-    cinemaId: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    }
+    // cinemaId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     required: true,
+    // }
 }, {timestamps: true})
 
 const Movie = mongoose.model('Movie', movieSchema)

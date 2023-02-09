@@ -153,7 +153,7 @@ function UserTickets() {
                                   </h3>
                                   <p>{reservation.startTime}</p>
                                 </div>
-                                <div>
+                                <div className="px-3">
                                   <h3 className="text-[15px] text-gray-500">
                                     Loại vé
                                   </h3>
@@ -170,13 +170,13 @@ function UserTickets() {
                                     )}
                                   </p>
                                 </div>
-                                <div>
+                                <div className="text-center">
                                   <h3 className="text-[15px] text-gray-500">
                                     Vị trí ghế
                                   </h3>
                                   <p>{reservation.seats}</p>
                                 </div>
-                                <div className="col-span-2">
+                                <div className="col-span-2 px-14">
                                   <h3 className="text-[15px] text-gray-500">
                                     Combo
                                   </h3>

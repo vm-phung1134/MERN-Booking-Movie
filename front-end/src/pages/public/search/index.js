@@ -9,9 +9,7 @@ function SearchPage() {
   const movies = useSelector((state) => state.movies.movies);
   const [isActive, setIsActive] = useState("1");
   const [isSearching, setIsSearching] = useState("");
-  console.log(isSearching);
   const [searchCurrentMovie, setSearchCurrentMovie] = useState([]);
-  console.log(searchCurrentMovie);
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
   };
@@ -84,7 +82,7 @@ function SearchPage() {
                   <div className="">
                     <div className="relative">
                       <img
-                        className="w-[370px] bg-cover"
+                        className="w-[370px] h-[450px] bg-cover"
                         src={movie.poster}
                         alt=""
                       ></img>

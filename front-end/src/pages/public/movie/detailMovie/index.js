@@ -9,7 +9,7 @@ import { getOneMovie } from "../../../../redux/actions/movieActions";
 import HeaderPublic from "../../components/headerPublic";
 import SpinnerLoading from "../../components/spinnerLoading";
 import MovieNowList from "../homeMovie/movieNowList";
-import Cinema from "../../cinema/cinema";
+import Cinema from "./cinema";
 
 const DetailMovie = () => {
   const dispatch = useDispatch();
@@ -44,14 +44,14 @@ const DetailMovie = () => {
               >
                 <div className="bg-gradient-to-t from-black/100 to-black/40">
                   <div className="grid grid-cols-3 p-10">
-                    <div className="mt-5 flex justify-end">
+                    <div className="mt-5 flex justify-center">
                       <img
                         src={movie.poster}
                         className="w-[340px]"
                         alt=""
                       ></img>
                     </div>
-                    <div className="px-5 pt-3 text-white">
+                    <div className="px-0 pt-3 text-white justify-end">
                       <button className="mb-3 py-[10px] border-b-[3px] border-[#E50914]">
                         THÔNG TIN CHI TIẾT PHIM
                       </button>

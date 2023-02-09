@@ -17,10 +17,6 @@ const showTimeSchema = new mongoose.Schema(
           type: String,
           required: true,
         },
-        quantitySeat: {
-          type: Number,
-          required: true,
-        },
       },
     ],
     startDate: {

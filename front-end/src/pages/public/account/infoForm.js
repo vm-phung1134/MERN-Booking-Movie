@@ -63,7 +63,7 @@ function InfoForm({userInfo}) {
               <input
                 type="userName"
                 name="userName"
-                id="emailAccount"
+                id="userName"
                 value={values.userName}
                 onChange={handleChange}
                 onBlur={handleBlur}

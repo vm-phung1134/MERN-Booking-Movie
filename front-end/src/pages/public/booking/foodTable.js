@@ -53,9 +53,9 @@ function FoodTable({ foods, setvlPriceFood}) {
                 <tbody className="divide-y divide-gray-200">
                   {foods.map((food, index) => (
                     <tr key={index}>
-                      <td className="pl-6 py-4 flex text-[12px] font-medium text-white whitespace-nowrap">
+                      <td className="pl-4 py-4 flex text-[12px] font-medium text-white whitespace-nowrap">
                         <img
-                          className="w-[100px] h-[60px]"
+                          className="w-[90px] h-[60px]"
                           src={food.image}
                           alt=""
                         ></img>
