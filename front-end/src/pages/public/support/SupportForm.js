@@ -1,25 +1,67 @@
 import { Formik } from "formik";
 import { memo } from "react";
-// import { useDispatch } from "react-redux";
-// import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { postOneFeedBack } from "../../../redux/actions/feedBackActions";
 
 function SupportForm({ userInfo }) {
-  //const dispatch = useDispatch();
-  const initialValues = {};
+  const dispatch = useDispatch();
+  const feedBack = useSelector((state) => state.feedBack.feedBack);
+  console.log(feedBack);
+  const initialValues = {
+    userName: "",
+    email: "",
+    phone: "",
+    content: "",
+  };
   const validate = (values) => {
     let errors = {};
     const regex =
       /^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$/;
+      const regex_email = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!regex.test(values.phone)) {
       errors.phone = "! Số điện thoại không chính xác";
     }
+    if (!regex_email.test(values.email)){
+      errors.email = "! Vui lòng nhập Email";
+    } else if (values.email.length > 30) {
+      errors.email = "! Email không vượt quá 30 ký tự";
+    }
+    if (!values.userName) {
+      errors.userName = "! Vui lòng nhập Họ và tên";
+    } else if (values.userName.length > 30) {
+      errors.userName = "! Họ và tên không vượt quá 30 ký tự";
+    }
+    if (!values.content) {
+      errors.content = "! Vui lòng nhập nội dung";
+    } else if (values.content.length > 200) {
+      errors.content = "! Nội dung không vượt quá 200 ký tự";
+    }
     return errors;
   };
-  const submitForm = async (values) => {
-    // toast.success("Đã gửi góp ý của bạn thành công - check Email lại sau nhá !", {
-    //   position: toast.POSITION.BOTTOM_LEFT,
-    // });
+  const submitForm = async (values, {resetForm}) => {
+    console.log(values);
+    await dispatch(postOneFeedBack(values));
+    resetForm({
+      userName: "",
+      email: "",
+      phone: "",
+      content: "",
+    })
+    if (feedBack !== {
+      userName: "",
+      email: "",
+      phone: "",
+      content: "",
+    }) {
+      toast.success(
+        "Đã gửi góp ý của bạn thành công - check Email lại sau nhá !",
+        {
+          position: toast.POSITION.BOTTOM_LEFT,
+        }
+      );
+    }
   };
   return (
     <Formik
@@ -62,7 +104,7 @@ function SupportForm({ userInfo }) {
                       placeholder="Họ và tên"
                     />{" "}
                     {errors.userName && touched.userName && (
-                      <span className="text-red-500 text-[14px]">
+                      <span className="text-red-500 text-[13px]">
                         {errors.userName}
                       </span>
                     )}
@@ -80,7 +122,7 @@ function SupportForm({ userInfo }) {
                       placeholder="Email"
                     />
                     {errors.email && touched.email && (
-                      <span className="text-red-500 text-[14px]">
+                      <span className="text-red-500 text-[13px]">
                         {errors.email}
                       </span>
                     )}
@@ -95,9 +137,10 @@ function SupportForm({ userInfo }) {
                       className="p-2 w-full mb-1 text-black bg-gray-200 placeholder:text-gray-700"
                       type="text"
                       placeholder="Số điên thoại"
-                    /><br></br>
+                    />
+                    <br></br>
                     {errors.phone && touched.phone && (
-                      <span className="text-red-500 text-[14px]">
+                      <span className="text-red-500 text-[13px]">
                         {errors.phone}
                       </span>
                     )}
@@ -115,7 +158,7 @@ function SupportForm({ userInfo }) {
                     placeholder="Nội dung"
                   />
                   {errors.content && touched.content && (
-                    <span className="text-red-500 text-[14px]">
+                    <span className="text-red-500 text-[13px]">
                       {errors.content}
                     </span>
                   )}
@@ -126,6 +169,7 @@ function SupportForm({ userInfo }) {
                     >
                       GỬI
                     </button>
+                    <ToastContainer toastStyle={{ color: "black" }} />
                   </div>
                 </div>
               </div>

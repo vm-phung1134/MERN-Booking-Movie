@@ -68,13 +68,7 @@ function HeaderPublic() {
                     
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    SỰ KIỆN
-                  </Link>
-                  <Link
-                    
-                    className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                  >
-                    GÓC ĐIỆN ẢNH
+                    GÓC ĐIỆN ẢNH & SỰ KIỆN
                   </Link>
                   <Link
                     to="/support"

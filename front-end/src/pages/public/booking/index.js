@@ -419,6 +419,11 @@ function Booking() {
                                               </p>
                                               <p className="border-2 border-black"></p>
                                             </div>
+                                            <div className="flex mt-5 text-sm text-black">
+                                              <p><span className="bg-red-600 px-2 mx-2"> </span> - Đã đặt</p>
+                                              <p><span className="bg-green-600 px-2 mx-2"> </span> - Đang chọn</p>
+                                              <p><span className="bg-gray-400 px-2 mx-2"> </span> - Còn trống</p>
+                                            </div>
                                           </div>
                                         )}
                                       </div>

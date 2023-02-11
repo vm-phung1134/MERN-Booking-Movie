@@ -19,6 +19,7 @@ const ticketRoute = require('./routes/ticketRoute')
 const foodRoute = require('./routes/foodRoute')
 const seatRoute =  require('./routes/seatRoute')
 const paymentRoute = require('./routes/paymentRoute')
+const feedBackRoute = require('./routes/feedBackRoute')
 
 //mount the route
 app.use('/api/v1/auth', authRoute)
@@ -30,6 +31,7 @@ app.use('/api/v1/tickets', ticketRoute)
 app.use('/api/v1/foods', foodRoute)
 app.use('/api/v1/seats', seatRoute)
 app.use('/api/v1/payment', paymentRoute)
+app.use('/api/v1/feedbacks', feedBackRoute)
 
 //Route not exist
 app.all('*', (req, res, next) => {

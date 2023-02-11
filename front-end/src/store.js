@@ -22,6 +22,7 @@ import {
 import { foodReducer } from './redux/reducer/foodReducer'
 import { editReservationReducer, getAllReservationReducer, newReservationReducer } from './redux/reducer/reservationReducer'
 import { seatsReducer } from './redux/reducer/seatReducer'
+import { feedBackReducer } from './redux/reducer/feedBackReducer'
 
 
 const reducer = combineReducers({
@@ -42,6 +43,7 @@ const reducer = combineReducers({
     newReservation: newReservationReducer,
     reservations: getAllReservationReducer,
     reservation: editReservationReducer,
+    feedBack: feedBackReducer
 })
 
 let initialState = {}
