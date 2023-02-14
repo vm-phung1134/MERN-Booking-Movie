@@ -65,7 +65,7 @@ function HeaderPublic() {
                     RẠP CHIẾU
                   </Link>
                   <Link
-                    
+                    to="/blog&event"
                     className="text-white hover:bg-[#E50914] hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     GÓC ĐIỆN ẢNH & SỰ KIỆN

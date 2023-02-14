@@ -2,17 +2,23 @@ import React, { useCallback, useEffect, useState } from "react";
 import HeaderPublic from "../components/headerPublic";
 import MovieNow from "../movie/homeMovie/movieNowList";
 import MovieSoon from "../movie/homeMovie/movieSoonList";
-import News from "./news";
-import Events from "./events";
+import { getAllBlog } from "../../../redux/actions/blogActions";
+import { getAllEvent } from "../../../redux/actions/eventActions";
 import SpinnerLoading from "../components/spinnerLoading";
-
+import { useSelector, useDispatch } from "react-redux";
+import Blogs from "../blog&event/blogs";
+import Events from "../blog&event/events";
 import slide1 from "./assets/slide_1.webp";
 import slide2 from "./assets/slide_2.jpg";
 import slide3 from "./assets/slide_3.png";
 function HomePage() {
+  const dispatch = useDispatch();
+  const blogs = useSelector((state) => state.blogs.blogs);
+  const events = useSelector((state) => state.events.events);
   const [loadingPage, setLoadingPage] = useState(false);
   const [stateMovie, setStateMovie] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const handleClickMovie = useCallback(() => {
     setStateMovie(!stateMovie);
   }, [stateMovie]);
@@ -71,11 +77,13 @@ function HomePage() {
     setLoadingPage(true);
     let timeOut = setTimeout(async () => {
       setLoadingPage(false);
+      await dispatch(getAllBlog());
+      await dispatch(getAllEvent());
     }, 1500);
     return () => {
       clearTimeout(timeOut);
     };
-  }, []);
+  }, [dispatch]);
 
   // useEffect(() => {
   //   setTimeout(() => {
@@ -186,11 +194,9 @@ function HomePage() {
                   BÌNH LUẬN PHIM
                 </button>
                 <div className="grid grid-cols-2 py-10 gap-4 px-6">
-                  {/* bình luận phim */}
-                  <News />
-                  <News />
-                  <News />
-                  <News />
+                  {blogs.map((blog) => (
+                    <Blogs key={blog._id} blog={blog} />
+                  ))}
                 </div>
               </div>
               {/* sự kiện */}
@@ -202,10 +208,9 @@ function HomePage() {
                   TIN KHUYẾN MÃI
                 </button>
                 <div className="grid grid-cols-4 gap-4 pb-10">
-                  <Events />
-                  <Events />
-                  <Events />
-                  <Events />
+                  {events.map((event) => (
+                    <Events key={event._id} event={event} />
+                  ))}
                 </div>
               </div>
               {/* về chúng tôi */}

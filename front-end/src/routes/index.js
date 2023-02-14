@@ -9,6 +9,9 @@ import UserTickets from '../pages/public/account/userTickets'
 import SearchPage from '../pages/public/search'
 import Cinema from '../pages/public/cinema'
 import support from '../pages/public/support'
+import BlogAndEvent from '../pages/public/blog&event'
+import BlogDetail from '../pages/public/blog&event/blogDetail'
+import EventDetail from '../pages/public/blog&event/eventDetail'
 
 const publicRoutes = [
     {
@@ -50,6 +53,18 @@ const publicRoutes = [
     {
         path: '/support',
         component: support
+    },
+    {
+        path: '/blog&event',
+        component: BlogAndEvent
+    },
+    {
+        path: '/blog-detail/:id',
+        component: BlogDetail
+    },
+    {
+        path: '/event-detail/:id',
+        component: EventDetail
     }
 ]
 

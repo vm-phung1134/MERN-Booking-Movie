@@ -23,6 +23,8 @@ import { foodReducer } from './redux/reducer/foodReducer'
 import { editReservationReducer, getAllReservationReducer, newReservationReducer } from './redux/reducer/reservationReducer'
 import { seatsReducer } from './redux/reducer/seatReducer'
 import { feedBackReducer } from './redux/reducer/feedBackReducer'
+import { blogDetailReducer, blogReducer } from './redux/reducer/blogReducer'
+import { eventDetailReducer, eventReducer } from './redux/reducer/eventReducer'
 
 
 const reducer = combineReducers({
@@ -43,7 +45,11 @@ const reducer = combineReducers({
     newReservation: newReservationReducer,
     reservations: getAllReservationReducer,
     reservation: editReservationReducer,
-    feedBack: feedBackReducer
+    feedBack: feedBackReducer,
+    blogs: blogReducer,
+    blog: blogDetailReducer,
+    events: eventReducer,
+    event: eventDetailReducer,
 })
 
 let initialState = {}
