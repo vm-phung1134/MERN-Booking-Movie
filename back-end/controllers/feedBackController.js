@@ -1,4 +1,4 @@
-const FeedBack = require("../models/FeedBack.Model");
+const FeedBack = require("../models/Feedback.Model");
 
 exports.getAllFeedBacks = async (req, res, next) => {
   const feedBacksCount = await FeedBack.countDocuments();
