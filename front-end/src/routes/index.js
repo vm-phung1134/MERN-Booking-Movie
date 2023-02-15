@@ -1,7 +1,7 @@
 import Login from '../pages/public/login'
 import HomePage from '../pages/public/homepage'
 import HomeMovie from '../pages/public/movie/homeMovie'
-import DetailMovie from '../pages/public/movie/detailMovie'
+import DetailMovieNow from '../pages/public/movie/detailMovie/movieNow'
 import Booking from '../pages/public/booking'
 import Account from '../pages/public/account'
 import CheckoutSuccess from '../pages/public/booking/checkoutSuccess'
@@ -12,6 +12,7 @@ import support from '../pages/public/support'
 import BlogAndEvent from '../pages/public/blog&event'
 import BlogDetail from '../pages/public/blog&event/blogDetail'
 import EventDetail from '../pages/public/blog&event/eventDetail'
+import DetailMovieSoon from '../pages/public/movie/detailMovie/movieSoon'
 
 const publicRoutes = [
     {
@@ -23,8 +24,12 @@ const publicRoutes = [
         component: HomeMovie
     },
     {
-        path: '/movies/:id', 
-        component: DetailMovie
+        path: '/movie-now/:id', 
+        component: DetailMovieNow
+    },
+    {
+        path: '/movie-soon/:id', 
+        component: DetailMovieSoon
     },
     {
         path: '/booking', 

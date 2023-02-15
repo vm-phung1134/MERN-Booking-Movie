@@ -19,7 +19,7 @@ function FoodTable({ foods, setvlPriceFood}) {
       <div className="flex flex-col mt-3">
         <div className="overflow-x-auto">
           <div className="w-full inline-block align-middle">
-            <div className="overflow-hidden border border-gray-500">
+            <div className="overflow-auto border border-gray-500">
               <table className="min-w-full divide-y divide-gray-500">
                 <thead className="bg-[#206cb391]">
                   <tr>
@@ -53,7 +53,7 @@ function FoodTable({ foods, setvlPriceFood}) {
                 <tbody className="divide-y divide-gray-200">
                   {foods.map((food, index) => (
                     <tr key={index}>
-                      <td className="pl-4 py-4 flex text-[12px] font-medium text-white whitespace-nowrap">
+                      <td className="pl-4 px-24 py-4 flex text-[11px] font-medium text-white whitespace-nowrap">
                         <img
                           className="w-[90px] h-[60px]"
                           src={food.image}
@@ -61,7 +61,7 @@ function FoodTable({ foods, setvlPriceFood}) {
                         ></img>
                         <div className="ml-2">
                           <p className="uppercase">{food.typeFood}</p>
-                          <p className="text-gray-400">{food.discription}</p>
+                          <p className="text-gray-300 font-thin">{food.discription}</p>
                         </div>
                       </td>
                       <td className="px-3 py-4 text-sm text-white whitespace-nowrap">
@@ -81,10 +81,10 @@ function FoodTable({ foods, setvlPriceFood}) {
                           </button>
                         </div>
                       </td>
-                      <td className="px-6 text-center py-4 text-sm text-white whitespace-nowrap">
+                      <td className="lg:px-14 px-16 text-center py-4 text-sm text-white whitespace-nowrap">
                         {food.price} <span className="text-[10px]">RF</span>
                       </td>
-                      <td className="px-6 text-center py-4 text-sm text-white whitespace-nowrap">
+                      <td className="lg:px-6 px-7 text-center py-4 text-sm text-white whitespace-nowrap">
                         {food.price * food.quantity} <span className="text-[10px]">RF</span>
                       </td>
                     </tr>

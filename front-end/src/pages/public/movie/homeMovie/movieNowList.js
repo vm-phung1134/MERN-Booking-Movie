@@ -1,25 +1,45 @@
-import React, { useEffect } from 'react'
-import Movie from './movieNow'
-
-import { getAllMovie } from '../../../../redux/actions/movieActions';
-import {useSelector, useDispatch} from 'react-redux'
-import {memo} from 'react'
+import React, { useEffect } from "react";
+import Movie from "./movieNow";
+import { Link } from "react-router-dom";
+import { getAllMovie } from "../../../../redux/actions/movieActions";
+import { useSelector, useDispatch } from "react-redux";
+import { memo } from "react";
 
 function MovieNow() {
-  const dispatch = useDispatch()
-  const movies = useSelector((state) => state.movies.movies)
+  const dispatch = useDispatch();
+  const movies = useSelector((state) => state.movies.movies);
   useEffect(() => {
-    dispatch(getAllMovie())
-  }, [dispatch])
+    dispatch(getAllMovie());
+  }, [dispatch]);
   return (
     <>
-    <div data-aos="fade-up" data-aos-duration="2000" className="grid grid-cols-3 gap-5 justify-items-center mt-10">
-        {
-          movies.map(movie => (
-            <Movie key={movie._id} movie={movie}/>
-          ))
-        }
-    </div>  
+      <div
+        data-aos="fade-up"
+        data-aos-duration="2000"
+        className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-2 gap-1 justify-items-center mt-10"
+      >
+        {movies.map((movie, index) => (
+          <div key={movie._id}>{index < 6 && <Movie movie={movie} />}</div>
+        ))}
+      </div>
+      <div>
+        <div className="flex justify-center mt-5">
+          <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+            <Link to="/movie">
+            <div className="buttons">
+              <button className="btn">
+                <span></span>
+                <p
+                  data-start="good luck!"
+                  data-text="Let's go!"
+                  data-title="Xem thêm"
+                ></p>
+              </button>
+            </div>
+            </Link>
+          </button>
+        </div>
+      </div>
     </>
   );
 }

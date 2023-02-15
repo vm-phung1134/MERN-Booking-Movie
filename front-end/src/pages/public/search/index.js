@@ -2,16 +2,20 @@ import HeaderPublic from "../components/headerPublic";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMovie } from "../../../redux/actions/movieActions";
+import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
 import { Link } from "react-router-dom";
 
 function SearchPage() {
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies.movies);
+  const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
   const [isActive, setIsActive] = useState("1");
   const [isSearching, setIsSearching] = useState("");
   const [searchCurrentMovie, setSearchCurrentMovie] = useState([]);
+  const [searchSoonMovie, setSearchSoonMovie] = useState([]);
   const handleClickActive = (e) => {
     setIsActive(e.target.value);
+    
   };
   const handleSearch = (e) => {
     setIsSearching(e.target.value);
@@ -24,13 +28,24 @@ function SearchPage() {
         )
       )
     );
+    setSearchSoonMovie(
+      movieSoons.filter((entry) =>
+        Object.values(entry).some(
+          (val) =>
+            typeof val === "string" &&
+            val.toLowerCase().includes(isSearching.toLowerCase())
+        )
+      )
+    );
   };
   useEffect(() => {
     dispatch(getAllMovie());
+    dispatch(getAllMovieSoon());
   }, [dispatch]);
   useEffect(() => {
     setSearchCurrentMovie(movies);
-  }, [movies]);
+    setSearchSoonMovie(movieSoons);
+  }, [movieSoons, movies]);
   return (
     <>
       <div className="bg-black min-h-screen max-h-full w-full">
@@ -71,12 +86,9 @@ function SearchPage() {
             className=" placeholder:text-gray-600 focus:outline-none focus:border-2 focus:border-green-700 text-white border px-5 border-gray-700 w-full py-4 bg-transparent"
           />
         </div>
-        <div
-          data-aos="fade-up"
-          data-aos-duration="1000"
-        >
+        <div data-aos="fade-up" data-aos-duration="1000">
           {isActive === "1" && (
-            <div className="grid grid-cols-4 py-10 px-20">
+            <div className="grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 mx-20">
               {searchCurrentMovie.map((movie) => (
                 <div key={movie._id}>
                   <div className="">
@@ -86,11 +98,11 @@ function SearchPage() {
                         src={movie.poster}
                         alt=""
                       ></img>
-                      <Link to={`/movies/${movie._id}`}>
+                      <Link to={`/movie-now/${movie._id}`}>
                         <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
                           <button
                             className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border text-sm border-white py-[13px] px-[25px] hover:bg-[#E50914] hover:border-none"
+                          border text-sm border-white py-[13px] px-[25px] hover:bg-[#c40404] hover:border-none"
                           >
                             <Link to="/booking">MUA VÉ</Link>
                           </button>
@@ -103,6 +115,36 @@ function SearchPage() {
             </div>
           )}
         </div>
+        <div data-aos="fade-up" data-aos-duration="1000">
+          {isActive === "2" && (
+            <div className="grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 mx-20">
+              {searchSoonMovie.map((movie) => (
+                <div key={movie._id}>
+                  <div className="">
+                    <div className="relative">
+                      <img
+                        className="w-[370px] h-[450px] bg-cover"
+                        src={movie.poster}
+                        alt=""
+                      ></img>
+                      <Link to={`/movie-soon/${movie._id}`}>
+                        <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
+                          <button
+                            className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
+                          border text-sm border-white py-[13px] px-[25px] hover:bg-[#c40404] hover:border-none"
+                          >
+                            <Link to="/booking">MUA VÉ</Link>
+                          </button>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <div className="py-20"></div>
       </div>
     </>
   );

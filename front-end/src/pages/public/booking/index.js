@@ -143,7 +143,7 @@ function Booking() {
       await dispatch(getAllFood());
       await dispatch(getAllSeat());
       setLoadingPage(false);
-    }, 1500);
+    }, 1300);
     return () => {
       clearTimeout(timeOut);
     };
@@ -156,7 +156,7 @@ function Booking() {
           {loadingPage === true ? (
             <SpinnerLoading />
           ) : (
-            <div className="px-16 py-20 min-h-screen max-h-full bg-transparent">
+            <div className="lg:px-14 md:px-12 px-10 md:py-16 py-14 lg:py-20 min-h-screen max-h-full bg-transparent">
               <Breadcrumbs className="bg-transparen p-0">
                 <Link to="/home" className="text-gray-400">
                   Trang chủ
@@ -168,13 +168,13 @@ function Booking() {
               <div className="flex justify-between">
                 <button
                   disabled
-                  className="text-white text-[15px] pr-6 py-[17px] border-b-[3px] border-[#E50914]"
+                  className="text-white lg:mb-0 mb-3 text-sm lg:text-[15px] pr-6 py-[17px] border-b-[3px] border-[#E50914]"
                 >
                   CHỌN RẠP & PHIM
                 </button>
               </div>
 
-              <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 sm:grid-cols-1">
+              <div className="grid lg:grid-cols-2 lg:gap-x-5 lg:my-10 gap-y-3 grid-cols-1">
                 <div>
                   <Select
                     className="text-white"
@@ -187,7 +187,7 @@ function Booking() {
                   >
                     {cinemas.map((cinema) => (
                       <Option
-                        className="text-black border-b border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
+                        className="text-black border-b text-sm lg:text-[15px] border-gray-500 py-5 focus:text-white focus:bg-blue-gray-600"
                         key={cinema._id}
                         value={cinema._id}
                       >
@@ -239,7 +239,7 @@ function Booking() {
                 {valueCinema !== "" && valueMovie !== "" ? (
                   <button
                     disabled
-                    className="text-white text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
+                    className="text-white text-sm lg:text-[15px] pr-6 py-[17px] border-b-2 border-[#E50914]"
                   >
                     CHỌN SUẤT CHIẾU
                   </button>
@@ -248,7 +248,7 @@ function Booking() {
                 )}
               </div>
 
-              <div className="grid grid-cols-2 gap-5 mt-5 mb-10">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-5 mt-5 mb-10">
                 {showtimes.map(
                   (showtime) =>
                     valueMovie !== "" &&
@@ -270,12 +270,12 @@ function Booking() {
                     <>
                       <button
                         disabled
-                        className="text-white text-[15px] mb-5 pr-6 py-[17px] border-b-[3px] border-[#E50914]"
+                        className="text-white text-sm lg:text-[15px] mb-5 pr-6 py-[17px] border-b-[3px] border-[#E50914]"
                       >
                         CHỌN LOẠI VÉ & GÓI TIỆN ÍCH
                       </button>
-                      <div className="grid grid-cols-3 gap-x-5">
-                        <div className="col-span-2">
+                      <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-5">
+                        <div className="lg:col-span-2">
                           <TicketTable
                             setvlPriceTicket={setvlPriceTicket}
                             tickets={tickets}
@@ -286,7 +286,7 @@ function Booking() {
                           />
                         </div>
                         <div
-                          className="mx-6 h-[70%] bg-cover bg-center"
+                          className="mx-6 lg:mx-0 xl:mx-6 mt-10 lg:mt-0 h-[100%] lg:h-[70%] bg-cover bg-center"
                           style={{ backgroundImage: `url("${movie.poster}")` }}
                         >
                           <div className="bg-gradient-to-r from-black/100 to-black/40  text-white text-sm w-full h-full">
@@ -338,7 +338,7 @@ function Booking() {
                                   {countTicket > 0 && (
                                     <button
                                       className="text-[13px] p-2 text-white bg-[#E51409]"
-                                      onClick={() => handleOpen("md")}
+                                      onClick={() => handleOpen("lg")}
                                     >
                                       CHỌN GHẾ
                                     </button>
@@ -368,13 +368,13 @@ function Booking() {
                               </div>
                               <div>
                                 <Dialog
-                                  open={size === "md"}
-                                  size={size || "md"}
+                                  open={size === "lg"}
+                                  size={size || "lg"}
                                   handler={handleOpen}
                                   style={{ borderRadius: "0px" }}
                                 >
                                   <DialogHeader>
-                                    <h2 className="text-[15px] text-[#E50914]">
+                                    <h2 className="text-sm lg:text-[15px] text-[#E50914]">
                                       CHỌN GHẾ
                                     </h2>
                                   </DialogHeader>
@@ -385,7 +385,7 @@ function Booking() {
                                         {valueShowTime.startTimeId ===
                                           seats.startTimeId && (
                                           <div>
-                                            <ul className="grid grid-cols-9 gap-1 py-5 px-14">
+                                            <ul className="grid grid-cols-9 gap-1 py-5 px-0 lg:px-14">
                                               {seats.seats.map((seat) => (
                                                 <div key={seat._id}>
                                                   {seat.status === true ? (
@@ -398,7 +398,7 @@ function Booking() {
                                                           seats._id
                                                         )
                                                       }
-                                                      className="bg-blue-gray-200 text-sm text-center text-gray-900 cursor-pointer"
+                                                      className="bg-blue-gray-200 hover:bg-green-600 text-sm text-center text-gray-900 cursor-pointer"
                                                     >
                                                       {seat.name}
                                                     </li>
@@ -419,10 +419,10 @@ function Booking() {
                                               </p>
                                               <p className="border-2 border-black"></p>
                                             </div>
-                                            <div className="flex mt-5 text-sm text-black">
-                                              <p><span className="bg-red-600 px-2 mx-2"> </span> - Đã đặt</p>
-                                              <p><span className="bg-green-600 px-2 mx-2"> </span> - Đang chọn</p>
-                                              <p><span className="bg-gray-400 px-2 mx-2"> </span> - Còn trống</p>
+                                            <div className="flex mt-5 text-[12px] md:text-sm text-black">
+                                              <p className=" mr-2 md:mx-2"><span className="bg-red-600 px-2"> </span>&ensp; Đã đặt</p>
+                                              <p className=" mx-1 md:mx-2"><span className="bg-green-600 px-2" > </span>&ensp; Đang chọn</p>
+                                              <p className=" ml-2 md:mx-2"><span className="bg-gray-400 px-2"> </span>&ensp; Còn trống</p>
                                             </div>
                                           </div>
                                         )}
@@ -469,13 +469,13 @@ function Booking() {
                                     {newSelectSeats.length > 0 ? (
                                       <button
                                         onClick={handlePayment}
-                                        className="px-8 my-3 py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
+                                        className="px-8 my-3 text-sm lg:text-[15px] py-3 text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]"
                                       >
                                         TIẾP TỤC
                                       </button>
                                     ) : (
                                       <Tooltip content="Chọn Vé và Ghế để tiếp tục">
-                                        <button className="px-8 my-3 py-3 cursor-pointer text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]">
+                                        <button className="px-8 text-sm lg:text-[15px] my-3 py-3 cursor-pointer text-white bg-gradient-to-r from-[#E50914] to-[#b8a608]">
                                           TIẾP TỤC
                                         </button>
                                       </Tooltip>

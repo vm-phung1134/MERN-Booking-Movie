@@ -81,10 +81,10 @@ function LoginForm() {
             id="login"
           >
             <div className="w-[60%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
-              <h1 className="text-3xl font-semibold text-center text-red-600">
+              <h1 className="text-3xl font-semibold text-center text-[#ce0000]">
                 Đăng Nhập
               </h1>
-              <p className="pt-1 text-center font-medium text-red-700">
+              <p className="pt-1 text-center font-medium text-[#ce0000]">
                 {stateError}
               </p>
               <form className="mt-6 " onSubmit={handleSubmit}>
@@ -130,7 +130,7 @@ function LoginForm() {
                       disabled
                       type="button"
                       className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200
-                      transform bg-red-700 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+                      transform bg-[#c40404] rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
                     >
                       <svg
                         aria-hidden="true"
@@ -155,7 +155,7 @@ function LoginForm() {
                     <button
                       type="submit"
                       className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200
-                      transform bg-red-700 rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
+                      transform bg-[#c40404] rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
                     >
                       <svg
                         className="animate-spin h-0 w-5 mr-3 text-white"

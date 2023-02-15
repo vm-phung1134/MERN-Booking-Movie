@@ -6,7 +6,7 @@ function Blogs({blog}) {
       <div className="grid grid-cols-3 gap-x-2 text-white">
         <Link to={`/blog-detail/${blog._id}`}>
           <img
-            className="w-[220px] h-[150px]"
+            className="h-full"
             src={blog.topImage}
             alt=""
           ></img>
@@ -19,9 +19,12 @@ function Blogs({blog}) {
           </p>
         </Link>
           <p className="text-sm">
-            Thích &ensp;
            <button className="text-[#E50914] py-2">
             3.4K <i className="fas fa-heart"></i>
+          </button> 
+          &emsp;
+          <button className="text-[#292ccf] py-2">
+            809 <i className="fas fa-share"></i>
           </button> 
           </p>
           <p className="text-gray-400 text-[12px]">

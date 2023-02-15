@@ -46,7 +46,7 @@ function Cinema() {
           {loadingPage === true ? (
             <SpinnerLoading />
           ) : (
-            <div className="m-[60px] max-h-full">
+            <div className="lg:m-[40px] 2xl:m-[60px] m-[20px] max-h-full">
               <Breadcrumbs className="bg-transparen p-0">
                 <Link to="/home" className="text-gray-400">
                   Trang chủ
@@ -55,11 +55,11 @@ function Cinema() {
                   Rạp chiếu phim
                 </Link>
               </Breadcrumbs>
-              <div className="grid grid-cols-2 gap-x-20 ">
+              <div className="grid lg:grid-cols-2 grid-cols-1 gap-x-10 lg:gap-x-5 ">
                 <div>
                   <button
                     disabled
-                    className="text-white text-[15px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
+                    className="text-white text-sm lg:text-[16px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
                   >
                     HỆ THỐNG RẠP CHIẾU
                   </button>
@@ -90,7 +90,7 @@ function Cinema() {
                         {movies.map((movie) => (
                           <div
                             key={movie._id}
-                            className="border-gray-400 border grid grid-cols-2 gap-x-3"
+                            className="border-gray-400 border grid grid-cols-2 lg:gap-x-2 xl:gap-x-3"
                           >
                             <div>
                               <img
@@ -121,12 +121,14 @@ function Cinema() {
                                     showtime.movieId === movie._id &&
                                     showtime.cinemaId === vlCinema && (
                                       <div className="flex justify-between items-center">
-                                        <p className="">{showtime.startDate}</p>
-                                        {showtime.startTime.map((time) => (
-                                          <button className="px-2 py-1 my-2 mx-2 border-2 border-gray-600">
-                                            {time.time}
-                                          </button>
-                                        ))}
+                                        <p className="">{showtime.startDate} </p>
+                                        <div className="flex w-full">
+                                          {showtime.startTime.map((time) => (
+                                            <button className="px-2 py-1 my-2 mx-2 border-2 border-gray-600">
+                                              {time.time}
+                                            </button>
+                                          ))}
+                                        </div>
                                       </div>
                                     )
                                 )}
@@ -139,7 +141,7 @@ function Cinema() {
                   </div>
                   <button
                     disabled
-                    className="text-white text-[15px] pr-6 py-[15px] my-3  border-b-[3px] border-[#E50914]"
+                    className="text-white text-sm lg:text-[16px] pr-6 py-[15px] my-3  border-b-[3px] border-[#E50914]"
                   >
                     MỘT SỐ HÌNH ẢNH
                   </button>
@@ -164,7 +166,7 @@ function Cinema() {
                   <div className="">
                     <button
                       disabled
-                      className="text-white text-[15px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
+                      className="text-white text-sm lg:text-[16px] pr-6 py-[15px]  border-b-[3px] border-[#E50914]"
                     >
                       GIÁ VÉ
                     </button>
@@ -177,7 +179,7 @@ function Cinema() {
                   </div>
                   <button
                     disabled
-                    className="text-white text-[15px] pr-6 py-[15px] mt-5  border-b-[3px] border-[#E50914]"
+                    className="text-white text-sm lg:text-[16px] pr-6 py-[15px] mt-5  border-b-[3px] border-[#E50914]"
                   >
                     THÔNG TIN CHI TIẾT
                   </button>

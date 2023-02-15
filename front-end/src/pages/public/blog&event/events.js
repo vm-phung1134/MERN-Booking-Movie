@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Events({event}) {
   return (
     <>
-      <div className="relative">
+      <div className="relative  w-[290px] h-[438px]">
         <img
           className="w-[290px] h-[438px]"
           src={event.topImage}
@@ -22,7 +22,7 @@ function Events({event}) {
             <Link to={`/event-detail/${event._id}`}>
              <button
               className="absolute bottom-[5%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
-                                     border border-white text-sm py-[13px] px-[25px] hover:bg-[#E50914] hover:border-none
+                                     border border-white text-sm py-[13px] px-[25px] hover:bg-[#c40404] hover:border-none
                                     "
             >
               CHI TIẾT

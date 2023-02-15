@@ -2,7 +2,7 @@ import {memo} from 'react';
 
 function FooterPublic() {
     return ( 
-        <footer className="bg-black text-blue-gray-300 border-t border-blue-gray-400 text-center lg:text-center">
+        <footer className="bg-black text-blue-gray-300 border-t border-blue-gray-400 text-center text-sm lg:text-[15px] lg:text-center">
         <div className="container px-6 pt-[100px]">
           <div className="grid lg:grid-cols-4 md:grid-cols-2">
             <div className="mb-6">

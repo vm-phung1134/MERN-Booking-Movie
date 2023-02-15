@@ -43,13 +43,13 @@ function Support() {
         {loadingPage === true ? (
           <SpinnerLoading />
         ) : (
-          <div className="m-16 grid grid-cols-3">
-            <div className="col-span-2 mr-3">
+          <div className="lg:m-16 m-10 grid grid-cols-1 lg:grid-cols-3">
+            <div className="lg:col-span-2 mr-3">
               <Breadcrumbs className="bg-transparen p-0 my-5">
                 <Link to="/home" className="text-gray-400">
                   Trang chủ
                 </Link>
-                <Link to="/movie" className="text-gray-400">
+                <Link className="text-gray-400">
                   Hỗ trợ
                 </Link>
                 <Link className="text-gray-200">Góp ý</Link>
@@ -72,14 +72,15 @@ function Support() {
                   GIẢI ĐÁP
                 </button>
               </div>
-              {isActive === "1" && (
-                <SupportForm/>
-              )}
+              {isActive === "1" && <SupportForm />}
 
               {isActive === "2" && (
                 <div className="mt-5">
                   <Accordion open={openAccordion === 1}>
-                    <AccordionHeader className="text-gray-400" onClick={() => handleOpenAccordion(1)}>
+                    <AccordionHeader
+                      className="text-gray-400"
+                      onClick={() => handleOpenAccordion(1)}
+                    >
                       Tôi có thể dùng tài khoản thành viên để mua vé nhóm được
                       không ?
                     </AccordionHeader>
@@ -91,7 +92,10 @@ function Support() {
                     </AccordionBody>
                   </Accordion>
                   <Accordion open={openAccordion === 2}>
-                    <AccordionHeader className="text-gray-400" onClick={() => handleOpenAccordion(2)}>
+                    <AccordionHeader
+                      className="text-gray-400"
+                      onClick={() => handleOpenAccordion(2)}
+                    >
                       Quy trình đặt vé của hệ thống như thế nào ?
                     </AccordionHeader>
                     <AccordionBody className="text-gray-500">
@@ -126,7 +130,10 @@ function Support() {
                     </AccordionBody>
                   </Accordion>
                   <Accordion open={openAccordion === 3}>
-                    <AccordionHeader className="text-gray-400" onClick={() => handleOpenAccordion(3)}>
+                    <AccordionHeader
+                      className="text-gray-400"
+                      onClick={() => handleOpenAccordion(3)}
+                    >
                       Làm sao để góp ý hay thiếu nại với hệ thống ?
                     </AccordionHeader>
                     <AccordionBody className="text-gray-500">
@@ -145,10 +152,10 @@ function Support() {
               <button className="mb-3 ml-8 text-white py-[10px] border-b-[3px] border-[#E50914]">
                 PHIM ĐANG CHIẾU
               </button>
-              <div className="grid grid-cols-1 gap-y-5 px-8 pt-5">
+              <div className="grid grid-cols-1 gap-5 px-8 pt-5">
                 {movies.map((movie, index) => (
                   <div key={movie._id}>
-                    {index < 3 ? (
+                    {index < 4 ? (
                       <div className="">
                         <div className="relative">
                           <img
@@ -156,11 +163,11 @@ function Support() {
                             src={movie.image}
                             alt=""
                           ></img>
-                          <Link to={`/movies/${movie._id}`}>
+                          <Link to={`/movie-now/${movie._id}`}>
                             <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
                               <button
                                 className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border text-sm border-white py-[13px] px-[25px] hover:bg-[#E50914] hover:border-none"
+                          border text-sm border-white py-[13px] px-[25px] hover:bg-[#c40404] hover:border-none"
                               >
                                 <Link to="/booking">MUA VÉ</Link>
                               </button>
@@ -173,12 +180,23 @@ function Support() {
                     )}
                   </div>
                 ))}
-                <div>
-                  <div className="flex justify-center">
-                    <button className="py-3 text-[14px] px-4 text-white bg-[#E50914]">
-                      <Link to="/movie">XEM THÊM</Link>
-                    </button>
-                  </div>
+              </div>
+              <div>
+                <div className="flex justify-center">
+                  <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+                    <Link to="/movie">
+                      <div className="buttons">
+                        <button className="btn">
+                          <span></span>
+                          <p
+                            data-start="good luck!"
+                            data-text="Let's go!"
+                            data-title="Xem thêm"
+                          ></p>
+                        </button>
+                      </div>
+                    </Link>
+                  </button>
                 </div>
               </div>
             </div>

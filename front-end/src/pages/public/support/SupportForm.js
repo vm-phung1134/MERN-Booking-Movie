@@ -165,7 +165,7 @@ function SupportForm({ userInfo }) {
                   <div className="flex justify-end mt-2">
                     <button
                       type="submit"
-                      className="py-2 px-3 bg-[#E50914] text-white"
+                      className="py-2 px-5 bg-[#c40404] text-white"
                     >
                       GỬI
                     </button>

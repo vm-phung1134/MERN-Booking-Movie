@@ -22,6 +22,7 @@ const paymentRoute = require('./routes/paymentRoute')
 const feedBackRoute = require('./routes/feedBackRoute')
 const blogRoute = require('./routes/blogRoute')
 const eventRoute = require('./routes/eventRoute')
+const movieSoonRoute = require('./routes/movieSoonRoute')
 
 //mount the route
 app.use('/api/v1/auth', authRoute)
@@ -36,6 +37,7 @@ app.use('/api/v1/payment', paymentRoute)
 app.use('/api/v1/feedbacks', feedBackRoute)
 app.use('/api/v1/blogs', blogRoute)
 app.use('/api/v1/events', eventRoute)
+app.use('/api/v1/moviesoons',movieSoonRoute)
 
 
 //Route not exist

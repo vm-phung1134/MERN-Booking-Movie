@@ -41,10 +41,10 @@ function HeaderPublic() {
                 <Link
                   to="/home"
                 >
-                  <img className="h-8 w-[150px]" src={Logo} alt="Workflow" />
+                  <img className="lg:h-8 lg:w-[150px] h-6 w-[120px]" src={Logo} alt="Workflow" />
                 </Link>
               </div>
-              <div className="hidden md:block">
+              <div className="hidden lg:block">
                 <div className="ml-10 flex items-baseline space-x-3">
                   <Link
                     to="/booking"
@@ -85,7 +85,7 @@ function HeaderPublic() {
                 </div>
               </div>
             </div>
-            <div className="">
+            <div className="flex justify-between">
               <button className="text-white p-2 text-[12px]">
                 <i className="fas fa-globe"></i>
                 &ensp;VN
@@ -104,7 +104,9 @@ function HeaderPublic() {
                   <MenuItem>
                     <Link to="/user-tickets">Vé đã đặt</Link>
                   </MenuItem>
-                  <MenuItem>Đổi mật khẩu</MenuItem>
+                  <MenuItem>
+                    <Link to="/account">Đổi mật khẩu</Link>
+                  </MenuItem>
                   <MenuItem
                     className="border-t border-bg-gray-700"
                     onClick={handleLogout}
@@ -114,7 +116,7 @@ function HeaderPublic() {
                 </MenuList>
               </Menu>
             </div>
-            <div className="-mr-2 flex md:hidden">
+            <div className="-mr-2 flex lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
@@ -160,9 +162,10 @@ function HeaderPublic() {
             </div>
           </div>
         </div>
-
+        <div className="z-50">
         <Transition
           show={isOpen}
+          className="bg-black"
           enter="transition ease-out duration-100 transform"
           enterFrom="opacity-0 scale-95"
           enterTo="opacity-100 scale-100"
@@ -171,45 +174,45 @@ function HeaderPublic() {
           leaveTo="opacity-0 scale-95"
         >
           {(ref) => (
-            <div className="md:hidden" id="mobile-menu">
+            <div className="lg:hidden" id="mobile-menu">
               <div ref={ref} className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 <Link
-                  to="/home"
-                  className="hover:bg-gray-700 text-white block px-3 py-2 rounded-md text-base font-medium"
+                  to="/booking"
+                  className="hover:bg-gray-700 text-white block px-3 py-[2px] rounded-md text-sm font-medium"
                 >
-                  TRANG CHỦ
+                  MUA VÉ
                 </Link>
 
                 <Link
-                  to="/cinema"
-                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                   to="/movie"
+                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-[2px] rounded-md text-sm font-medium"
+                >
+                  PHIM
+                </Link>
+
+                <Link
+                to="/cinema"
+                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-[2px] rounded-md text-sm font-medium"
                 >
                   RẠP CHIẾU
                 </Link>
 
                 <Link
-                  to="/booking"
-                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  to="/blog&event"
+                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-[2px] rounded-md text-sm font-medium"
                 >
-                  ĐẶT VÉ
+                  GÓC ĐIỆN ẢNH & SỰ KIỆN
                 </Link>
 
                 <Link
-                  to="/news"
-                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  to="/support"
+                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-[2px] rounded-md text-sm font-medium"
                 >
-                  KHUYẾN MÃI
-                </Link>
-
-                <Link
-                  to="/member"
-                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-                >
-                  THÀNH VIÊN
+                  HỖ TRỢ
                 </Link>
                 <Link
-                  to="/member"
-                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+                  to="/search"
+                  className="text-white hover:bg-gray-700 hover:text-white block px-3 py-[2px] rounded-md text-sm font-medium"
                 >
                   TÌM KIẾM
                 </Link>
@@ -217,6 +220,7 @@ function HeaderPublic() {
             </div>
           )}
         </Transition>
+        </div>
       </nav>
     </div>
   );

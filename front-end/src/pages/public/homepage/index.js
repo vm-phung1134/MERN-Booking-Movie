@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import HeaderPublic from "../components/headerPublic";
 import MovieNow from "../movie/homeMovie/movieNowList";
 import MovieSoon from "../movie/homeMovie/movieSoonList";
+import { Link } from "react-router-dom";
 import { getAllBlog } from "../../../redux/actions/blogActions";
 import { getAllEvent } from "../../../redux/actions/eventActions";
 import SpinnerLoading from "../components/spinnerLoading";
@@ -11,6 +12,8 @@ import Events from "../blog&event/events";
 import slide1 from "./assets/slide_1.webp";
 import slide2 from "./assets/slide_2.jpg";
 import slide3 from "./assets/slide_3.png";
+
+
 function HomePage() {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs.blogs);
@@ -79,7 +82,7 @@ function HomePage() {
       setLoadingPage(false);
       await dispatch(getAllBlog());
       await dispatch(getAllEvent());
-    }, 1500);
+    }, 1300);
     return () => {
       clearTimeout(timeOut);
     };
@@ -99,30 +102,30 @@ function HomePage() {
         <SpinnerLoading />
       ) : (
         <div>
-          <div className="h-screen w-full relative group">
+          <div className="h-screen w-full group">
             <div
               style={{ backgroundImage: `url(${slides[currentIndex].url})` }}
               className="w-full h-full bg-center bg-cover duration-500"
             >
               <div className="bg-gradient-to-r from-black/100 h-screen w-full">
                 <HeaderPublic />
-
+                <div className="relative mt-16">
                 <div
                   data-aos="fade-right"
                   data-aos-duration="2000"
-                  className="absolute text-white translate-x-[-50%] top-[25%] left-20 w-[50%]"
+                  className="absolute z-10 text-white translate-x-[-50%] top-[25%] left-12 lg:left-20 w-[80%] lg:w-[50%]"
                 >
-                  <h2 className="text-[15px]">
+                  <h2 className="lg:text-[15px] text-sm">
                     {slides[currentIndex].content.h2}
                   </h2>
-                  <h3 className="text-[40px] font-bold my-2">
+                  <h3 className="lg:text-[40px] md:text-[28px] text-[20px] font-bold my-2">
                     {slides[currentIndex].content.h3}
                   </h3>
-                  <h4 className="text-[40px] font-bold my-2">
+                  <h4 className="lg:text-[40px] md:text-[28px] text-[20px] font-bold my-2">
                     {slides[currentIndex].content.h4}
                   </h4>
                   {slides[currentIndex].content.rating !== "" ? (
-                    <button className="bg-[#E50914] text-[14px] rounded-full p-3 mb-2">
+                    <button className="bg-[#c40404] lg:text-[14px] text-[12px] rounded-full p-2 lg:p-3 mb-2">
                       {slides[currentIndex].content.rating}{" "}
                       <i className="fas fa-star"></i>
                     </button>
@@ -130,36 +133,37 @@ function HomePage() {
                     <button hidden></button>
                   )}
 
-                  <p className="text-[16px] text-justify">
+                  <p className="lg:block md:text-[13px] lg:text-[16px] font-thin text-[12px] text-justify">
                     {slides[currentIndex].content.discription}
                   </p>
-                  <button className="py-2 text-[14px] px-3 bg-[#E50914] mt-5">
+                  <button className="py-2 text-[12px] lg:text-[14px] px-2 lg:px-3 bg-[#c40404] mt-3 md:mt-5">
                     {slides[currentIndex].content.btn} &ensp;
                     <i className="fas fa-chevron-right text-[12px]"></i>
                   </button>
                 </div>
+                </div>
               </div>
             </div>
             {/* Left Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] lg:left-5 left-2 text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
               <button onClick={prevSlide}>
                 <i className="fas fa-chevron-left text-[20px]"></i>
               </button>
             </div>
             {/* Right Arrow */}
-            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+            <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 right-2 lg:text-xl lg:text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
               <button onClick={nextSlide}>
                 <i className="fas fa-chevron-right text-[20px]"></i>
               </button>
             </div>
           </div>
           {/* content */}
-          <div className="mx-auto px-[50px] bg-black">
+          <div className="mx-auto px-2 lg:px-[50px] bg-black">
             <div>
               <div className="flex justify-between">
-                <div className="text-white text-[17px]">
+                <div className="text-white">
                   <button
-                    className="mx-3 text-[15px] py-[20px] border-[#E50914]"
+                    className="mx-3 text-[13px] lg:text-[15px] py-[20px] border-[#E50914]"
                     onClick={handleClickMovie}
                     style={{
                       borderBottom:
@@ -169,7 +173,7 @@ function HomePage() {
                     PHIM ĐANG CHIẾU
                   </button>
                   <button
-                    className="mx-3 py-[20px] text-[15px]"
+                    className="mx-3 py-[20px] text-[13px] lg:text-[15px]"
                     onClick={handleClickMovie}
                     style={{
                       borderBottom:
@@ -181,7 +185,7 @@ function HomePage() {
                 </div>
                 <div className="py-[5px] text-white">
                   <p className="w-[120px] brightness-200 h-10 bg-[url('https://www.galaxycine.vn/website/images/ic_hotnews.png')]"></p>
-                  <p className="text-zinc-400">Avatar: The Way Of Water</p>
+                  <Link to="/movie-now/63b93dfd1d4172de899ce6ca"><p className="text-zinc-400 text-[13px] lg:text-[17px]">Avatar: The Way Of Water</p></Link>
                 </div>
               </div>
               {/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}
@@ -193,7 +197,7 @@ function HomePage() {
                 >
                   BÌNH LUẬN PHIM
                 </button>
-                <div className="grid grid-cols-2 py-10 gap-4 px-6">
+                <div className="grid lg:grid-cols-2 grid-cols-1 py-10 gap-4">
                   {blogs.map((blog) => (
                     <Blogs key={blog._id} blog={blog} />
                   ))}
@@ -207,7 +211,7 @@ function HomePage() {
                 >
                   TIN KHUYẾN MÃI
                 </button>
-                <div className="grid grid-cols-4 gap-4 pb-10">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 pb-10">
                   {events.map((event) => (
                     <Events key={event._id} event={event} />
                   ))}
@@ -218,7 +222,7 @@ function HomePage() {
                 <button className="text-white py-[17px]  text-[15px] border-b-[3px] mb-10 border-[#E50914]">
                   REACT FLIX
                 </button>
-                <p className="text-gray-400 text-justify">
+                <p className="text-gray-400 text-sm lg:text-[15px] text-justify">
                   &ensp;React Flix là một trong những công ty một mình tao đầu
                   tiên về điện ảnh được thành lập từ năm 2003, đã khẳng định
                   thương hiệu là 1 trong 10 địa điểm vui chơi giải trí được yêu

@@ -15,7 +15,7 @@ function TicketTable({ tickets, setvlPriceTicket }) {
       <div className="flex flex-col">
         <div className="overflow-x-auto">
           <div className="w-full inline-block align-middle">
-            <div className="overflow-hidden border border-gray-500 ">
+            <div className="overflow-auto border border-gray-500 ">
               <table className="min-w-full divide-y divide-gray-500">
                 <thead className="bg-[#206cb391]">
                   <tr>
@@ -53,9 +53,9 @@ function TicketTable({ tickets, setvlPriceTicket }) {
                     <tr key={index}>
                       <td className="px-6 py-4 text-[12px] font-medium text-white whitespace-nowrap">
                         <p className="uppercase">{ticket.typeTicket}</p>
-                        <p className="text-gray-400">{ticket.discription}</p>
+                        <p className="text-gray-300 font-thin">{ticket.discription}</p>
                       </td>
-                      <td className="px-6 py-4 text-sm text-white whitespace-nowrap">
+                      <td className="lg:px-6 px-3 py-4 text-sm text-white whitespace-nowrap">
                         <div className="flex justify-between">
                           <button
                             className="border rounded-full px-1"
@@ -72,10 +72,10 @@ function TicketTable({ tickets, setvlPriceTicket }) {
                           </button>
                         </div>
                       </td>
-                      <td className="px-6 text-center py-4 text-sm text-white whitespace-nowrap">
+                      <td className="lg:px-6 px-16 text-center py-4 text-sm text-white whitespace-nowrap">
                         {ticket.price} <span className="text-[10px]">RF</span>
                       </td>
-                      <td className="px-6 text-center py-4 text-sm text-white whitespace-nowrap">
+                      <td className="lg:px-6 px-6 text-center py-4 text-sm text-white whitespace-nowrap">
                         {ticket.price * ticket.quantity}
                         <span className="text-[10px]"> RF</span>
                       </td>

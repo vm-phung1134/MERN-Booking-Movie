@@ -35,7 +35,7 @@ function BlogAndEvent() {
           <SpinnerLoading />
         ) : (
           <div>
-            <div className="px-16 py-20 text-white max-h-full w-full">
+            <div className="lg:px-16 px-8 py-10 lg:py-20 text-white max-h-full w-full">
               <Breadcrumbs className="bg-transparen p-0 mb-3">
                 <Link to="/home" className="text-gray-400">
                   Trang chủ
@@ -48,33 +48,55 @@ function BlogAndEvent() {
               >
                 SỰ KIỆN
               </button>
-              <div className="grid grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-2 2xl:grid-cols-4 gap-2 lg:gap-4">
                 {events.map((event) => (
                   <Events key={event._id} event={event} />
                 ))}
               </div>
               <div className="flex justify-center mt-10">
-                <button className="text-white px-4 text-sm py-2 bg-[#E50914]">
-                  XEM THÊM
+                <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+                  <Link >
+                    <div className="buttons">
+                      <button className="btn">
+                        <span></span>
+                        <p
+                          data-start="good luck!"
+                          data-text="Let's go!"
+                          data-title="Xem thêm"
+                        ></p>
+                      </button>
+                    </div>
+                  </Link>
                 </button>
               </div>
             </div>
-            <div className="px-16 text-white max-h-full w-full">
+            <div className="lg:px-16 px-8 text-white max-h-full w-full">
               <button
                 disabled
                 className="text-white text-[15px] pr-6 py-[15px] mb-5  border-b-[3px] border-[#E50914]"
               >
                 BlOG ĐIỆN ẢNH
               </button>
-              <div className="grid grid-cols-2 py-10 gap-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 py-10 gap-4">
                 {blogs.map((blog) => (
                   <Blogs key={blog._id} blog={blog} />
                 ))}
               </div>
             </div>
             <div className="flex justify-center py-10">
-              <button className="text-white px-4 text-sm py-2 bg-[#E50914]">
-                XEM THÊM
+              <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+                <Link>
+                  <div className="buttons">
+                    <button className="btn">
+                      <span></span>
+                      <p
+                        data-start="good luck!"
+                        data-text="Let's go!"
+                        data-title="Xem thêm"
+                      ></p>
+                    </button>
+                  </div>
+                </Link>
               </button>
             </div>
           </div>

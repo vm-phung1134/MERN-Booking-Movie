@@ -1,10 +1,12 @@
 import { Formik } from "formik";
-import { memo, useEffect, } from "react";
+import { memo, useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-
-import { changePasswordUser, authLogout} from "../../../redux/actions/authActions";
+import {
+  changePasswordUser,
+  authLogout,
+} from "../../../redux/actions/authActions";
 
 function ChangePassForm({ userInfo }) {
   const initialValues = {
@@ -12,27 +14,30 @@ function ChangePassForm({ userInfo }) {
     passwordNew: "",
     passwordNewConfirm: "",
   };
-  const dispatch = useDispatch()
-  const navigator = useNavigate()
-  const {error, isChanged} = useSelector(
-    (state) => state.newUser
-  );
+  const dispatch = useDispatch();
+  const navigator = useNavigate();
+  const { error, isChanged } = useSelector((state) => state.newUser);
   const { user, isAuthenticated } = useSelector((state) => state.user);
   const [stateErr, setStateErr] = useState("");
   const submitForm = async (values, { resetForm }) => {
-    await dispatch(changePasswordUser(userInfo._id, values.passwordCurrent, values.passwordNew));
-    if(stateErr !== ""){
+    await dispatch(
+      changePasswordUser(
+        userInfo._id,
+        values.passwordCurrent,
+        values.passwordNew
+      )
+    );
+    if (stateErr !== "") {
       resetForm({
         passwordCurrent: "",
         passwordNew: "",
         passwordNewConfirm: "",
-      })
+      });
     }
     dispatch(authLogout());
-    localStorage.removeItem('user')
-    localStorage.removeItem('userId')
-    localStorage.removeItem('token')
-
+    localStorage.removeItem("user");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("token");
   };
   const validate = (values) => {
     let errors = {};
@@ -58,20 +63,20 @@ function ChangePassForm({ userInfo }) {
     return errors;
   };
   useEffect(() => {
-    if(error){
+    if (error) {
       setStateErr(error);
     }
-    if(isChanged === true){
-      setStateErr("")
+    if (isChanged === true) {
+      setStateErr("");
     }
-  },[dispatch, error, isChanged])
-  
+  }, [dispatch, error, isChanged]);
+
   useEffect(() => {
     if (isAuthenticated === false) {
       navigator("/");
     }
   }, [dispatch, isAuthenticated, navigator, user]);
-  
+
   return (
     <Formik
       initialValues={initialValues}
@@ -88,11 +93,14 @@ function ChangePassForm({ userInfo }) {
           handleBlur,
         } = formik;
         return (
-          <form className="mt-10 text-[15px]" onSubmit={handleSubmit}>
-            <h1 className="text-white text-[15px] mb-5">THAY ĐỔI MẬT KHẨU</h1>
-            <p className="pb-1 font-medium text-red-500">
-                {stateErr}
-            </p>
+          <form
+            className="mt-10 text-sm lg:text-[15px]"
+            onSubmit={handleSubmit}
+          >
+            <h1 className="text-white text-sm lg:text-[15px] mb-5">
+              THAY ĐỔI MẬT KHẨU
+            </h1>
+            <p className="pb-1 font-medium text-red-500">{stateErr}</p>
             <div className="mb-4">
               <label
                 htmlFor="currentPass"
@@ -159,10 +167,20 @@ function ChangePassForm({ userInfo }) {
                 </span>
               )}
             </div>
-            <button 
-            type="submit"
-            className="px-4 my-5 py-2 text-sm text-gray-200 bg-[#E50914]">
-              XÁC NHẬN
+            <button
+              type="submit"
+              className="py-1 text-[14px] px-2 text-white bg-[#ce0000]"
+            >
+              <div className="buttons">
+                <button className="btn">
+                  <span></span>
+                  <p
+                    data-start="good luck!"
+                    data-text="Tiếp tục!"
+                    data-title="Xác nhận"
+                  ></p>
+                </button>
+              </div>
             </button>
             {/* <ToastContainer  toastStyle={{color: 'black'}} /> */}
           </form>

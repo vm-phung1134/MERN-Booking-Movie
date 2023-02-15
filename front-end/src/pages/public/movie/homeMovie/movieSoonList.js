@@ -1,92 +1,47 @@
-import {memo} from 'react'
+import React, { useEffect } from "react";
+import MovieSoon from "./movieSoon";
+import { Link } from "react-router-dom";
+import { getAllMovieSoon } from "../../../../redux/actions/movieSoonActions";
+import { useSelector, useDispatch } from "react-redux";
+import { memo } from "react";
 
-function MovieSoon() {
+function MovieSoonList() {
+  const dispatch = useDispatch();
+  const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
+  useEffect(() => {
+    dispatch(getAllMovieSoon());
+  }, [dispatch]);
   return (
     <>
-      <div className="grid grid-cols-3 gap-5 justify-items-center mt-10">
-        <div className="">
-          <div className="relative">
-            <img
-              className="w-[350px] h-[250px] bg-cover"
-              src="https://cdn.galaxycine.vn/media/2022/12/14/gangnamthatthu-4_1671011569719.jpg"
-              alt=""
-            ></img>
-            <a href="/#">
-              <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
-                <button
-                  className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
-                                     border border-white py-[15px] px-[30px] hover:bg-[#E50914] hover:border-none
-                                    "
-                >
-                  MUA VÉ
-                </button>
-              </div>
-            </a>
-          </div>
-
-          <div className="text-[15px]">
-            <p className="text-white">AVATAR THE WAY OF WATER</p>
-            <p className="text-zinc-300">AVATAR DÒNG CHẢY CỦA NƯỚC</p>
-          </div>
-        </div>
-        <div className="">
-          <img
-            className="w-[350px] h-[250px] bg-cover"
-            src="https://cdn.galaxycine.vn/media/2022/12/14/gangnamthatthu-4_1671011569719.jpg"
-            alt=""
-          ></img>
-          <div className="text-[15px]">
-            <p className="text-white">AVATAR THE WAY OF WATER</p>
-            <p className="text-zinc-300">AVATAR DÒNG CHẢY CỦA NƯỚC</p>
-          </div>
-        </div>
-        <div className="">
-          <img
-            className="w-[350px] h-[250px] bg-cover"
-            src="https://cdn.galaxycine.vn/media/2022/12/14/gangnamthatthu-4_1671011569719.jpg"
-            alt=""
-          ></img>
-          <div className="text-[15px]">
-            <p className="text-white">AVATAR THE WAY OF WATER</p>
-            <p className="text-zinc-300">AVATAR DÒNG CHẢY CỦA NƯỚC</p>
-          </div>
-        </div>
-        <div className="">
-          <img
-            className="w-[350px] h-[250px] bg-cover"
-            src="https://cdn.galaxycine.vn/media/2022/12/14/gangnamthatthu-4_1671011569719.jpg"
-            alt=""
-          ></img>
-          <div className="text-[15px]">
-            <p className="text-white">AVATAR THE WAY OF WATER</p>
-            <p className="text-zinc-300">AVATAR DÒNG CHẢY CỦA NƯỚC</p>
-          </div>
-        </div>
-        <div className="">
-          <img
-            className="w-[350px] h-[250px] bg-cover"
-            src="https://cdn.galaxycine.vn/media/2022/12/14/gangnamthatthu-4_1671011569719.jpg"
-            alt=""
-          ></img>
-          <div className="text-[15px]">
-            <p className="text-white">AVATAR THE WAY OF WATER</p>
-            <p className="text-zinc-300">AVATAR DÒNG CHẢY CỦA NƯỚC</p>
-          </div>
-        </div>
-        <div className="">
-          <img
-            className="w-[350px] h-[250px] bg-cover"
-            src="https://cdn.galaxycine.vn/media/2022/12/14/gangnamthatthu-4_1671011569719.jpg"
-            alt=""
-          ></img>
-          <div className="text-[15px]">
-            <p className="text-white">AVATAR THE WAY OF WATER</p>
-            <p className="text-zinc-300">AVATAR DÒNG CHẢY CỦA NƯỚC</p>
-          </div>
+      <div
+        data-aos="fade-up"
+        data-aos-duration="2000"
+        className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 lg:gap-4 md:gap-2 gap-1 justify-items-center mt-10"
+      >
+        {movieSoons.map((movie, index) => (
+          <div key={movie._id}>{index < 6 && <MovieSoon movie={movie} />}</div>
+        ))}
+      </div>
+      <div>
+        <div className="flex justify-center mt-5">
+        <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+            <Link to="/movie">
+            <div className="buttons">
+              <button className="btn">
+                <span></span>
+                <p
+                  data-start="good luck!"
+                  data-text="Let's go!"
+                  data-title="Xem thêm"
+                ></p>
+              </button>
+            </div>
+            </Link>
+          </button>
         </div>
       </div>
     </>
   );
 }
 
-export default memo(MovieSoon);
+export default memo(MovieSoonList);
