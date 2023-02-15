@@ -11,6 +11,7 @@ import {
     ONE_RESERVATION_REQUEST,
     ONE_RESERVATION_SUCCESS
 } from '../constants/reservationConstants'
+const baseURL = "https://mern-booking-movie-api.vercel.app"
 
 export const createReservation = (reservation) => async (dispatch) => {
     try {
@@ -22,7 +23,7 @@ export const createReservation = (reservation) => async (dispatch) => {
             },
         }
         const {data} = await axios.post(
-            'http://localhost:5000/api/v1/reservations/',
+            `${baseURL}/api/v1/reservations/`,
             reservation,
             config
         )
@@ -41,7 +42,7 @@ export const createReservation = (reservation) => async (dispatch) => {
 export const getAllReservation = () => async (dispatch) => {
     try{
         dispatch({type: ONE_RESERVATION_REQUEST})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/reservations`)
+        const {data} = await axios.get(`${baseURL}/api/v1/reservations`)
         dispatch({
             type: ONE_RESERVATION_SUCCESS,
             payload: data
@@ -58,7 +59,7 @@ export const deleteTicket = (id) => async (dispatch) => {
     try{
         
         dispatch({type: DELETE_RESERVATION_REQUEST})
-        const {data} = await axios.delete(`http://localhost:5000/api/v1/reservations/${id}`)
+        const {data} = await axios.delete(`${baseURL}/api/v1/reservations/${id}`)
         dispatch({
             type: DELETE_RESERVATION_SUCCESS,
             payload: data

@@ -24,12 +24,14 @@ import {
   CLEAR_ERRORS,
 } from "../constants/authConstants";
 
+const baseURL = "https://mern-booking-movie-api.vercel.app"
+
 export const authLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_LOGIN_REQUEST });
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.post(
-      `http://localhost:5000/api/v1/auth/login`,
+      `${baseURL}/api/v1/auth/login`,
       { email, password },
       config
     );
@@ -47,7 +49,7 @@ export const authLogin = (email, password) => async (dispatch) => {
 
 export const authLogout = () => async (dispatch) => {
   try {
-    await axios.get(`http://localhost:5000/api/v1/auth/logout`);
+    await axios.get(`${baseURL}/api/v1/auth/logout`);
     dispatch({ type: AUTH_LOGOUT_SUCCESS });
   } catch (error) {
     dispatch({ type: AUTH_LOGOUT_FAIL, payload: error.response.data.message });
@@ -65,7 +67,7 @@ export const authRegister =
       dispatch({ type: AUTH_REGISTER_REQUEST });
       const config = { headers: { "Content-Type": "application/json" } };
       const { data } = await axios.post(
-        `http://localhost:5000/api/v1/auth/register`,
+        `${baseURL}/api/v1/auth/register`,
         { name, email, password, phone, cardId, gender, position },
         config
       );
@@ -85,7 +87,7 @@ export const getAllUser = () => async (dispatch) => {
   try {
     dispatch({ type: AUTH_GETALLUSER_REQUEST });
     const { data } = await axios.get(
-      `http://localhost:5000/api/v1/auth/login/`
+      `${baseURL}/api/v1/auth/login/`
     );
     dispatch({
       type: AUTH_GETALLUSER_SUCCESS,
@@ -102,7 +104,7 @@ export const getOneUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_GETONEUSER_REQUEST });
     const { data } = await axios.get(
-      `http://localhost:5000/api/v1/auth/user/${id}`
+      `${baseURL}/api/v1/auth/user/${id}`
     );
     dispatch({
       type: AUTH_GETONEUSER_SUCCESS,
@@ -121,7 +123,7 @@ export const updateOneUser = (id, user) => async (dispatch) => {
     dispatch({ type: AUTH_UPDATE_REQUEST });
     const config = { headers: { "Content-Type": "application/json" } };
     const { data } = await axios.put(
-      `http://localhost:5000/api/v1/auth/user/${id}`,
+      `${baseURL}/api/v1/auth/user/${id}`,
       user,
       config
     );

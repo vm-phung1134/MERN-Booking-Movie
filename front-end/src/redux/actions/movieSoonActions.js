@@ -8,11 +8,12 @@ import {
     ONE_MOVIESOON_SUCCESS,
     ONE_MOVIESOON_REQUEST,
 } from '../constants/movieSoonConstants'
+const baseURL = "https://mern-booking-movie-api.vercel.app"
 
 export const getAllMovieSoon = () => async (dispatch) => {
     try{
         dispatch({type: ALL_MOVIESOON_REQUEST})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/moviesoons`)
+        const {data} = await axios.get(`${baseURL}/api/v1/moviesoons`)
         dispatch({
             type: ALL_MOVIESOON_SUCCESS,
             payload: data
@@ -29,7 +30,7 @@ export const getOneMovieSoon = (id) => async (dispatch) => {
     try{
         
         dispatch({type: ONE_MOVIESOON_REQUEST})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/moviesoons/${id}`)
+        const {data} = await axios.get(`${baseURL}/api/v1/moviesoons/${id}`)
         dispatch({
             type: ONE_MOVIESOON_SUCCESS,
             payload: data

@@ -7,11 +7,12 @@ import {
     GET_ONE_EVENT_REQUIRED, 
     GET_ONE_EVENT_SUCCESS 
 } from "../constants/eventConstants"
+const baseURL = "https://mern-booking-movie-api.vercel.app"
 
 export const getAllEvent= () => async (dispatch) => {
     try{
         dispatch({type: GET_ALL_EVENT_REQUIRED})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/events`)
+        const {data} = await axios.get(`${baseURL}/api/v1/events`)
         dispatch({
             type: GET_ALL_EVENT_SUCCESS,
             payload: data
@@ -27,7 +28,7 @@ export const getAllEvent= () => async (dispatch) => {
 export const getOneEvent = (id) => async (dispatch) => {
     try{
         dispatch({type: GET_ONE_EVENT_REQUIRED})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/events/${id}`)
+        const {data} = await axios.get(`${baseURL}/api/v1/events/${id}`)
         dispatch({
             type: GET_ONE_EVENT_SUCCESS,
             payload: data

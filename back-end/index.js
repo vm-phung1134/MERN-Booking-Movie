@@ -5,7 +5,7 @@ const app = express()
 const cors = require('cors')
 const port = process.env.APP_PORT;
 const {errorHandler} = require('./error/errorHandler')
-
+connectDB()
 app.use(cors()) // use send req from back to front end
 app.use(express.json())
 
@@ -51,4 +51,3 @@ app.use(errorHandler)
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`)
 })
-connectDB()

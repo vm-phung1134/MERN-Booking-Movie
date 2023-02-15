@@ -2,6 +2,7 @@ import axios from 'axios'
 import { POST_FEEDBACK_FAIL, POST_FEEDBACK_REQUIRED, POST_FEEDBACK_SUCCESS } from '../constants/feedBackConstants'
 
 
+const baseURL = "https://mern-booking-movie-api.vercel.app"
 
 // export const getAllFeedBack = () => async (dispatch) => {
 //     try{
@@ -29,7 +30,7 @@ export const postOneFeedBack = (feedBack) => async (dispatch) => {
             },
         }
         const {data} = await axios.post(
-            `http://localhost:5000/api/v1/feedbacks/`,
+            `${baseURL}/api/v1/feedbacks/`,
             feedBack,
             config
             )

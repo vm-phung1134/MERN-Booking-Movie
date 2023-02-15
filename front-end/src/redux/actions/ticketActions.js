@@ -9,11 +9,12 @@ import {
     ONE_TICKET_SUCCESS,
     INCREMENT, DECREMENT
 } from '../constants/ticketConstants'
+const baseURL = "https://mern-booking-movie-api.vercel.app"
 
 export const getAllTicket = () => async (dispatch) => {
     try{
         dispatch({type: ALL_TICKET_REQUEST})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/tickets/`)
+        const {data} = await axios.get(`${baseURL}/api/v1/tickets/`)
         dispatch({
             type: ALL_TICKET_SUCCESS,
             payload: data
@@ -28,7 +29,7 @@ export const getAllTicket = () => async (dispatch) => {
 export const getOneTicket = (id) => async (dispatch) => {
     try{
         dispatch({type: ONE_TICKET_REQUEST})
-        const {data} = await axios.get(`http://localhost:5000/api/v1/tickets/${id}`)
+        const {data} = await axios.get(`${baseURL}/api/v1/tickets/${id}`)
         dispatch({
             type: ONE_TICKET_SUCCESS,
             payload: data
