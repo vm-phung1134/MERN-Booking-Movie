@@ -1,4 +1,4 @@
-const ShowTime = require('../models/ShowTime.Model.js')
+const ShowTime = require('../models/Showtime.Model')
 
 exports.getAllShowTimes = async (req, res, next) => {
     const showTimesCount = await ShowTime.countDocuments()
