@@ -31,7 +31,7 @@ exports.login = async (req, res, next) => {
       return next(err);
     }
     if (bcrypt.compareSync(req.body.password, user.password)) {
-      // so sánh pw user nhập vào và pw (hash) in db
+      //so sánh pw user nhập vào và pw (hash) in db
       const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET);
       res.status(200).json({
         token,

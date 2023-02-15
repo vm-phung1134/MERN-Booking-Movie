@@ -24,12 +24,16 @@ import {
   CLEAR_ERRORS,
 } from "../constants/authConstants";
 
-const baseURL = "https://mern-booking-movie-api.vercel.app"
+const baseURL = "https://mern-booking-movie-api.vercel.app";
 
 export const authLogin = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_LOGIN_REQUEST });
-    const config = { headers: { "Content-Type": "application/json" } };
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
     const { data } = await axios.post(
       `${baseURL}/api/v1/auth/login`,
       { email, password },
@@ -86,9 +90,7 @@ export const authRegister =
 export const getAllUser = () => async (dispatch) => {
   try {
     dispatch({ type: AUTH_GETALLUSER_REQUEST });
-    const { data } = await axios.get(
-      `${baseURL}/api/v1/auth/login/`
-    );
+    const { data } = await axios.get(`${baseURL}/api/v1/auth/login/`);
     dispatch({
       type: AUTH_GETALLUSER_SUCCESS,
       payload: data,
@@ -103,9 +105,7 @@ export const getAllUser = () => async (dispatch) => {
 export const getOneUser = (id) => async (dispatch) => {
   try {
     dispatch({ type: AUTH_GETONEUSER_REQUEST });
-    const { data } = await axios.get(
-      `${baseURL}/api/v1/auth/user/${id}`
-    );
+    const { data } = await axios.get(`${baseURL}/api/v1/auth/user/${id}`);
     dispatch({
       type: AUTH_GETONEUSER_SUCCESS,
       payload: data,

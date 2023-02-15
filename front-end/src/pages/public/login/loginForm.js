@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authLogin, clearErrors } from "../../../redux/actions/authActions";
 import { useNavigate } from "react-router-dom";
 import { Formik } from "formik";
+import { Link } from "react-router-dom";
 function LoginForm() {
   const initialValues = {
     email: "",
@@ -12,15 +13,11 @@ function LoginForm() {
   const navigate = useNavigate();
   const [stateError, setStateError] = useState("");
   const [stateLoadingLogin, setStateLoadingLogin] = useState({ loading: false });
-  const submitForm = (values, { resetForm }) => {
+  const submitForm = (values) => {
     setStateLoadingLogin({ loading: true });
     let timeOutLogin = setTimeout(async () => {
       await setStateLoadingLogin({ loading: false });
       dispatch(authLogin(values.email, values.password));
-      resetForm({
-        email: "",
-        password: "",
-      });
       return () => {
         clearTimeout(timeOutLogin)
       }
@@ -118,17 +115,17 @@ function LoginForm() {
                     <span className="text-red-500 text-[14px]">{errors.password}</span>
                   )}
                 </div>
-                <a
-                  href="/#"
+                < Link
+                  
                   className="text-[13px] text-green-500 hover:underline"
                 >
                   Quên mật khẩu?
-                </a>
+                </Link>
                 <div className="mt-6">
                   {stateLoadingLogin.loading === true ? (
                     <button
                       disabled
-                      type="button"
+                      type="submit"
                       className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200
                       transform bg-[#e01414] rounded-md hover:bg-red-600 focus:outline-none focus:bg-red-600"
                     >
