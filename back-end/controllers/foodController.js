@@ -1,4 +1,4 @@
-const Food = require('../models/Food.Model.js')
+const Food = require('../models/Food.Model')
 
 exports.getAllFoods = async (req, res, next) => {
     const foodsCount = await Food.countDocuments()

@@ -1,5 +1,5 @@
 const { set } = require('mongoose')
-const Seat = require('../models/Seat.Model.js')
+const Seat = require('../models/Seat.Model')
 
 exports.getAllSeats = async (req, res, next) => {
     const productsCount = await Seat.countDocuments()

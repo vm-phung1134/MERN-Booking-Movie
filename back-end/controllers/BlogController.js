@@ -1,4 +1,4 @@
-const Blog = require('../models/Blog.Model.js')
+const Blog = require('../models/Blog.Model')
 
 exports.getAllBlogs = async (req, res, next) => {
     const blogsCount = await Blog.countDocuments()

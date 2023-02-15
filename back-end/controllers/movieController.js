@@ -1,4 +1,4 @@
-const Movie = require('../models/Movie.Model.js')
+const Movie = require('../models/Movie.Model')
 
 exports.getAllMovies = async (req, res, next) => {
     const productsCount = await Movie.countDocuments()

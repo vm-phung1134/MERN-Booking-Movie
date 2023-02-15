@@ -1,4 +1,4 @@
-const MovieSoon = require('../models/MovieSoon.Model.js')
+const MovieSoon = require('../models/MovieSoon.Model')
 
 exports.getAllMovieSoons = async (req, res, next) => {
     const productsCount = await MovieSoon.countDocuments()

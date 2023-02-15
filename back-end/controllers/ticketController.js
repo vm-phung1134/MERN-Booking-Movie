@@ -1,4 +1,4 @@
-const Ticket = require('../models/Ticket.Model.js')
+const Ticket = require('../models/Ticket.Model')
 
 exports.getAllTickets = async (req, res, next) => {
     const ticketsCount = await Ticket.countDocuments()

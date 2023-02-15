@@ -1,4 +1,4 @@
-const Event = require('../models/Event.Model.js')
+const Event = require('../models/Event.Model')
 
 exports.getAllEvents = async (req, res, next) => {
     const eventsCount = await Event.countDocuments()

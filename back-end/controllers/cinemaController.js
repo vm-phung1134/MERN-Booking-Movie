@@ -1,4 +1,4 @@
-const Cinema = require('../models/Cinema.Model.js')
+const Cinema = require('../models/Cinema.Model')
 
 exports.getAllCinemas = async (req, res, next) => {
     const cinemasCount = await Cinema.countDocuments()
