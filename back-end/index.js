@@ -4,7 +4,6 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const {errorHandler} = require('./error/errorHandler')
-connectDB()
 app.use(cors()) // use send req from back to front end
 app.use(express.json())
 

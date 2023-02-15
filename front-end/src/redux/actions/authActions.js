@@ -24,7 +24,7 @@ import {
   CLEAR_ERRORS,
 } from "../constants/authConstants";
 
-const baseURL = "https://mern-booking-movie-api.vercel.app";
+const baseURL = 'https://mern-booking-movie-api.vercel.app'
 
 export const authLogin = (email, password) => async (dispatch) => {
   try {

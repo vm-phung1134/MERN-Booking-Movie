@@ -10,7 +10,7 @@ exports.register = async (req, res, next) => {
       err.statusCode = 400;
       return next(err);
     } else {
-      //const user = await User.create(req.body);
+      const user = await User.create(req.body);
       const token = jwt.sign({ userId: user._id }, process.env.APP_SECRET);
       res.status(200).json({
         user,
