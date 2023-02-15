@@ -3,7 +3,6 @@ const {connectDB} = require('./config')
 const express = require('express')
 const app = express()
 const cors = require('cors')
-const port = process.env.APP_PORT;
 const {errorHandler} = require('./error/errorHandler')
 connectDB()
 app.use(cors()) // use send req from back to front end
@@ -48,6 +47,7 @@ app.all('*', (req, res, next) => {
 })
 app.use(errorHandler)
 
-app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
+app.listen(() => {
+    console.log(`Server is running on port ${5000}`)
 })
+connectDB()
