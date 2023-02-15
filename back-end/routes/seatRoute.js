@@ -1,7 +1,7 @@
 const express = require('express')
 const Router = express.Router()
 const {getAllSeats, createSeat, updateSeat, deleteSeat, getOneSeat, updateStatusSeat}
-    = require('../controllers/SeatController')
+    = require('../controllers/seatController')
 Router.route('/').get(getAllSeats)
 Router.route('/:seatId&:nameId').put(updateSeat).delete(deleteSeat).get(getOneSeat)
 Router.route('/:startTimeId').post(createSeat)
