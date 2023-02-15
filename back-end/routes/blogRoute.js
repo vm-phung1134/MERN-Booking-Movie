@@ -1,6 +1,6 @@
 const express = require('express')
 const Router = express.Router()
-const {getAllBlogs, createBlog, updateBlog, deleteBlog, getOneBlog, getDetailBlog}
+const {getAllBlogs, createBlog, updateBlog, deleteBlog, getOneBlog}
     = require('../controllers/blogController')
 
 Router.route('/').get(getAllBlogs).post(createBlog)
