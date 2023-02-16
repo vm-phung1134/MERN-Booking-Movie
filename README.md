@@ -1,5 +1,7 @@
 # MERN Stack - Website Movie Theater Ticket System 2023
-(Lưu ý: Do website mới deploy còn bugs nên hãy reload nếu bị out nhé !!!)
+Lưu ý: 
+- Do website mới deploy còn bugs nên hãy reload nếu bị out nhé !!! 
+- Local vẫn chạy bình thường nha
 
 ## Demo Website
 - 👉 Here : [mern-booking-movie.vercel.app](https://mern-booking-movie.vercel.app)
