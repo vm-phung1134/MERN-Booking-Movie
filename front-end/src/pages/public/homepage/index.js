@@ -13,7 +13,6 @@ import slide1 from "./assets/slide_1.webp";
 import slide2 from "./assets/slide_2.jpg";
 import slide3 from "./assets/slide_3.png";
 
-
 function HomePage() {
   const dispatch = useDispatch();
   const blogs = useSelector((state) => state.blogs.blogs);
@@ -57,7 +56,7 @@ function HomePage() {
         h3: "IT - CHÚ HỀ MA QUÁI",
         rating: "7.7/10",
         discription:
-          "Là một trong những bộ phim kinh dị hứa hẹn nhất năm, bộ phim chuyển thể từ tiểu thuyết rùng rợn nhất của Stephen King mang đến những cảnh phim kinh hoàng hơn cùng cái nhìn trực diện về gã hề ác ma Pennywise. Sau 17 năm kể từ lần đầu xuất hiện trong bản chuyển thể phim truyền hình, khán giả mới có dịp khóc thét một lần nữa trước sự trở lại ma mị, tàn bạo và kinh hoàng của Pennywise trên màn ảnh rộng. Xem thêm tại: https://www.galaxycine.vn/phim/it",
+          "Là một trong những bộ phim kinh dị hứa hẹn nhất năm, bộ phim chuyển thể từ tiểu thuyết rùng rợn nhất của Stephen King mang đến những cảnh phim kinh hoàng hơn cùng cái nhìn trực diện về gã hề ác ma Pennywise. Sau 17 năm kể từ lần đầu xuất hiện trong bản chuyển thể phim truyền hình, khán giả mới có dịp khóc thét một lần nữa trước sự trở lại ma mị, tàn bạo và kinh hoàng của Pennywise trên màn ảnh rộng.",
         btn: "ĐẶT VÉ NGAY",
       },
     },
@@ -109,38 +108,39 @@ function HomePage() {
             >
               <div className="bg-gradient-to-r from-black/100 h-screen w-full">
                 <HeaderPublic />
-                <div className="relative mt-16">
-                <div
-                  data-aos="fade-right"
-                  data-aos-duration="2000"
-                  className="absolute z-10 text-white translate-x-[-50%] top-[25%] left-8 md:left-12 lg:left-20 w-[80%] lg:w-[50%]"
-                >
-                  <h2 className="lg:text-[15px] text-sm">
-                    {slides[currentIndex].content.h2}
-                  </h2>
-                  <h3 className="lg:text-[40px] md:text-[28px] text-[20px] font-bold my-2">
-                    {slides[currentIndex].content.h3}
-                  </h3>
-                  <h4 className="lg:text-[40px] md:text-[28px] text-[20px] font-bold my-2">
-                    {slides[currentIndex].content.h4}
-                  </h4>
-                  {slides[currentIndex].content.rating !== "" ? (
-                    <button className="bg-[#c40404] lg:text-[14px] text-[12px] rounded-full p-2 lg:p-3 mb-2">
-                      {slides[currentIndex].content.rating}{" "}
-                      <i className="fas fa-star"></i>
-                    </button>
-                  ) : (
-                    <button hidden></button>
-                  )}
-
-                  <p className="lg:block md:text-[13px] lg:text-[16px] font-thin text-[12px] text-justify">
-                    {slides[currentIndex].content.discription}
-                  </p>
-                  <button className="py-2 text-[12px] lg:text-[14px] px-2 lg:px-3 bg-[#c40404] mt-3 md:mt-5">
-                    {slides[currentIndex].content.btn} &ensp;
-                    <i className="fas fa-chevron-right text-[12px]"></i>
-                  </button>
-                </div>
+                <div className="relative lg:mt-28 mt-16">
+                  <div
+                    data-aos="fade-right"
+                    data-aos-duration="2000"
+                    className="absolute z-10 text-white translate-x-[-50%] top-[25%] lg:top-[50%] left-8 md:left-12 lg:left-20 w-[80%] lg:w-[50%]"
+                  >
+                    <h2 className="lg:text-[15px] text-sm">
+                      {slides[currentIndex].content.h2}
+                    </h2>
+                    <h3 className="lg:text-[40px] md:text-[28px] text-[20px] font-bold my-2">
+                      {slides[currentIndex].content.h3}
+                    </h3>
+                    <h4 className="lg:text-[40px] md:text-[28px] text-[20px] font-bold my-2">
+                      {slides[currentIndex].content.h4}
+                    </h4>
+                    {slides[currentIndex].content.rating !== "" ? (
+                      <button className="bg-[#c40404] lg:text-[14px] text-[12px] rounded-full p-2 lg:p-3 mb-2">
+                        {slides[currentIndex].content.rating}{" "}
+                        <i className="fas fa-star"></i>
+                      </button>
+                    ) : (
+                      <button hidden></button>
+                    )}
+                    <p className="lg:block md:text-[13px] lg:text-[16px] font-thin text-[12px] text-justify">
+                      {slides[currentIndex].content.discription}
+                    </p>
+                    <Link to="/booking">
+                      <button className="py-2 text-[12px] lg:text-[14px] px-2 lg:px-3 bg-[#c40404] mt-3 md:mt-5">
+                        {slides[currentIndex].content.btn} &ensp;
+                        <i className="fas fa-chevron-right text-[12px]"></i>
+                      </button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -185,7 +185,11 @@ function HomePage() {
                 </div>
                 <div className="py-[5px] text-white">
                   <p className="w-[110px] md:w-[120px] brightness-200 h-10 bg-[url('https://www.galaxycine.vn/website/images/ic_hotnews.png')]"></p>
-                  <Link to="/movie-now/63b93dfd1d4172de899ce6ca"><p className="text-zinc-400 text-[12px] lg:text-[17px]">Avatar: The Way Of Water</p></Link>
+                  <Link to="/movie-now/63b93dfd1d4172de899ce6ca">
+                    <p className="text-zinc-400 text-[12px] lg:text-[17px]">
+                      Avatar: The Way Of Water
+                    </p>
+                  </Link>
                 </div>
               </div>
               {/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}

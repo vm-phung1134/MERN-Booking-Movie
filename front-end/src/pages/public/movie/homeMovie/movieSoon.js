@@ -15,7 +15,7 @@ function MovieSoon({movie}) {
               <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
                 <button
                   className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
-                  border bg-[#c40404] border-white text-sm py-[13px] px-[25px] hover:bg-[#ce0000]hover:border-none"
+                  border text-sm py-[13px] px-[25px] hover:bg-[#ce0000] hover:border-none"
                 >
                   MUA VÉ
                 </button>

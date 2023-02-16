@@ -37,6 +37,7 @@ import { isCheckQuanlitySeat } from "../middleware";
 function Booking() {
   const dispatch = useDispatch();
   // CALL STORE FROM GET API
+  const baseURL = 'https://mern-booking-movie-api.vercel.app'
   const cinemas = useSelector((state) => state.cinemas.cinemas);
   const movies = useSelector((state) => state.movies.movies);
   const showtimes = useSelector((state) => state.showtimes.showtimes);
@@ -110,7 +111,7 @@ function Booking() {
     setTimeout(async () => {
       setStateLoadingLogin({ loading: false });
       await axios
-        .post(`http://localhost:5000/api/v1/payment/create-checkout-session`, {
+        .post(`${baseURL}/api/v1/payment/create-checkout-session`, {
           ticketPayment,
           userId: tokenId,
         })

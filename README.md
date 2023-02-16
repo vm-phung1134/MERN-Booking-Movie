@@ -15,6 +15,7 @@ $ git clone https://github.com/vm-phung1134/MERN-Booking-Movie.git
 $ cd mern-booking-movie
 ```
 ### 2. Create .env File
+  - change name of .env.example into .env
   - create params into .env file
   
 ### 3. Setup MongoDB and Stripe
