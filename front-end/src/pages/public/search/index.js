@@ -56,7 +56,7 @@ function SearchPage() {
               style={{ background: isActive === "1" ? "#E50914" : "" }}
               value="1"
               onClick={handleClickActive}
-              className="py-2 px-4 text-sm  text-white rounded-md ease-in-out duration-500"
+              className="py-2 px-4 text-[13px] lg:text-sm  text-white rounded-md ease-in-out duration-500"
             >
               PHIM ĐANG CHIẾU
             </button>
@@ -64,7 +64,7 @@ function SearchPage() {
               value="2"
               style={{ background: isActive === "2" ? "#E50914" : "" }}
               onClick={handleClickActive}
-              className="py-2 px-4 text-sm text-white rounded-md ease-in-out duration-500"
+              className="py-2 px-4 text-[13px] lg:text-sm text-white rounded-md ease-in-out duration-500"
             >
               PHIM SẮP CHIẾU
             </button>
@@ -72,13 +72,13 @@ function SearchPage() {
               value="3"
               style={{ background: isActive === "3" ? "#E50914" : "" }}
               onClick={handleClickActive}
-              className="py-2 px-4 text-sm text-white rounded-md ease-in-out duration-500"
+              className="py-2 px-4 text-[13px] lg:text-sm text-white rounded-md ease-in-out duration-500"
             >
               DIỄN VIÊN
             </button>
           </div>
         </div>
-        <div className="px-20">
+        <div className="md:px-10 lg:px-20 px-5">
           <input
             type="text"
             onChange={handleSearch}
@@ -88,13 +88,13 @@ function SearchPage() {
         </div>
         <div data-aos="fade-up" data-aos-duration="1000">
           {isActive === "1" && (
-            <div className="grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 mx-20">
+            <div className="grid-cols-2 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 mx-5 md:mx-10 lg:mx-20">
               {searchCurrentMovie.map((movie) => (
                 <div key={movie._id}>
                   <div className="">
                     <div className="relative">
                       <img
-                        className="w-[370px] h-[450px] bg-cover"
+                        className="w-[370px] h-[350px] md:h-[400px] lg:h-[450px] bg-cover"
                         src={movie.poster}
                         alt=""
                       ></img>
@@ -117,13 +117,13 @@ function SearchPage() {
         </div>
         <div data-aos="fade-up" data-aos-duration="1000">
           {isActive === "2" && (
-            <div className="grid-cols-1 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 mx-20">
+            <div className="grid-cols-2 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 md:mx-10 lg:mx-20">
               {searchSoonMovie.map((movie) => (
                 <div key={movie._id}>
                   <div className="">
                     <div className="relative">
                       <img
-                        className="w-[370px] h-[450px] bg-cover"
+                        className="w-[370px] h-[350px] md:h-[400px] lg:h-[450px] bg-cover"
                         src={movie.poster}
                         alt=""
                       ></img>

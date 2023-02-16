@@ -113,7 +113,7 @@ function HomePage() {
                 <div
                   data-aos="fade-right"
                   data-aos-duration="2000"
-                  className="absolute z-10 text-white translate-x-[-50%] top-[25%] left-12 lg:left-20 w-[80%] lg:w-[50%]"
+                  className="absolute z-10 text-white translate-x-[-50%] top-[25%] left-8 md:left-12 lg:left-20 w-[80%] lg:w-[50%]"
                 >
                   <h2 className="lg:text-[15px] text-sm">
                     {slides[currentIndex].content.h2}
@@ -163,7 +163,7 @@ function HomePage() {
               <div className="flex justify-between">
                 <div className="text-white">
                   <button
-                    className="mx-3 text-[13px] lg:text-[15px] py-[20px] border-[#E50914]"
+                    className="md:mx-3 mx-2 text-[13px] lg:text-[15px] py-[20px] border-[#E50914]"
                     onClick={handleClickMovie}
                     style={{
                       borderBottom:
@@ -173,7 +173,7 @@ function HomePage() {
                     PHIM ĐANG CHIẾU
                   </button>
                   <button
-                    className="mx-3 py-[20px] text-[13px] lg:text-[15px]"
+                    className="md:mx-3 ml-2 py-[20px] text-[13px] lg:text-[15px]"
                     onClick={handleClickMovie}
                     style={{
                       borderBottom:
@@ -184,8 +184,8 @@ function HomePage() {
                   </button>
                 </div>
                 <div className="py-[5px] text-white">
-                  <p className="w-[120px] brightness-200 h-10 bg-[url('https://www.galaxycine.vn/website/images/ic_hotnews.png')]"></p>
-                  <Link to="/movie-now/63b93dfd1d4172de899ce6ca"><p className="text-zinc-400 text-[13px] lg:text-[17px]">Avatar: The Way Of Water</p></Link>
+                  <p className="w-[110px] md:w-[120px] brightness-200 h-10 bg-[url('https://www.galaxycine.vn/website/images/ic_hotnews.png')]"></p>
+                  <Link to="/movie-now/63b93dfd1d4172de899ce6ca"><p className="text-zinc-400 text-[12px] lg:text-[17px]">Avatar: The Way Of Water</p></Link>
                 </div>
               </div>
               {/* RENDER PHIM ĐANG CHIẾU OR PHIM SẮP CHIẾU */}

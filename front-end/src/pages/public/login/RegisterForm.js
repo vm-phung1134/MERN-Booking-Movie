@@ -107,7 +107,7 @@ function RegisterForm() {
             id="register"
             className="relative flex flex-col justify-center min-h-screen overflow-hidden"
           >
-            <div className="w-[60%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
+            <div className="md:w-[60%] lg:w-[70%] w-[90%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
               <h1 className="text-3xl font-semibold text-center text-purple-600">
                 Đăng Ký Tài Khoản
               </h1>

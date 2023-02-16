@@ -6,7 +6,7 @@ function Blogs({blog}) {
       <div className="grid grid-cols-3 gap-x-2 text-white">
         <Link to={`/blog-detail/${blog._id}`}>
           <img
-            className="h-full"
+            className="h-auto"
             src={blog.topImage}
             alt=""
           ></img>

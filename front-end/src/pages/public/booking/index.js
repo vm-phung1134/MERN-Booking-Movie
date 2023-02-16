@@ -156,7 +156,7 @@ function Booking() {
           {loadingPage === true ? (
             <SpinnerLoading />
           ) : (
-            <div className="lg:px-14 md:px-12 px-10 md:py-16 py-14 lg:py-20 min-h-screen max-h-full bg-transparent">
+            <div className="lg:px-14 md:px-12 px-6 md:py-16 py-14 lg:py-20 min-h-screen max-h-full bg-transparent">
               <Breadcrumbs className="bg-transparen p-0">
                 <Link to="/home" className="text-gray-400">
                   Trang chủ
@@ -286,7 +286,7 @@ function Booking() {
                           />
                         </div>
                         <div
-                          className="mx-6 lg:mx-0 xl:mx-6 mt-10 lg:mt-0 h-[100%] lg:h-[70%] bg-cover bg-center"
+                          className="md:mx-6 mx-0 lg:mx-0 xl:mx-6 mt-10 lg:mt-0 h-[100%] lg:h-[70%] bg-cover bg-center"
                           style={{ backgroundImage: `url("${movie.poster}")` }}
                         >
                           <div className="bg-gradient-to-r from-black/100 to-black/40  text-white text-sm w-full h-full">

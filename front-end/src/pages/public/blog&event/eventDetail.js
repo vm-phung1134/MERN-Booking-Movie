@@ -20,7 +20,7 @@ function EventDetail() {
     <>
       <div className="bg-black max-h-full">
         <HeaderPublic />
-        <div className="px-16 py-20 text-white w-full">
+        <div className="md:px-16 px-5 md:py-20 py-16 text-white w-full">
           <div>
             <Breadcrumbs className="bg-transparen p-0 mb-3">
               <Link to="/home" className="text-gray-400">
@@ -40,10 +40,24 @@ function EventDetail() {
                 ĐÁNH GIÁ
               </button>
               <p className="mb-5">Thời gian: {event.date}</p>
-              <img className="mb-5" src={event.mainImage} width="400px" alt=""></img>
-              <p className="text-justify mb-5 font-medium">Thể lệ: <br></br><span className="text-gray-300 font-thin">{event.mainContent}</span></p>
-              <p className="text-justify font-medium">Điều kiện: <br></br><span className="text-gray-300 font-thin">{event.mainContent2}</span></p>
-
+              <img
+                className="mb-5"
+                src={event.mainImage}
+                width="400px"
+                alt=""
+              ></img>
+              <p className="text-justify mb-5 font-medium">
+                Thể lệ: <br></br>
+                <span className="text-gray-300 font-thin">
+                  {event.mainContent}
+                </span>
+              </p>
+              <p className="text-justify font-medium">
+                Điều kiện: <br></br>
+                <span className="text-gray-300 font-thin">
+                  {event.mainContent2}
+                </span>
+              </p>
             </div>
           </div>
           <div className="mt-10 mb-3">
@@ -53,11 +67,25 @@ function EventDetail() {
             >
               KHUYẾN MÃI KHÁC
             </button>
-            <div className="grid grid-cols-4 gap-5">
-            {events.map((event) => (
-              <Events key={event._id} event={event} />
-            ))}
-          </div>
+            <div className="grid xl:grid-cols-4 lg:grid-cols-3 grid-cols-2 md:grid-cols-2 gap-3">
+              {events.map((event) => (
+                <Events key={event._id} event={event} />
+              ))}
+            </div>
+            <div className="flex justify-center py-10">
+              <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
+                <div className="buttons">
+                  <button className="btn">
+                    <span></span>
+                    <p
+                      data-start="good luck!"
+                      data-text="Let's go!"
+                      data-title="Xem thêm"
+                    ></p>
+                  </button>
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>

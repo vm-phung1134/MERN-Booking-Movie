@@ -34,7 +34,7 @@ function HeaderPublic() {
   return (
     <div>
       <nav className="bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
+        <div className="max-w-7xl mx-auto px-3 md:px-4 sm:px-6 lg:px-6">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <div className="flex-shrink-0">
@@ -86,13 +86,13 @@ function HeaderPublic() {
               </div>
             </div>
             <div className="flex justify-between">
-              <button className="text-white p-2 text-[12px]">
+              <button className="text-white text-[11px] md:text-[12px]">
                 <i className="fas fa-globe"></i>
                 &ensp;VN
               </button>
               <Menu>
                 <MenuHandler>
-                  <Button className="text-white  ml-3 py-2 bg-transparent hover:bg-none font-medium shadow-none text-[14px] capitalize">
+                  <Button className="text-white ml-0 md:ml-3 py-2 bg-transparent hover:bg-none font-[400] shadow-none text-[14px] capitalize">
                     {userName} &ensp;
                     <i className="fas fa-chevron-down text-[12px]"></i>
                   </Button>
@@ -116,18 +116,18 @@ function HeaderPublic() {
                 </MenuList>
               </Menu>
             </div>
-            <div className="-mr-2 flex lg:hidden">
+            <div className="mr-0 flex lg:hidden">
               <button
                 onClick={() => setIsOpen(!isOpen)}
                 type="button"
-                className="bg-gray-900 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
+                className="bg-transparent inline-flex items-center justify-center p-2 rounded-md text-gray-200 hover:text-white hover:bg-gray-800 focus:outline-none "
                 aria-controls="mobile-menu"
                 aria-expanded="false"
               >
                 <span className="sr-only">Open main menu</span>
                 {!isOpen ? (
                   <svg
-                    className="block h-6 w-6"
+                    className="block h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
@@ -143,7 +143,7 @@ function HeaderPublic() {
                   </svg>
                 ) : (
                   <svg
-                    className="block h-6 w-6"
+                    className="block h-5 w-5"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"

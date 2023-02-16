@@ -72,7 +72,7 @@ function UserTickets() {
         {loadingPage === true ? (
           <SpinnerLoading />
         ) : (
-          <div className="lg:px-16 px-10 py-20 text-white min-h-screen max-h-full w-full">
+          <div className="lg:px-16 px-5 py-20 text-white min-h-screen max-h-full w-full">
             <Breadcrumbs className="bg-transparen p-0">
               <Link to="/home" className="text-gray-400">
                 Trang chủ

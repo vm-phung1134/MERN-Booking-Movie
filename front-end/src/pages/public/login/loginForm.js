@@ -16,8 +16,8 @@ function LoginForm() {
   const submitForm = (values) => {
     setStateLoadingLogin({ loading: true });
     let timeOutLogin = setTimeout(async () => {
-      await setStateLoadingLogin({ loading: false });
-      dispatch(authLogin(values.email, values.password));
+      await dispatch(authLogin(values.email, values.password));
+      setStateLoadingLogin({ loading: false });
       return () => {
         clearTimeout(timeOutLogin)
       }
@@ -77,7 +77,7 @@ function LoginForm() {
             className="relative flex flex-col justify-center min-h-screen overflow-hidden"
             id="login"
           >
-            <div className="w-[60%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
+            <div className="md:w-[60%] lg:w-[70%] w-[90%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
               <h1 className="text-3xl font-semibold text-center text-[#e01414]">
                 Đăng Nhập
               </h1>

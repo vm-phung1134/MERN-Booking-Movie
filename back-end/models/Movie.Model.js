@@ -51,6 +51,10 @@ const movieSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Discription must be required']
     },
+    trailer: {
+        type: String,
+        require: true
+    }
     // cinemaId: {
     //     type: mongoose.Schema.Types.ObjectId,
     //     required: true,

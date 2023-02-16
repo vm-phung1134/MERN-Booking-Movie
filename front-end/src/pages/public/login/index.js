@@ -51,7 +51,7 @@ export default function Login() {
           </div>
           {/* -----------HEADER LOGIN PAGE-------------- */}
           <div className="left-[50%] text-center text-white translate-x-[-50%] absolute top-[25%]">
-            <h2 className="lg:text-[40px] md:text-[30px] text-[28px] font-bold">
+            <h2 className="lg:text-[40px] md:text-[35px] text-[30px] font-bold">
               TUYỂN CHỌN TỪ NHỮNG PHIM CHIẾU RẠP ĐẶC SẮC NHẤT
             </h2>
             <p className="lg:text-[18px] text-[15px] mt-5 px-5">

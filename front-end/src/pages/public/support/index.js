@@ -43,7 +43,7 @@ function Support() {
         {loadingPage === true ? (
           <SpinnerLoading />
         ) : (
-          <div className="lg:m-16 m-10 grid grid-cols-1 lg:grid-cols-3">
+          <div className="lg:m-16 my-10 mx-5 grid grid-cols-1 lg:grid-cols-3">
             <div className="lg:col-span-2 mr-3">
               <Breadcrumbs className="bg-transparen p-0 my-5">
                 <Link to="/home" className="text-gray-400">
@@ -75,14 +75,13 @@ function Support() {
               {isActive === "1" && <SupportForm />}
 
               {isActive === "2" && (
-                <div className="mt-5">
+                <div className="my-5">
                   <Accordion open={openAccordion === 1}>
                     <AccordionHeader
-                      className="text-gray-400"
+                      className="text-gray-400  text-sm lg:text-[16px]"
                       onClick={() => handleOpenAccordion(1)}
                     >
-                      Tôi có thể dùng tài khoản thành viên để mua vé nhóm được
-                      không ?
+                      Tôi có thể dùng tài khoản thành viên để mua vé nhóm không ?
                     </AccordionHeader>
                     <AccordionBody className="text-gray-500">
                       Bạn có thể cung cấp mã barcode trên mobile app/thẻ thành
@@ -93,7 +92,7 @@ function Support() {
                   </Accordion>
                   <Accordion open={openAccordion === 2}>
                     <AccordionHeader
-                      className="text-gray-400"
+                      className="text-gray-400  text-sm lg:text-[16px]"
                       onClick={() => handleOpenAccordion(2)}
                     >
                       Quy trình đặt vé của hệ thống như thế nào ?
@@ -131,7 +130,7 @@ function Support() {
                   </Accordion>
                   <Accordion open={openAccordion === 3}>
                     <AccordionHeader
-                      className="text-gray-400"
+                      className="text-gray-400  text-sm lg:text-[16px]"
                       onClick={() => handleOpenAccordion(3)}
                     >
                       Làm sao để góp ý hay thiếu nại với hệ thống ?
@@ -149,10 +148,10 @@ function Support() {
               )}
             </div>
             <div>
-              <button className="mb-3 ml-8 text-white py-[10px] border-b-[3px] border-[#E50914]">
+              <button className="mb-3 lg:mt-0 mt-5 ml-5 lg:ml-8 text-white text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
                 PHIM ĐANG CHIẾU
               </button>
-              <div className="grid grid-cols-1 gap-5 px-8 pt-5">
+              <div className="grid grid-cols-1 gap-5 pl-5 lg:px-8 pt-5">
                 {movies.map((movie, index) => (
                   <div key={movie._id}>
                     {index < 4 ? (

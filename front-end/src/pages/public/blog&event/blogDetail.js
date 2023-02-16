@@ -24,7 +24,7 @@ function BlogDetail() {
       >
         <div className="bg-black/90 h-full w-full">
           <HeaderPublic />
-          <div className="px-16 py-20 text-white w-full">
+          <div className="md:px-16 px-5 md:py-20 py-16 text-white w-full">
             <div>
               <Breadcrumbs className="bg-transparen p-0 mb-3">
                 <Link to="/home" className="text-gray-400">
@@ -35,15 +35,15 @@ function BlogDetail() {
                 </Link>
                 <Link className="text-white">Blog điện ảnh</Link>
               </Breadcrumbs>
-              <h1 className="text-[20px] font-medium uppercase">{blog.name}</h1>
+              <h1 className="md:text-[20px] text-[17px] font-medium uppercase">{blog.name}</h1>
               <div className="leading-7">
-                <button className="bg-blue-500 my-5 mr-1 py-1 px-3 text-sm">
+                <button className="bg-blue-500 my-5 text-[12px] md:text-[15px] mr-1 py-1 px-3 text-sm">
                   <i className="fas fa-thumbs-up"></i> Thích 13
                 </button>
-                <button className="bg-[#d4491f] ml-1 my-5 py-1 px-3 text-sm">
+                <button className="bg-[#d4491f] text-[12px] md:text-[15px]  ml-1 my-5 py-1 px-3 text-sm">
                   ĐÁNH GIÁ
                 </button>
-                <p className="text-justify font-thin">{blog.mainContent}</p>
+                <p className="text-justify text-sm md:text-[15px] font-thin">{blog.mainContent}</p>
               </div>
             </div>
             <div className="mt-10 mb-3">
@@ -55,7 +55,7 @@ function BlogDetail() {
               </button>
               {blogs.map((blog) => (
                 <Link className="hover:text-red-500" to={`/blog-detail/${blog._id}`}>                 
-                  <p className="text-sm my-1">&#10230; {blog.name}</p>
+                  <p className="text-sm my-2">&#10230; {blog.name}</p>
                 </Link>
               ))}
             </div>

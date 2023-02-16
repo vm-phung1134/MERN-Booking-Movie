@@ -35,13 +35,16 @@ function Account() {
         {loadingPage === true ? (
           <SpinnerLoading />
         ) : (
-          <div className="lg:px-16 px-10 py-20 text-white max-h-full w-full">
+          <div className="lg:px-16 px-5 py-20 text-white max-h-full w-full">
             <Breadcrumbs className="bg-transparen p-0">
               <Link to="/home" className="text-gray-400">
                 Trang chủ
               </Link>
               <Link to="/account" className="text-gray-200">
                 Thành viên
+              </Link>
+              <Link className="text-gray-200">
+                Thông tin tài khoản
               </Link>
             </Breadcrumbs>
             <div className="mb-10">
@@ -64,14 +67,14 @@ function Account() {
             >
               PHIM ĐANG CHIẾU
             </button>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-2 gap-x-10 mt-10">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 grid-cols-2 gap-2 lg:gap-5 mt-10">
               {movies.map((movie, index) => (
                 <div key={movie._id}>
                   {index < 4 && (
                     <div className="">
                       <div className="relative">
                         <img
-                          className="w-[370px] bg-cover"
+                          className="w-[370px] h-[350px] md:h-[400px] lg:h-[450px] bg-cover"
                           src={movie.poster}
                           alt=""
                         ></img>

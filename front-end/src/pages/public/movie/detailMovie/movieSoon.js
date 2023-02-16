@@ -1,5 +1,5 @@
 //import logic
-import React, { useEffect, useState } from "react";
+import React, {useCallback, useState, useEffect} from 'react'
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
@@ -10,17 +10,29 @@ import HeaderPublic from "../../components/headerPublic";
 import SpinnerLoading from "../../components/spinnerLoading";
 import MovieSoonList from "../homeMovie/movieSoonList";
 import Cinema from "./cinema";
+import {
+  Dialog,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 const DetailMovieSoon = () => {
   const dispatch = useDispatch();
   const movieSoonId = useParams();
   const { movieSoon } = useSelector((state) => state.movieSoon);
   const cinemas = useSelector((state) => state.cinemas.cinemas);
-
+const [size, setSize] = useState(null);
+    const [vlYoutube, setVlYoutube] = useState("");
   const [loadingPage, setLoadingPage] = useState(false);
+  const handleOpen = useCallback((value, embed) => {
+      setSize(value);
+      setVlYoutube(embed);
+    }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
+    
+    
     setTimeout(async () => {
       await dispatch(getOneMovieSoon(movieSoonId.id));
       dispatch(getAllCinema());
@@ -45,11 +57,22 @@ const DetailMovieSoon = () => {
                 <div className="bg-gradient-to-t from-black/100 to-black/40">
                   <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 p-10">
                     <div className="mt-5 flex justify-center">
-                      <img
-                        src={movieSoon.poster}
-                        className="w-[340px]"
-                        alt=""
-                      ></img>
+                      <div className="relative">
+                        <img
+                          src={movieSoon.poster}
+                          className="w-[340px]"
+                          alt=""
+                        ></img>
+                        <div className="absolute opacity-0 hover:opacity-100 transition duration-500 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/60">
+                          <button
+                            onClick={() => handleOpen("xl", movieSoon.trailer)}
+                            className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
+                          border text-[17px] border-white py-[13px] rounded-lg px-[35px] hover:bg-[#c40404] hover:border-none"
+                          >
+                            <i className="fas fa-play"></i>
+                          </button>
+                        </div>
+                      </div>
                     </div>
                     <div className="px-0 pt-3 text-white justify-end">
                       <button className="mb-3 text-sm lg:text-[16px] py-[10px] border-b-[3px] border-[#E50914]">
@@ -92,7 +115,34 @@ const DetailMovieSoon = () => {
                   </div>
                 </div>
               </div>
-
+              <Dialog
+                open={size === "xl"}
+                size={size || "xl"}
+                handler={handleOpen}
+                style={{ background: "transparent" }}
+              >
+                <DialogBody>
+                  <div>
+                    <iframe
+                      title="youtube"
+                      width="100%"
+                      height="500px"
+                      src={`https://www.youtube.com/embed/${vlYoutube}`}
+                      frameborder="0"
+                      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                      allowfullscreen
+                    ></iframe>
+                  </div>
+                </DialogBody>
+                <DialogFooter>
+                  <button
+                    className="px-6 py-2 text-sm text-white bg-[#c40404]"
+                    onClick={() => handleOpen(null, null)}
+                  >
+                    Tiếp tục
+                  </button>
+                </DialogFooter>
+              </Dialog>
               <div>
                 <div className="p-10">
                   <button className="mb-5 text-sm lg:text-[16px] py-[10px] text-white border-b-2 border-[#E50914]">

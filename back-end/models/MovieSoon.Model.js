@@ -51,6 +51,10 @@ const movieSoonSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Discription must be required']
     },
+    trailer: {
+        type: String,
+        require: true
+    }
 }, {timestamps: true})
 
 const MovieSoon = mongoose.model('MovieSoon', movieSoonSchema)
