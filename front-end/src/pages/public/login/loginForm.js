@@ -12,15 +12,17 @@ function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [stateError, setStateError] = useState("");
-  const [stateLoadingLogin, setStateLoadingLogin] = useState({ loading: false });
+  const [stateLoadingLogin, setStateLoadingLogin] = useState({
+    loading: false,
+  });
   const submitForm = (values) => {
     setStateLoadingLogin({ loading: true });
     let timeOutLogin = setTimeout(async () => {
       await dispatch(authLogin(values.email, values.password));
       setStateLoadingLogin({ loading: false });
       return () => {
-        clearTimeout(timeOutLogin)
-      }
+        clearTimeout(timeOutLogin);
+      };
     }, 2000);
   };
   const { user, errorLogin, isAuthenticated } = useSelector(
@@ -34,7 +36,7 @@ function LoginForm() {
     if (isAuthenticated === true) {
       localStorage.setItem("user", user.userName);
       localStorage.setItem("token", user.token);
-      localStorage.setItem('userId', user.userId);
+      localStorage.setItem("userId", user.userId);
       navigate("/home");
     }
   }, [dispatch, errorLogin, isAuthenticated, navigate, stateError, user]);
@@ -77,7 +79,20 @@ function LoginForm() {
             className="relative flex flex-col justify-center min-h-screen overflow-hidden"
             id="login"
           >
-            <div className="md:w-[60%] lg:w-[70%] w-[90%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
+            <div
+              data-aos="fade-down"
+              data-aos-duration="1000"
+              className="text-center pt-10 px-10 sm:block lg:hidden"
+            >
+              <h1 className="text-[25px] font-medium">
+                ƯU ĐÃI DÀNH CHO THÀNH VIÊN HỆ THỐNG
+              </h1>
+              <p className="text-[15px] font-thin mt-5">
+                Trở thành viên của hệ thống để nhận nhiều ưu đãi. Tích lũy
+                R-start để có cơ hội nhận nhiều phần quà hấp dẫn.
+              </p>
+            </div>
+            <div className="md:w-[60%] md:border-hidden border lg:w-[70%] w-[90%] mt-5 p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
               <h1 className="text-3xl font-semibold text-center text-[#e01414]">
                 Đăng Nhập
               </h1>
@@ -97,7 +112,9 @@ function LoginForm() {
                     className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none "
                   />
                   {errors.email && touched.email && (
-                    <span className="text-red-500 text-[14px]">{errors.email}</span>
+                    <span className="text-red-500 text-[14px]">
+                      {errors.email}
+                    </span>
                   )}
                 </div>
                 <div className="mb-4">
@@ -112,13 +129,12 @@ function LoginForm() {
                     className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
                   />
                   {errors.password && touched.password && (
-                    <span className="text-red-500 text-[14px]">{errors.password}</span>
+                    <span className="text-red-500 text-[14px]">
+                      {errors.password}
+                    </span>
                   )}
                 </div>
-                < Link
-                  
-                  className="text-[13px] text-green-500 hover:underline"
-                >
+                <Link className="text-[13px] text-green-500 hover:underline">
                   Quên mật khẩu?
                 </Link>
                 <div className="mt-6">

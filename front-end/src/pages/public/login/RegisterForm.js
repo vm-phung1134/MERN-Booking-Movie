@@ -1,8 +1,8 @@
 import { Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, memo } from "react";
-import {ToastContainer ,toast} from "react-toastify"
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { authRegister } from "../../../redux/actions/authActions";
 
 function RegisterForm() {
@@ -15,9 +15,9 @@ function RegisterForm() {
     email: "",
     password: "",
     phone: "",
-    gender:"",
+    gender: "",
     cardId: "",
-    position:"",
+    position: "",
     passwordConfirm: "",
   };
   const dispatch = useDispatch();
@@ -27,7 +27,17 @@ function RegisterForm() {
     setStateLoadingRegister({ loading: true });
     let timeOutRegister = setTimeout(async () => {
       await setStateLoadingRegister({ loading: false });
-      dispatch(authRegister(values.name, values.email, values.password, values.phone, values.cardId, values.gender, values.position));
+      dispatch(
+        authRegister(
+          values.name,
+          values.email,
+          values.password,
+          values.phone,
+          values.cardId,
+          values.gender,
+          values.position
+        )
+      );
       resetForm({
         name: "",
         email: "",
@@ -35,8 +45,8 @@ function RegisterForm() {
         passwordConfirm: "",
       });
       return () => {
-        clearTimeout(timeOutRegister)
-      }
+        clearTimeout(timeOutRegister);
+      };
     }, 2000);
   };
   const { user, error, isRegister } = useSelector((state) => state.user);
@@ -47,9 +57,9 @@ function RegisterForm() {
       setStateSuccess("");
     }
     if (isRegister === true) {
-      toast.success('Đăng ký thành công !', {
+      toast.success("Đăng ký thành công !", {
         position: toast.POSITION.BOTTOM_LEFT,
-        className: 'text-black'
+        className: "text-black",
       });
       setStateErr("");
     }
@@ -105,9 +115,22 @@ function RegisterForm() {
         return (
           <div
             id="register"
-            className="relative flex flex-col justify-center min-h-screen overflow-hidden"
+            className="relative mb-10 flex flex-col justify-center min-h-screen overflow-hidden"
           >
-            <div className="md:w-[60%] lg:w-[70%] w-[90%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
+            <div
+              data-aos="fade-down"
+              data-aos-duration="1000"
+              className="text-center pt-10 px-10 sm:block lg:hidden"
+            >
+              <h1 className="text-[25px] font-medium">
+                ĐĂNG KÝ TRỰC TUYẾN TRÊN NHIỀU NÊN TẢNG
+              </h1>
+              <p className="text-[15px] font-thin mt-5">
+                Hệ thống luôn hỗ trợ đăng ký thành viên trên nhiều nên tảng khác
+                nhau
+              </p>
+            </div>
+            <div className="md:w-[60%] md:border-hidden border lg:w-[70%] w-[90%] p-4 m-auto bg-transparent rounded-md shadow-xl lg:max-w-xl">
               <h1 className="text-3xl font-semibold text-center text-purple-600">
                 Đăng Ký Tài Khoản
               </h1>
@@ -131,7 +154,9 @@ function RegisterForm() {
                     className="placeholder-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white  focus:outline-none"
                   />
                   {errors.name && touched.name && (
-                    <span className="text-red-500 text-[13px]">{errors.name}</span>
+                    <span className="text-red-500 text-[13px]">
+                      {errors.name}
+                    </span>
                   )}
                 </div>
                 <div className="mb-4">
@@ -146,7 +171,9 @@ function RegisterForm() {
                     onBlur={handleBlur}
                   />
                   {errors.email && touched.email && (
-                    <span className="text-red-500 text-[13px]">{errors.email}</span>
+                    <span className="text-red-500 text-[13px]">
+                      {errors.email}
+                    </span>
                   )}
                 </div>
                 <div className="mb-4">
@@ -161,7 +188,9 @@ function RegisterForm() {
                     className="placeholder:text-gray-500 block w-full px-4 py-2 mt-2 text-white bg-transparent border rounded-md focus:border-white focus:ring-white focus:outline-none"
                   />
                   {errors.password && touched.password && (
-                    <span className="text-red-500 text-[13px]">{errors.password}</span>
+                    <span className="text-red-500 text-[13px]">
+                      {errors.password}
+                    </span>
                   )}
                 </div>
                 <div className="mb-4">
@@ -209,13 +238,13 @@ function RegisterForm() {
                     </button>
                   ) : (
                     <>
-                    <button
-                      type="submit"
-                      className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
-                    >
-                      Đăng ký
-                    </button>
-                    <ToastContainer  toastStyle={{color: 'black'}} />
+                      <button
+                        type="submit"
+                        className="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-purple-700 rounded-md hover:bg-purple-600 focus:outline-none focus:bg-purple-600"
+                      >
+                        Đăng ký
+                      </button>
+                      <ToastContainer toastStyle={{ color: "black" }} />
                     </>
                   )}
                 </div>

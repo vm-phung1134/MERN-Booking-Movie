@@ -319,7 +319,7 @@ function UserTickets() {
                             <Link to="/booking">
                               <button
                                 className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border text-[12px] md:text-sm border-white lg:py-[13px] py-[10px] px-[20px] lg:px-[25px] hover:bg-[#c40404] hover:border-none"
+                          border text-[12px] md:text-sm border-white py-[7px] px-[15px] md:py-[13px] md:px-[25px] hover:bg-[#c40404] hover:border-none"
                               >
                                 MUA VÉ
                               </button>

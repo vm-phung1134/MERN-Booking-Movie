@@ -73,7 +73,7 @@ function HomeMovie() {
                           <div className="">
                             <div className="relative">
                               <img
-                                className="w-[370px] bg-cover"
+                                className="w-[370px] lg:h-[470px] bg-cover"
                                 src={movie.poster}
                                 alt=""
                               ></img>
@@ -82,7 +82,7 @@ function HomeMovie() {
                                   <Link to="/booking">
                                     <button
                                       className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border md:text-sm text-[12px] border-white py-[10px] px-[20px] md:py-[13px] md:px-[25px] hover:bg-[#E50914] hover:border-none"
+                          border md:text-sm text-[12px] border-white py-[7px] px-[15px] md:py-[13px] md:px-[25px] hover:bg-[#E50914] hover:border-none"
                                     >
                                       MUA VÉ
                                     </button>
@@ -136,7 +136,7 @@ function HomeMovie() {
                                   <Link to="/booking">
                                     <button
                                       className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border md:text-sm text-[12px] border-white py-[10px] px-[20px] md:py-[13px] md:px-[25px] hover:bg-[#E50914] hover:border-none"
+                          border md:text-sm text-[12px] border-white py-[7px] px-[15px] md:py-[13px] md:px-[25px] hover:bg-[#E50914] hover:border-none"
                                     >
                                       MUA VÉ
                                     </button>
