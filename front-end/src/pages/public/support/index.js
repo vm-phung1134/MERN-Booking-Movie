@@ -148,10 +148,10 @@ function Support() {
               )}
             </div>
             <div>
-              <button className="mb-3 lg:mt-0 mt-5 ml-5 lg:ml-8 text-white text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
+              <button className="mb-3 lg:mt-0 mt-5 lg:ml-8 text-white text-sm lg:text-[15px] py-[10px] border-b-[3px] border-[#E50914]">
                 PHIM ĐANG CHIẾU
               </button>
-              <div className="grid grid-cols-1 gap-5 pl-5 lg:px-8 pt-5">
+              <div className="grid grid-cols-1 gap-5 lg:px-8 pt-5">
                 {movies.map((movie, index) => (
                   <div key={movie._id}>
                     {index < 4 ? (

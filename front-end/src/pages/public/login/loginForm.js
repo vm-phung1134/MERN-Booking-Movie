@@ -76,13 +76,13 @@ function LoginForm() {
         } = formik;
         return (
           <div
-            className="relative mt-20 flex flex-col justify-center min-h-screen overflow-hidden"
+            className="relative mt-10 flex flex-col justify-center min-h-screen overflow-hidden"
             id="login"
           >
             <div
               data-aos="fade-down"
               data-aos-duration="1000"
-              className="text-center pt-10 px-10 sm:block lg:hidden"
+              className="text-center py-10 px-10 sm:block lg:hidden"
             >
               <h1 className="text-[25px] font-medium">
                 ƯU ĐÃI DÀNH CHO THÀNH VIÊN HỆ THỐNG

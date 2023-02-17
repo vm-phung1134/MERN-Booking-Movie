@@ -80,7 +80,7 @@ function SupportForm({ userInfo }) {
           handleBlur,
         } = formik;
         return (
-          <form className="mt-10 text-[15px]" onSubmit={handleSubmit}>
+          <form className="mt-10 text-[15px] " onSubmit={handleSubmit}>
             <div className="text-sm text-white bg-[#111111] p-3 mt-5">
               <div className="text-center text-gray-300 leading-6">
                 <h1 className="lg:text-[20px] text-[15px]">
@@ -90,7 +90,7 @@ function SupportForm({ userInfo }) {
                 <p className="font-thin text-[12px] lg:text-[13px]">Email: supports@reactflix.com.vn</p>
                 <p className="font-thin text-[12px] lg:text-[13px]">Đường dây nóng: 19000000</p>
               </div>
-              <div className="bg-[#1d1c1c] p-5 mt-3">
+              <div className="bg-[#1d1c1c] p-2 md:p-5 mt-3">
                 <div className="grid grid-cols-3 gap-x-2 mb-5">
                   <div className="">
                     <input

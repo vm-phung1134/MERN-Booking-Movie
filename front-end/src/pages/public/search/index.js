@@ -87,7 +87,7 @@ function SearchPage() {
         </div>
         <div data-aos="fade-up" data-aos-duration="1000">
           {isActive === "1" && (
-            <div className="grid-cols-2 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 mx-5 md:mx-10 lg:mx-20">
+            <div className="grid-cols-2 grid md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 my-10 md:mx-10 lg:mx-20">
               {searchCurrentMovie.map((movie) => (
                 <div key={movie._id}>
                   <div className="">
@@ -97,14 +97,16 @@ function SearchPage() {
                         src={movie.poster}
                         alt=""
                       ></img>
-                      <Link to={`/movie-now/${movie._id}`}>
+                      <Link to={`/movie-soon/${movie._id}`}>
                         <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
-                          <button
-                            className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border text-sm border-white py-[7px] px-[15px] md:py-[13px] md:px-[25px] hover:bg-[#c40404] hover:border-none"
-                          >
-                            <Link to="/booking">MUA VÉ</Link>
-                          </button>
+                          <Link to="/booking">
+                            <button
+                              className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
+                          border text-[12px] border-white py-[7px] px-[15px] md:py-[13px] md:px-[25px] hover:bg-[#c40404] hover:border-none"
+                            >
+                              MUA VÉ
+                            </button>
+                          </Link>
                         </div>
                       </Link>
                     </div>
