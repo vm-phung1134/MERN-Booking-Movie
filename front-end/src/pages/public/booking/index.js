@@ -216,10 +216,10 @@ function Booking() {
                         >
                           <div className="flex justify-between">
                             <div>
-                              {movie.name} - {movie.namevn}
+                              <span className="capitalize">{movie.name}</span> - {movie.namevn}
                             </div>
-                            <p className="px-2 ml-5 text-white rounded bg-red-600/70">
-                              {movie.limitAge} +
+                            <p className="text-[13px] ml-5 text-[#c40404] rounded">
+                              C{movie.limitAge}
                             </p>
                           </div>
                         </Option>
@@ -364,7 +364,7 @@ function Booking() {
                                 </p>
                                 <p className="text-[10px] text-gray-200">
                                   &#40; Nếu bạn không muốn lên nóc nhà ngồi. Thì
-                                  hãy chọn ghế ! &#41;
+                                  hãy chọn ghế &#41;
                                 </p>
                               </div>
                               <div>

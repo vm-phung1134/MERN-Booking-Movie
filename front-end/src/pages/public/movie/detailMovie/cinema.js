@@ -13,7 +13,7 @@ function Cinema({ cinema }) {
   return (
     <>
       <div className="text-white">
-        <h5 className="bg-[#E50914] text-sm lg:text-[16px] px-4 py-2 w-[40%] md:w-[37%] lg:w-[30%]">{cinema.name}</h5>
+        <h5 className="bg-[#E50914] text-[13px] lg:text-[16px] px-4 py-2 w-[45%] md:w-[37%] lg:w-[30%]">{cinema.name}</h5>
         <div className="border-2 h-32 items-center border-gray-600 px-5 grid grid-cols-4">
           <p className="text-sm lg:text-[16px]">2D - Phụ Đề</p>
           <div className="col-span-3">

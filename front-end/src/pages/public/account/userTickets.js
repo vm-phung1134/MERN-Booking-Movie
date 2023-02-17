@@ -41,6 +41,7 @@ function UserTickets() {
   }, []);
   const handleDeleteTicket = async (id) => {
     await dispatch(deleteTicket(id));
+
     setSize(null); //DISMISS MODAL
     setNewReservation(reservations.filter((item) => item._id !== id)); //AFTER DELETE SAVE INTO NEW RESERVATION
     toast.success("Hủy vé thành công !", {
@@ -100,8 +101,8 @@ function UserTickets() {
                       >
                         <div className="bg-gradient-to-r from-black/60 to-black/20 text-sm w-full text-white mt-5 px-2 lg:px-5 py-1 lg:py-3">
                           <div className="bg-transparent">
-                            <div className="grid grid-cols-2 lg:px-2">
-                              <div className="lg:flex lg:items-center justify-start">
+                            <div className="grid grid-cols-3 lg:px-2">
+                              <div className="lg:flex lg:items-center justify-start col-span-2">
                                 <h1 className="lg:mr-5 mr-0 lg:ml-3 ml-0 pt-2 text-sm lg:text-[15px] text-gray-500">
                                   Phim:{" "}
                                   <span className="text-white font-thin text-[12px] lg:text-[15px] uppercase">
@@ -144,14 +145,14 @@ function UserTickets() {
                             <div className="bg-black/70 rounded-lg">
                               <div className="bg-transparent grid grid-cols-6 lg:grid-cols-8 gap-x-1 mt-5 lg:px-5 px-2 py-1 lg:py-2">
                                 <div>
-                                  <h3 className="text-sm lg:text-[15px] text-gray-500">
+                                  <h3 className="text-sm ml-2 lg:ml-0 lg:text-[15px] text-gray-500">
                                     Ngày chiếu
                                   </h3>
                                   <p className="text-[12px] font-thin lg:text-[15px]">
                                     {reservation.startDate}
                                   </p>
                                 </div>
-                                <div>
+                                <div className="text-center">
                                   <h3 className="text-sm lg:text-[15px] text-gray-500">
                                     Giờ chiếu
                                   </h3>
@@ -159,7 +160,7 @@ function UserTickets() {
                                     {reservation.startTime}
                                   </p>
                                 </div>
-                                <div className="lg:px-3 ">
+                                <div className="px-0 lg:mx-0">
                                   <h3 className="text-sm lg:text-[15px] text-gray-500">
                                     Loại vé
                                   </h3>
@@ -290,7 +291,7 @@ function UserTickets() {
               </DialogBody>
               <DialogFooter>
                 <button
-                  className="px-6 my-5 py-2 text-sm text-white bg-[#c40404]"
+                  className="px-6 py-2 text-sm text-white bg-[#c40404]"
                   onClick={() => handleOpenQR(null, null)}
                 >
                   Tiếp tục
