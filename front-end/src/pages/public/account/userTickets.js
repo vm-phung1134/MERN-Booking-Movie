@@ -77,9 +77,7 @@ function UserTickets() {
               <Link to="/home" className="text-gray-400">
                 Trang chủ
               </Link>
-              <Link className="text-gray-200">
-                Vé đã đặt
-              </Link>
+              <Link className="text-gray-200">Vé đã đặt</Link>
             </Breadcrumbs>
             <button
               disabled
@@ -305,7 +303,7 @@ function UserTickets() {
             >
               PHIM ĐANG CHIẾU
             </button>
-            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-x-10 pt-10">
+            <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 lg:gap-x-10 pt-10">
               {movies.map((movie, index) => (
                 <div key={movie._id}>
                   {index < 4 && (
@@ -318,12 +316,14 @@ function UserTickets() {
                         ></img>
                         <Link to={`/movie-now/${movie._id}`}>
                           <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
-                            <button
-                              className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border text-sm border-white lg:py-[13px] py-[10px] px-[20px] lg:px-[25px] hover:bg-[#c40404] hover:border-none"
-                            >
-                              <Link to="/booking">MUA VÉ</Link>
-                            </button>
+                            <Link to="/booking">
+                              <button
+                                className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
+                          border text-[12px] md:text-sm border-white lg:py-[13px] py-[10px] px-[20px] lg:px-[25px] hover:bg-[#c40404] hover:border-none"
+                              >
+                                MUA VÉ
+                              </button>
+                            </Link>
                           </div>
                         </Link>
                       </div>

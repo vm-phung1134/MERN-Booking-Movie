@@ -50,11 +50,11 @@ export default function Login() {
             </div>
           </div>
           {/* -----------HEADER LOGIN PAGE-------------- */}
-          <div className="left-[50%] text-center text-white translate-x-[-50%] absolute top-[25%]">
+          <div className="lg:left-[50%] left-[30%] md:left-[40%] text-center text-white translate-x-[-50%] absolute top-[25%]">
             <h2 className="lg:text-[40px] md:text-[35px] text-[30px] font-bold">
               TUYỂN CHỌN TỪ NHỮNG PHIM CHIẾU RẠP ĐẶC SẮC NHẤT
             </h2>
-            <p className="lg:text-[18px] text-[15px] mt-5 px-5">
+            <p className="lg:text-[18px] text-[15px] mt-5 px-3 md:px-5">
               Bạn đã có tài khoản để đặt vé chưa. Nhanh chóng đăng ký thành viên
               để nhận nhiều ưu đãi
             </p>

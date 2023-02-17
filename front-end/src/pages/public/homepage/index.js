@@ -184,7 +184,7 @@ function HomePage() {
                   </button>
                 </div>
                 <div className="py-[5px] text-white">
-                  <p className="w-[110px] md:w-[120px] brightness-200 h-10 bg-[url('https://www.galaxycine.vn/website/images/ic_hotnews.png')]"></p>
+                  <p className="w-[120px] brightness-200 h-10 bg-[url('https://www.galaxycine.vn/website/images/ic_hotnews.png')]"></p>
                   <Link to="/movie-now/63b93dfd1d4172de899ce6ca">
                     <p className="text-zinc-400 text-[12px] lg:text-[17px]">
                       Avatar: The Way Of Water

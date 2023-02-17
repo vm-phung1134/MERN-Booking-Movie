@@ -53,7 +53,7 @@ const DetailMovie = () => {
                 className="bg-cover bg-center"
               >
                 <div className="bg-gradient-to-t from-black/100 to-black/40">
-                  <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 p-10">
+                  <div className="grid lg:grid-cols-3 2xl:gap-x-0 md:gap-x-3 grid-cols-1 px-5 md:px-10 md:py-10 py-10">
                     <div className="mt-5 flex justify-center">
                       <div className="relative">
                         <img

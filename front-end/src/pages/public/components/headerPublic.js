@@ -41,7 +41,7 @@ function HeaderPublic() {
                 <Link
                   to="/home"
                 >
-                  <img className="lg:h-8 lg:w-[150px] h-6 w-[120px]" src={Logo} alt="Workflow" />
+                  <img className="lg:h-8 lg:w-[150px] h-5 w-[100px]" src={Logo} alt="Workflow" />
                 </Link>
               </div>
               <div className="hidden lg:block">

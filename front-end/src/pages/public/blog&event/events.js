@@ -19,7 +19,7 @@ function Events({event}) {
                 {event.topContent}
               </p>
             </div>
-            <Link to={`/event-detail/${event._id}`}>
+            <Link className="md:block hidden" to={`/event-detail/${event._id}`}>
              <button
               className="absolute bottom-[5%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-white
                                      border border-white text-sm py-[13px] px-[18px] md:px-[25px] hover:bg-[#c40404] hover:border-none
