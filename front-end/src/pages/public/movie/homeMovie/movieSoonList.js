@@ -23,7 +23,7 @@ function MovieSoonList() {
         ))}
       </div>
       <div>
-        <div className="flex justify-center mt-5">
+        <div className="flex justify-center my-5">
         <button className="py-1 text-[14px] px-2 text-white bg-[#ce0000]">
             <Link to="/movie">
             <div className="buttons">

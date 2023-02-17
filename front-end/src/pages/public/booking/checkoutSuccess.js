@@ -2,15 +2,16 @@ import HeaderPublic from "../components/headerPublic";
 import SpinnerLoading from "../components/spinnerLoading";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import MovieSoonList from "../movie/homeMovie/movieSoonList";
 import { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getAllMovieSoon } from "../../../redux/actions/movieSoonActions";
 
 function CheckoutSuccess() {
   const dispatch = useDispatch();
   const [loadingPage, setLoadingPage] = useState(false);
-  const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
+  //const movieSoons = useSelector((state) => state.movieSoons.movieSoons);
   useEffect(() => {
     window.scrollTo(0, 0);
     setLoadingPage(true);
@@ -75,45 +76,8 @@ function CheckoutSuccess() {
                 >
                   PHIM SẮP CHIẾU
                 </button>
-                <div className="grid lg:grid-cols-3 grid-cols-1 xl:grid-cols-4 gap-3 lg:gap-x-5 px-6 pt-5 lg:p-6">
-                  {movieSoons.map((movie, index) => (
-                    <div key={movie._id}>
-                      {index < 8 && (
-                        <div className="">
-                          <div className="relative">
-                            <img
-                              className="w-[370px] bg-cover"
-                              src={movie.image}
-                              alt=""
-                            ></img>
-                            <Link to={`/movie-soon/${movie._id}`}>
-                              <div className="absolute opacity-0 hover:opacity-100 transition duration-400 ease-in-out top-0 right-0 left-0 bottom-0 w-full h-full overflow-hidden bg-fixed bg-black/50">
-                                <button
-                                  className="absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] text-gray-200
-                          border text-sm border-white lg:py-[13px] py-[8px] px-[17px] lg:px-[25px] hover:bg-[#E50914] hover:border-none"
-                                >
-                                  <Link to="/booking">MUA VÉ</Link>
-                                </button>
-                              </div>
-                            </Link>
-                          </div>
-                          <div className="text-[15px] mt-3">
-                            <p className="text-gray-300 text-sm lg:text-[15px] uppercase">
-                              {movie.namevn}
-                            </p>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <div className="flex justify-center pb-10">
-                    <button className="py-3 text-[14px] px-4 text-white bg-[#E50914]">
-                      <Link to="/movie">XEM THÊM</Link>
-                    </button>
-                  </div>
-                </div>
+                <MovieSoonList/>
+                <div className="py-20"></div>
               </div>
             </>
           )}

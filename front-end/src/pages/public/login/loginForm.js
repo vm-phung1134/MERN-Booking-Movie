@@ -76,7 +76,7 @@ function LoginForm() {
         } = formik;
         return (
           <div
-            className="relative flex flex-col justify-center min-h-screen overflow-hidden"
+            className="relative mt-20 flex flex-col justify-center min-h-screen overflow-hidden"
             id="login"
           >
             <div

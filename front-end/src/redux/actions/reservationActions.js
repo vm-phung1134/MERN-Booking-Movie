@@ -23,7 +23,7 @@ export const createReservation = (reservation) => async (dispatch) => {
             },
         }
         const {data} = await axios.post(
-            `${baseURL}/api/v1/reservations/`,
+            `${baseURL}/api/v1/reservations`,
             reservation,
             config
         )
